@@ -1,0 +1,15 @@
+body {
+  overflow: hidden;
+}
+
+.container {
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  text-align: center;
+  width: 50%;
+}
