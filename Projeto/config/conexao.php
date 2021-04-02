@@ -1,6 +1,6 @@
 <?php
 $servername = "localhost";
-$database = "reservaveiculos";
+$database = "reserva_veiculo";
 $username = "root";
 $password = "";
 
