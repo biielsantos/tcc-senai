@@ -1,3 +1,7 @@
 .car-icon {
   margin-right: 2rem;
 }
+
+select{
+  display: inline-block!important;
+}
