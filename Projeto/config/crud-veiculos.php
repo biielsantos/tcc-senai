@@ -1,0 +1,46 @@
+<?php
+include("conexao.php");
+
+if(isset($_POST['modelo']) && isset($_POST['placa']) && isset($_POST['proprietario'])){
+	$modelo = $_POST['modelo'];
+	$placa = $_POST['placa'];
+	$proprietario = $_POST['proprietario'];
+}
+
+if(isset($_POST['id'])){
+	$id = $_POST['id'];
+}
+
+$option = $_POST['option'];
+
+switch ($option) {
+	case 1:
+		$query = "INSERT INTO veiculo (modelo, placa, proprietario) VALUES ('$modelo', '$placa', '$proprietario')";
+		mysqli_query($conn, $query);
+
+		$query = "SELECT * FROM veiculo ORDER BY id_veiculo DESC LIMIT 1";
+		$result = mysqli_query($conn, $query);
+		$data = mysqli_fetch_array($result);
+		break;
+	case 2:
+		$query = "UPDATE veiculo SET modelo='$modelo', placa='$placa', proprietario='$proprietario' WHERE id_veiculo = $id";
+		mysqli_query($conn, $query);
+
+		$query = "SELECT * FROM veiculo WHERE id_veiculo = $id";
+		$result = mysqli_query($conn, $query);
+		$data = mysqli_fetch_array($result);
+		break;
+	case 3:
+		$query = "SELECT * FROM veiculo WHERE id_veiculo = $id";
+		$result = mysqli_query($conn, $query);
+		$data = mysqli_fetch_array($result);
+
+		mysqli_query($conn, "DELETE FROM veiculo WHERE id_veiculo = $id");
+		break;
+}
+
+echo $id;
+
+
+mysqli_close($conn);
+?>
