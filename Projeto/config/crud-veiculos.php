@@ -1,7 +1,7 @@
 <?php
 include("conexao.php");
 
-if(isset($_POST['modelo']) && isset($_POST['placa']) && isset($_POST['proprietario'])){
+if(isset($_POST['modelo'])){
 	$modelo = $_POST['modelo'];
 	$placa = $_POST['placa'];
 	$proprietario = $_POST['proprietario'];
@@ -15,7 +15,7 @@ $option = $_POST['option'];
 
 switch ($option) {
 	case 1:
-		$query = "INSERT INTO veiculo (modelo, placa, proprietario) VALUES ('$modelo', '$placa', '$proprietario')";
+		$query = "INSERT INTO veiculo (modelo, placa, proprietario, status_veiculo) VALUES ('$modelo', '$placa', '$proprietario', 'A')";
 		mysqli_query($conn, $query);
 
 		$query = "SELECT * FROM veiculo ORDER BY id_veiculo DESC LIMIT 1";
@@ -39,7 +39,7 @@ switch ($option) {
 		break;
 }
 
-echo $id;
+print json_encode($data);
 
 
 mysqli_close($conn);

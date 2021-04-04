@@ -7,7 +7,7 @@ $(document).ready(function(){
     "columnDefs":[{
       "targets": -1,
       "data":null,
-      "defaultContent": "<a href='#modal1' data-target='modal1' class='btnEdit modal-trigger btn deep-purple darken-1 waves-effect waves-light' type='submit' name='action'>UPDATE</a><button id='btnDelete' class='btnDelete red darken-1 btn waves-effect waves-light type='submit' name='action'>DELETE</button>"
+      "defaultContent": "<a href='#modal1' data-target='modal1' class='btnEdit modal-trigger btn deep-purple darken-1 waves-effect waves-light' type='submit' name='action'>EDITAR</a><button id='btnDelete' class='btnDelete red darken-1 btn waves-effect waves-light type='submit' name='action'>EXCLUIR</button>"
     }],
     "language":{
       "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
@@ -16,6 +16,7 @@ $(document).ready(function(){
 
 var linhaTabelaVeiculo;
 
+//Botão Novo Veículo
 $(document).on("click", "#btn-novo-veiculo", function() {
   id="";
   modelo="";
@@ -29,6 +30,7 @@ $(document).on("click", "#btn-novo-veiculo", function() {
 
 });
 
+//Botão EDITAR
 $(document).on("click", ".btnEdit", function(){
   linhaTabelaVeiculo=$(this).closest('tr');
   id=parseInt(linhaTabelaVeiculo.find('td').eq(0).text());
@@ -36,9 +38,11 @@ $(document).on("click", ".btnEdit", function(){
   placa=linhaTabelaVeiculo.find('td').eq(2).text()
   $("#modelo").val(modelo);
   $('#placa').val(placa);
+  option=2;
+  console.log(option);
 
 
-  //Trazer dados para o modal de atualização
+  //Trazer todos os dados para o form de atualização
   $.ajax({
     url: "../config/verifica-veiculo.php",
     type: 'POST',
@@ -54,11 +58,9 @@ $(document).on("click", ".btnEdit", function(){
       console.log(z);
     }
   });
-  
-  option=2;
 })
 
-//terminado -- fazer msg de comfirmação
+//Botão EXCLUIR
 $(document).on("click", ".btnDelete", function(){
   linhaTabelaVeiculo=$(this);
   id=parseInt(linhaTabelaVeiculo.closest('tr').find('td').eq(0).text());
@@ -82,9 +84,42 @@ $(document).on("click", ".btnDelete", function(){
   });
 });
 
+//Submit -> Form de veículos
 $("#form-veiculo").submit(function(e){
-  e.PreventDefault();
-  modelo = $.trim($("modelo").val());
-  placa = $.trim($("placa").val());
-  proprietario = $.trim($("proprietario").val());
+  e.preventDefault();
+  modelo = $('#modelo').val().trim();
+  placa = $('#placa').val().trim();
+  proprietario = $('#proprietario').val().trim();
+  
+
+  $.ajax({
+    url: "../config/crud-veiculos.php",
+    type: 'POST',
+    dataType: 'json',
+    data:{option:option, modelo:modelo, placa:placa, proprietario:proprietario, id:id},
+    success:function(data){
+      console.log(data)
+      id=data[0];
+      //Inserir
+      if (option==1){
+        TabelaVeiculos.row.add([id, modelo, placa]).draw();
+        modelo='';
+        placa='';
+        proprietario='';
+        $('#modelo').val(modelo);
+        $('#placa').val(placa);
+        $('#proprietario').val(proprietario);
+      }
+      //Atualizar
+      else if(option==2){
+        TabelaVeiculos.row(linhaTabelaVeiculo).data([id, modelo, placa]);
+      }
+  
+    },error(x,y,z){
+      console.log(x);
+      console.log(y);
+      console.log(z);
+
+    }
+  });
 });

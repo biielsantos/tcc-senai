@@ -53,29 +53,29 @@ include("../config/conexao.php");
   <div id="modal1" class="modal">
     <div class="modal-content">
       <div class="container">
-        <h3 class="center">Cadastrar Veículo</h3>
+        <h3 class="center">Veículo</h3>
         <p class="center"><i class="material-icons medium">directions_car</i></p>
         <div class="row">
           <form id="form-veiculo" class="col s12">
             <div class="row">
               <div class="input-field col s6">
-                <input id="modelo" type="text" class="validate" name="modelo">
+                <input id="modelo" type="text" name="modelo">
                 <label for="modelo">Modelo</label>
               </div>
               <div class="input-field col s6">
-                <input id="placa" type="text" class="validate" name="placa">
+                <input id="placa" type="text"  name="placa">
                 <label for="placa">Placa</label>
               </div>
             </div>
             <div class="input-field">
-              <input id="proprietario" type="text" class="validate" name="proprietario">
+              <input id="proprietario" type="text"  name="proprietario">
               <label for="proprietario">Proprietario</label>
             </div>
             <div class="button-container">
               <button type="button" class="modal-close btn waves-effect red darken-1">Cancelar
                 <i class="material-icons left">cancel</i>
               </a>
-              <button class="btn waves-effect right" type="submit" name="submit">Salvar
+              <button class="btn modal-close waves-effect right" type="submit" name="submit">Salvar
                 <i class="material-icons right">send</i>
               </button>
             </div>
