@@ -8,7 +8,7 @@ $(document).ready(function(){
     "columnDefs":[{
       "targets": -1,
       "data":null,
-      "defaultContent": "<a href='#modal1' data-target='modal1' class='btnEdit modal-trigger btn deep-purple darken-1 waves-effect waves-light' type='submit' name='action'>EDITAR</a><button id='btnDelete' class='btnDelete red darken-1 btn waves-effect waves-light type='submit' name='action'>EXCLUIR</button>"
+      "defaultContent": "<a href='#modal1' data-target='modal1' class='btnEdit modal-trigger btn orange darken-1 waves-effect waves-light' type='submit' name='action'><i class='material-icons right'>edit</i>EDITAR</a><button class='btnDelete red darken-1 btn waves-effect waves-light type='submit' name='action'><i class='material-icons right'>delete</i>EXCLUIR</button>"
     }],
     "language":{
       "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
@@ -16,22 +16,21 @@ $(document).ready(function(){
 });
 });
 
+
 var linhaTabelaVeiculo;
 
 //Botão Novo Veículo
 $(document).on("click", "#btn-novo-veiculo", function() {
   id="";
-  modelo="";
-  placa="";
-  proprietario="";
+  modelo= null;
+  placa= null;
+  proprietario= null;
   ver_placa="";
   $('#modelo').val(modelo);
   $('#placa').val(placa);
   $('#proprietario').val(proprietario);
   option=1;
   validation=1;
-  console.log('Verificação ao INSERIR');
-  console.log('ADICIONAR: ',validation);
 });
 
 //Botão EDITAR
@@ -39,7 +38,8 @@ $(document).on("click", ".btnEdit", function(){
   linhaTabelaVeiculo=$(this).closest('tr');
   id=parseInt(linhaTabelaVeiculo.find('td').eq(0).text());
   option=4;
-
+  
+  $('#modelo').trigger('autoresize'); 
   //Trazer todos os dados para o form de atualização
   $.ajax({
     url: "../config/crud-veiculos.php",
@@ -105,9 +105,7 @@ $("#form-veiculo").submit(function(e){
       if (option==1){
         console.log(data);
         TabelaVeiculos.row.add([id, modelo, placa]).draw();
-        modelo='';
-        placa='';
-        proprietario='';
+
         $('#modelo').val(modelo);
         $('#placa').val(placa);
         $('#proprietario').val(proprietario);
@@ -131,7 +129,7 @@ $("#form-veiculo").submit(function(e){
 
 });
 
-//Bloqueia caracteres especiais
+//Bloqueia caracteres especiais do campo #placa
 var input = document.querySelector("#placa");
 input.addEventListener("keypress", function(e) {
     if(!checkChar(e)) {
@@ -146,13 +144,13 @@ function checkChar(e) {
   }
 }
 
-//Validação placa repetida ao INSERIR
-//if(placa.lenght == 7){ 
+//Validação form
   const form = document.querySelector("#form-veiculo");
   const verifica = document.getElementById('placa');
-  verifica.addEventListener('change', function(){
+
+  verifica.addEventListener('input', function(){
   placa = $('#placa').val().toUpperCase();
-  console.log('valor mudado: ',placa);
+    if(placa.length == 7){
       $.ajax({
         url: "../config/verifica-veiculo.php",
         type: 'POST',
@@ -166,4 +164,5 @@ function checkChar(e) {
           console.log(z);
         }
       });
+    }
   });

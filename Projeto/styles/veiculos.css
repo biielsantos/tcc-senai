@@ -9,3 +9,7 @@ select{
 #placa{
   text-transform: uppercase;
 }
+
+.btnEdit{
+  margin-right: 4%;
+}

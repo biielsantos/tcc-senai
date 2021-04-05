@@ -44,12 +44,12 @@ include("../config/conexao.php");
       </tbody>
     </table>
     <br><br>
-    <a id="btn-novo-veiculo" class="waves-effect waves-light btn modal-trigger right" href="#modal1">Novo Veículo
+    <a id="btn-novo-veiculo" class="#00b8d4 cyan accent-4 waves-effect waves-light btn modal-trigger right" href="#modal1">Novo Veículo
       <i class="material-icons right">add</i>
     </a>
   </div>
 
-  <!-- Modal-Cadastro -->
+  <!-- Modal-Veiculo -->
   <div id="modal1" class="modal">
     <div class="modal-content">
       <div class="container">
