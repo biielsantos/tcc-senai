@@ -59,23 +59,24 @@ include("../config/conexao.php");
           <form id="form-veiculo" class="col s12">
             <div class="row">
               <div class="input-field col s6">
-                <input id="modelo" type="text" name="modelo">
+                <input id="modelo" type="text" name="modelo" required>
                 <label for="modelo">Modelo</label>
               </div>
               <div class="input-field col s6">
-                <input id="placa" type="text"  name="placa">
+                <input id="placa" class="validate" type="text"  name="placa" data-length="7" minlength="7" maxlength="7" required>
                 <label for="placa">Placa</label>
+                <span class="helper-text" data-error="o número minimo de caracteres é 7" data-success="Correto"></span>
               </div>
             </div>
             <div class="input-field">
-              <input id="proprietario" type="text"  name="proprietario">
+              <input id="proprietario" type="text"  name="proprietario" required>
               <label for="proprietario">Proprietario</label>
             </div>
             <div class="button-container">
               <button type="button" class="modal-close btn waves-effect red darken-1">Cancelar
                 <i class="material-icons left">cancel</i>
               </a>
-              <button class="btn modal-close waves-effect right" type="submit" name="submit">Salvar
+              <button class="btn waves-effect right" type="submit" name="submit">Salvar
                 <i class="material-icons right">send</i>
               </button>
             </div>

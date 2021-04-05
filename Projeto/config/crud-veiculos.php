@@ -1,7 +1,7 @@
 <?php
 include("conexao.php");
 
-if(isset($_POST['modelo'])){
+if(isset($_POST['modelo']) && isset($_POST['placa']) && $_POST['proprietario']){
 	$modelo = $_POST['modelo'];
 	$placa = $_POST['placa'];
 	$proprietario = $_POST['proprietario'];
@@ -36,6 +36,11 @@ switch ($option) {
 		$data = mysqli_fetch_array($result);
 
 		mysqli_query($conn, "DELETE FROM veiculo WHERE id_veiculo = $id");
+		break;
+	case 4:
+		$query = "SELECT * FROM veiculo WHERE id_veiculo = $id";
+		$result = mysqli_query($conn, $query);
+		$data = mysqli_fetch_array($result);
 		break;
 }
 

@@ -5,3 +5,7 @@
 select{
   display: inline-block!important;
 }
+
+#placa{
+  text-transform: uppercase;
+}
