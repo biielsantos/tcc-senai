@@ -44,7 +44,7 @@ include("../config/conexao.php");
       </tbody>
     </table>
     <br><br>
-    <a id="btn-novo-veiculo" class="#00b8d4 cyan accent-4 waves-effect waves-light btn modal-trigger right" href="#modal1">Novo Veículo
+    <a id="btn-novo-veiculo" class="#0277bd light-blue darken-3 waves-effect waves-light btn modal-trigger right" href="#modal1">Novo Veículo
       <i class="material-icons right">add</i>
     </a>
   </div>
@@ -63,9 +63,9 @@ include("../config/conexao.php");
                 <label for="modelo">Modelo</label>
               </div>
               <div class="input-field col s6">
-                <input id="placa" class="validate" type="text"  name="placa" data-length="7" minlength="7" maxlength="7" required>
+                <input id="placa" type="text"  name="placa" data-length="7" minlength="7" maxlength="7" autocomplete="off" required>
                 <label for="placa">Placa</label>
-                <span class="helper-text" data-error="o número minimo de caracteres é 7" data-success="Correto"></span>
+                <span id="validate" class="helper-text" data-success="Sucesso"></span>
               </div>
             </div>
             <div class="input-field">

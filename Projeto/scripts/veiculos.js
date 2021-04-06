@@ -38,8 +38,7 @@ $(document).on("click", ".btnEdit", function(){
   linhaTabelaVeiculo=$(this).closest('tr');
   id=parseInt(linhaTabelaVeiculo.find('td').eq(0).text());
   option=4;
-  
-  $('#modelo').trigger('autoresize'); 
+
   //Trazer todos os dados para o form de atualização
   $.ajax({
     url: "../config/crud-veiculos.php",
@@ -48,7 +47,7 @@ $(document).on("click", ".btnEdit", function(){
     data:{id:id, option:option},
     success:function(data){
       $("#modelo").val(data[1]);
-      M.textareaAutoResize($('#modelo'));
+      $("#modelo").trigger('autoresize');
       $('#placa').val(data[2]);
       $('#proprietario').val(data[3]);
       option=2;
@@ -93,40 +92,40 @@ $("#form-veiculo").submit(function(e){
   modelo = $('#modelo').val().trim();
   placa = $('#placa').val().toUpperCase();
   proprietario = $('#proprietario').val().trim();
-  
-  $.ajax({
-    url: "../config/crud-veiculos.php",
-    type: 'POST',
-    dataType: 'json',
-    data:{option:option, modelo:modelo, placa:placa, proprietario:proprietario, id:id},
-    success:function(data){
-      id=data[0];
-      //Inserir
-      if (option==1){
-        console.log(data);
-        TabelaVeiculos.row.add([id, modelo, placa]).draw();
 
-        $('#modelo').val(modelo);
-        $('#placa').val(placa);
-        $('#proprietario').val(proprietario);
+  if(!$('#placa').hasClass("invalid")){
+    $.ajax({
+      url: "../config/crud-veiculos.php",
+      type: 'POST',
+      dataType: 'json',
+      data:{option:option, modelo:modelo, placa:placa, proprietario:proprietario, id:id},
+      success:function(data){
+        id=data[0];
+        //Inserir
+        if (option==1){
+          TabelaVeiculos.row.add([id, modelo, placa]).draw();
+
+          $('#modelo').val(modelo);
+          $('#placa').val(placa);
+          $('#proprietario').val(proprietario);
+        }
+        //Atualizar
+        else if(option==2){
+          TabelaVeiculos.row(linhaTabelaVeiculo).data([id, modelo, placa]);
+        }
+    
+      },error(x,y,z){
+        console.log(x);
+        console.log(y);
+        console.log(z);
       }
-      //Atualizar
-      else if(option==2){
-        TabelaVeiculos.row(linhaTabelaVeiculo).data([id, modelo, placa]);
-      }
-  
-    },error(x,y,z){
-      console.log(x);
-      console.log(y);
-      console.log(z);
+    });
 
-    }
-  });
-
-  var elem = document.getElementById("modal1");
-  var instance = M.Modal.getInstance(elem);
-  instance.close();
-
+    var elem = document.getElementById("modal1");
+    var instance = M.Modal.getInstance(elem);
+    instance.close();
+    document.getElementById('placa').removeAttribute("class");
+  }
 });
 
 //Bloqueia caracteres especiais do campo #placa
@@ -144,25 +143,40 @@ function checkChar(e) {
   }
 }
 
-//Validação form
-  const form = document.querySelector("#form-veiculo");
-  const verifica = document.getElementById('placa');
+//Verifica placa
+const verifica_placa = document.getElementById('placa');
+var validar = document.getElementById("validate");
 
-  verifica.addEventListener('input', function(){
+verifica_placa.addEventListener('input', function(){
   placa = $('#placa').val().toUpperCase();
-    if(placa.length == 7){
-      $.ajax({
-        url: "../config/verifica-veiculo.php",
-        type: 'POST',
-        dataType: 'json',
-        data:{validation:validation, placa:placa, ver_placa:ver_placa},
-        success:function(data){
-          console.log(data);
-        },error(x,y,z){
-          console.log(x);
-          console.log(y);
-          console.log(z);
+  if(placa.length == 7){
+    $.ajax({
+      url: "../config/verifica-veiculo.php",
+      type: 'POST',
+      dataType: 'json',
+      data:{validation:validation, placa:placa, ver_placa:ver_placa},
+      success:function(data){
+        switch (data) {
+          case 1: //Disponivel
+            validar.setAttribute("data-success" , "Placa Disponivel");
+            $("#placa").removeClass("invalid").addClass("valid");
+            break;
+          case 2: //Indisponivel
+            validar.setAttribute("data-error" , "Esta placa ja está cadastrada no sistema");
+            $("#placa").addClass("invalid");
+            break;
+          case 3: //Não Alterou
+            verifica_placa.removeAttribute("class");
+            break;
         }
-      });
-    }
-  });
+      },error(x,y,z){
+        console.log(x);
+        console.log(y);
+        console.log(z);
+      }
+    });
+  }else{
+    validar.setAttribute("data-error" , "Minimo de caracteres é 7");
+    $("#placa").removeClass("valid").addClass("invalid");
+  }
+});

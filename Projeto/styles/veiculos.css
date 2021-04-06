@@ -13,3 +13,11 @@ select{
 .btnEdit{
   margin-right: 4%;
 }
+
+.modal{ 
+  max-height: 100% !important;
+}
+
+.current{
+  background-color: brown  !important;
+}

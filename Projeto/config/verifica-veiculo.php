@@ -1,26 +1,19 @@
 <?php
 
 include ("conexao.php");
-$data = '';
+
 if(isset($_POST['validation'])){
 	$validation = $_POST['validation'];
     $placa = $_POST['placa'];
 
     switch ($validation) {
         case 1:
-            $ver = false;
-            $query = "SELECT * FROM veiculo";
+            $query = "SELECT * FROM veiculo WHERE placa = '$placa'";
             $result = mysqli_query($conn, $query);
-            while($veiculo = mysqli_fetch_array($result)){
-                if($placa == $veiculo['placa']){
-                    $ver = true;
-                }
-            }
-        
-            if($ver == true){
-                $data = 'placa ja cadastrada';
+            if(mysqli_num_rows($result) > 0){
+                $data = 2; //Placa ja cadastrada
             }else{
-                $data = 'placa disponivel';
+                $data = 1; //Placa disponivel
             }
             break;
         case 2:
@@ -28,7 +21,7 @@ if(isset($_POST['validation'])){
             $ver = false;
             $query = "SELECT * FROM veiculo WHERE placa != '$ver_placa'";
             $result = mysqli_query($conn, $query);
-            if(mysqli_num_rows($result) > 0){
+            
                 while($veiculo = mysqli_fetch_array($result)){
                     if($placa == $veiculo['placa']){
                         $ver = true;
@@ -36,15 +29,13 @@ if(isset($_POST['validation'])){
                 }
             
                 if($ver == true){
-                    $data = 'placa ja cadastrada, Edit';
+                    $data = 2; //Placa ja cadastrada
                 }else if($placa == $ver_placa){
-                    $data = 'Não Alterou o numero da Placa';
+                    $data = 3; //Não mudou
                 }else{
-                    $data = 'Placa disponivel, Edit';
+                    $data = 1; //Placa disponivel
                 }
-            }else{
-                $data = 'Placa Disponivel';
-            }
+            
             break;
     }
 }
