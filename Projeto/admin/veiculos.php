@@ -17,7 +17,7 @@ include("../config/conexao.php");
     <h3 class="left">Veículos</h3>
 
     <!--Tabela Veiculos-->
-    <table id="tabela-veiculos" class="centered highlight">
+    <table id="tabela-veiculos" class="centered highlight display compact">
       <thead>
         <tr>
           <th>ID</th>
@@ -43,11 +43,11 @@ include("../config/conexao.php");
         ?>
       </tbody>
     </table>
-    <br><br>
-    <a id="btn-novo-veiculo" class="#0277bd light-blue darken-3 waves-effect waves-light btn modal-trigger right" href="#modal1">Novo Veículo
-      <i class="material-icons right">add</i>
-    </a>
   </div>
+  
+  <a id="btn-novo-veiculo" class="#0277bd light-blue darken-3 btn-floating btn-large waves-effect waves-light btn modal-trigger right" href="#modal1">
+    <i class="material-icons right">add</i>
+  </a>
 
   <!-- Modal-Veiculo -->
   <div id="modal1" class="modal">
@@ -84,6 +84,28 @@ include("../config/conexao.php");
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Modal Confirmação excluir-->
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <i class="modal-close material-icons right">close</i>
+      <h4>Você tem certeza?</h4>
+      <p id="confirm-delete"></p>
+    </div>
+        <div class="row">
+          <form id="form-delete" class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="confirm" type="text" name="confirm">
+                <label for="confirm">Confirmar</label>
+              </div>
+              <button id="submitDelete" class="disabled btn red darken-1 waves-effect center center-align" type="submit" name="submitDelete">
+              Eu entendo as consequências, exclua este veículo
+            </button>
+            </div> 
+          </form>
+        </div>
   </div>
   
   <?php include ("../components/scripts.php")?>
