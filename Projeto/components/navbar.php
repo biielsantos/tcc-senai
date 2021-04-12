@@ -1,18 +1,18 @@
-<?php
-session_start();
-?>
-
 <nav>
-  <div class="nav-wrapper" style="padding: 0 1rem;">
-    <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons" style="font-size: 32px;">menu</i></a>
-    <i class="material-icons" style="font-size: 32px;">account_circle</i>
+  <div class="nav-wrapper">
+    <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large btn-floating btn-flat waves-effect waves-light"><i class="material-icons">menu</i></a>
+    <div class="usuario">
+      <span class="nome"><?php echo $_SESSION['nome']; ?></span>
+      <i class="material-icons">account_circle</i>
+    </div>
   </div>
 </nav>
 
-<ul id="slide-out" class="sidenav" style="display: flex; flex-direction: column; justify-content: space-between; padding-top: 1rem;">
+<ul id="slide-out" class="sidenav">
   <div>
-    <li class="center">
-      <i class="material-icons" style="font-size: 4rem;">directions_car</i>
+    <li class="center top-header">
+      <i class="medium material-icons">directions_car</i>
+      <i class="small material-icons sidenav-close">close</i>
     </li>
     <li><div class="divider"></div></li>
     <li><a class="subheader">Acesso Rápido</a></li>
