@@ -1,0 +1,67 @@
+nav .nav-wrapper {
+	padding: 0 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+nav .sidenav-trigger {
+	width: 64px;
+	height: 64px;
+	margin: 0;
+}
+
+nav .sidenav-trigger:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+nav .sidenav-trigger i {
+	font-size: 32px;
+}
+
+
+nav .nav-wrapper .usuario {
+	display: flex;
+}
+
+nav .nav-wrapper .usuario .nome {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-right: 1rem;
+}
+
+nav .nav-wrapper .usuario i {
+	font-size: 32px;
+}
+
+.sidenav {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding-top: 1rem;
+}
+
+.sidenav .top-header {
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidenav .sidenav-close {
+  display: inline-block;
+}
+
+.sidenav .sidenav-close:hover {
+  cursor: pointer;
+}
+
+.sidenav .sidenav-close:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+@media screen and (max-width: 600px) {
+  .sidenav {
+    width: 100vw;
+  }
+}

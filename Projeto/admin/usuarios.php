@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../config/conexao.php");
 ?>
 <!DOCTYPE html>
@@ -8,10 +9,12 @@ include("../config/conexao.php");
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
   <?php include "../components/head.php" ?>
   <link rel="stylesheet" href="../styles/usuarios.css">
+  <link rel="stylesheet" href="../styles/navbar.css">
   <title>Usuários</title>
 </head>
 
 <body>
+  <?php include "../components/navbar.php" ?>
   <div class="container">
     <p class="left user-icon"><i class="fas fa-user-circle fa-5x"></i></p>
     <h3 class="left">Usuários</h3>
