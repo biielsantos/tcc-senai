@@ -3,7 +3,7 @@
 
 ## :bookmark_tabs: Sobre
 
-Este repositório tem como finalidade gerenciar o código e a documentação do **sistema de gerenciamento de veículos**, um trabalho de conclusão de curso desenvolvido pelos alunos Gabriel, Gustavo, Luís e Vanderlei, do curso de desenvolvimento de sistemas aplicado pelo Serviço Nacional de Aprendizagem Industrial (SENAI).
+Este repositório tem como finalidade gerenciar o código e a documentação do **sistema de gerenciamento de veículos**, um trabalho de conclusão de curso desenvolvido pelos alunos **Gabriel, Gustavo, Luís e Vanderlei**, do curso de desenvolvimento de sistemas aplicado pelo Serviço Nacional de Aprendizagem Industrial (SENAI).
 
 O sistema tem o objetivo de gerenciar entrada e saída de veículos disponíveis em uma empresa, onde os usuários podem reservar um horário para usar os carros empresariais.
 
