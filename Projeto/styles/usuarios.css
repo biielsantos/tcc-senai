@@ -2,11 +2,27 @@
   margin-right: 2rem;
 }
 
-#modal1 {
-  width: 60vw;
-  height: 75vh;
+.modal {
+  max-height: 95% !important;
+  max-width: 80%;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+.icon-close{
+  position: fixed !important;
+  top: 10%;
+  float: right !important;
 }
 
 select{
   display: inline-block!important;
 }
+
+#tipo-usuario{
+  display: none !important;
+}
+
+/*#slide-out{
+  width: 100vw;
+}*/
