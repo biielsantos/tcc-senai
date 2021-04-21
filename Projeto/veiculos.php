@@ -8,6 +8,7 @@
   <?php include "./components/head.php" ?>
   <link rel="stylesheet" href="./styles/navbar.css">
   <link rel='stylesheet' href='./lib/main.css' />
+  <link rel="stylesheet" href="./styles/consultar.css" />
   <script src='./lib/main.js'></script>
   <title>SRV | Veículos</title>
 
@@ -26,9 +27,16 @@
     const events = [];
     reservas.forEach(reserva => {
       events.push({
-        title: `${reserva.nome} (${reserva.modelo})`,
+        title: reserva.modelo,
         start: reserva.data_saida,
         end: reserva.data_retorno,
+        extendedProps: {
+          usuario: reserva.nome,
+          destino: `${reserva.rua} (${reserva.cidade} ${reserva.estado})`,
+          estado: reserva.estado,
+          cidade: reserva.cidade,
+          rua: reserva.rua,
+        }
       })
     })
 
@@ -38,11 +46,30 @@
         initialView: 'timeGridWeek',
         locale: 'pt-br',
         events: events,
+        eventContent: function(arg) {
+          return {
+            html: `
+              <div class="event">
+                <p class="eventTag"><strong>${arg.timeText}</strong></p>
+                <p class="eventTag"><strong>Veículo</strong>: ${arg.event.title}</p>
+                <p class="eventTag"><strong>Usuário</strong>: ${arg.event.extendedProps.usuario}</p>
+                <p class="eventTag"><strong>Destino</strong>: ${arg.event.extendedProps.destino}</p>
+              </div>
+            `
+          }
+        },
         height: 700,
+        nowIndicator: true,
         headerToolbar: {
           start: "today prev,next",
           center: "title",
           end: "dayGridMonth timeGridWeek timeGridDay listWeek"
+        },
+        slotLabelFormat: {
+          hour: 'numeric',
+          minute: '2-digit',
+          omitZeroMinute: false,
+          meridiem: 'short'
         },
         views: {
           dayGridMonth: {
@@ -51,7 +78,7 @@
               month: 'long',
               year: 'numeric'
             }
-          }
+          },
         },
         buttonText: {
           today: 'Hoje',
