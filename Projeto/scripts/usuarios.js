@@ -1,15 +1,15 @@
 $(document).ready(function(){
+  //Materialize
   $('select').formSelect();
   $('.modal').modal();
   $('.sidenav').sidenav();
-  M.updateTextFields();
 
   //DataTables
   TabelaUsuarios = $('#tabela-usuarios').DataTable({
     "columnDefs":[{
       "targets": -1,
       "data":null,
-      "defaultContent": "<a href='#modal1' data-target='modal1' class='btnEdit modal-trigger btn orange darken-1 waves-effect waves-light' type='submit' name='action'><i class='material-icons right'>edit</i><span class='hide-on-small-only'>EDITAR</span></a><a href='#modal2' data-target='modal2' class='btnDelete modal-trigger red darken-1 btn waves-effect waves-light type='submit' name='action' ><i class='material-icons right'>delete</i>EXCLUIR</a>"
+      "defaultContent": "<a href='#modal1' data-target='modal1' class='btnEdit modal-trigger btn orange darken-1 waves-effect waves-light' type='submit' name='action'><i class='material-icons right'>edit</i>EDITAR</a><a href='#modal2' data-target='modal2' class='btnDelete modal-trigger red darken-1 btn waves-effect waves-light type='submit' name='action' ><i class='material-icons right'>delete</i>EXCLUIR</a>"
     }],
     "language":{
       "url": "https://cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
@@ -27,10 +27,12 @@ $(document).on("click", "#btn-novo-usuario", function() {
   departamento = "";
   telefone = "";
   ver_cpf="";
+  senha="";
   $("#nome").val(nome);
   $("#cpf").val(cpf);
   $("#departamento").val(departamento); 
   $("#telefone").val(telefone);
+  $("#senha").val(senha);
   option = 1;
   validation=1;
   document.getElementById('cpf').removeAttribute("class");
@@ -43,14 +45,14 @@ $(document).on("click", ".btnEdit", function(){
   option=4;
   document.getElementById('cpf').removeAttribute("class");
 
-  //Trazer todos os dados para o form de atualização
+  //Trazer todos os dados para o modal de atualização
   $.ajax({
     url: "../config/crud-usuarios.php",
     type: 'POST',
     dataType: 'json',
     data:{id:id, option:option},
     success:function(data){
-      console.log(data);
+      console.log("Objeto -> editar\n", data);
       $('#nome').val(data[1]);
       $("#cpf").val(data[2]);
       $("#senha").val(data[3]);
@@ -82,6 +84,18 @@ $(document).on("click", ".btnDelete", function(){
   $("#submitDelete").addClass("disabled");
 });
 
+
+//Verifica confirmação ao Excluir
+const verifica_delete = document.getElementById('confirm');
+
+verifica_delete.addEventListener('input', function(){
+  if($('#confirm').val().toUpperCase().trim() == cpf){
+    $("#submitDelete").removeClass("disabled");
+  }else{
+    $("#submitDelete").addClass("disabled");
+  }
+});
+
 //Submit -> Form Cadastrar/Atualizar Usuário
 $("#form-usuario").submit(function(e){
   e.preventDefault();
@@ -98,10 +112,15 @@ $("#form-usuario").submit(function(e){
     dataType: 'json',
     data:{option:option, nome:nome, tipo:tipo, cpf:cpf, departamento:departamento,telefone:telefone, senha,senha,id:id},
     success:function(data){
-      id=data[0];
+      id = data[0];
+      if(tipo == "A"){
+        tipo = "ADMIN";
+      }else if(tipo == "U"){
+        tipo = "COMUM"
+      }
       //Inserir
-      if (option==1){
-        TabelaUsuarios.row.add([id, nome, cpf, tipo, departamento, telefone]).draw();
+      if (option == 1){
+        TabelaUsuarios.row.add([id, nome, cpf, tipo]).draw();
         $('#nome').val(nome);
         //$('#placa').val(placa);
         //s$('#proprietario').val(proprietario);
@@ -109,8 +128,8 @@ $("#form-usuario").submit(function(e){
         M.toast({html: msg, classes: 'rounded #66bb6a green lighten-1'});
       }
       //Atualizar
-      else if(option==2){
-        TabelaUsuarios.row(linhaTabelaUsuario).data([id, nome, cpf, tipo, departamento, telefone]);
+      else if(option == 2){
+        TabelaUsuarios.row(linhaTabelaUsuario).data([id, nome, cpf, tipo]);
         var msg = '<span>Usuário atualizado com Sucesso</span>';
         M.toast({html: msg, classes: 'rounded #66bb6a green lighten-1'});
       }

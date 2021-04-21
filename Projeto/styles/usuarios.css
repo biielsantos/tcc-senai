@@ -23,6 +23,11 @@ select{
   display: none !important;
 }
 
-/*#slide-out{
-  width: 100vw;
-}*/
+#toast-container {
+  top: 5px !important;
+  right: auto !important;
+  bottom: 10%;
+  left: 50%;
+  transform: translate(-50%);
+  max-height: 250px;
+}

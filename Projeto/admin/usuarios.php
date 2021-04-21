@@ -24,22 +24,20 @@ include("../config/conexao.php");
     <table id="tabela-usuarios" class="centered highlight display compact">
       <thead>
         <tr>
-          <th class="hide-on-small-only">ID</th>
+          <th>ID</th>
           <th>NOME</th>
           <th>CPF</th>
           <th>TIPO</th>
-          <th class="hide-on-small-only">DEPARTAMENTO</th>
-          <th class="hide-on-med-and-down">TELEFONE</th>
           <th>AÇÃO</th>
         </tr>
       </thead>
       <tbody>
         <?php
-        $query = mysqli_query($conn, "SELECT * FROM usuario ORDER BY id_usuario DESC") or die(mysqli_connect_error());
+        $query = mysqli_query($conn, "SELECT * FROM usuario") or die(mysqli_connect_error());
         while ($usuario = mysqli_fetch_array($query)) {
         ?>
           <tr>
-            <td class="hide-on-small-only"><?php echo $usuario['id_usuario']; ?></td>
+            <td><?php echo $usuario['id_usuario']; ?></td>
             <td><?php echo $usuario['nome']; ?></td>
             <td><?php echo $usuario['cpf']; ?></td>
             <td>
@@ -51,8 +49,7 @@ include("../config/conexao.php");
                 }
               ?>
             </td>
-            <td class="hide-on-small-only"><?php echo $usuario['departamento']; ?></td>
-            <td class="hide-on-med-and-down"><?php echo $usuario['telefone']; ?></td>
+            
             <td></td>
           </tr>
         <?php
@@ -87,7 +84,7 @@ include("../config/conexao.php");
             <div class="row">
               <div class="input-field col l6 m6 s12">
                 <select id="tipo-usuario">
-                  <option value="" disabled selected  required="required">Selecione</option>
+                  <option selected  required="required">Selecione</option>
                   <option value="U">COMUM</option>
                   <option value="A">ADMIN</option>
                 </select>
