@@ -1,5 +1,5 @@
 <?php
-include("conexao.php");
+include ("../config/conexao.php");
 
 if(isset($_POST['nome']) && isset($_POST['tipo']) && isset($_POST['cpf']) && isset($_POST['departamento']) && isset($_POST['telefone']) && isset($_POST['senha'])){
 	$nome = $_POST['nome'];

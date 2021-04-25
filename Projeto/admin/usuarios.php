@@ -24,10 +24,12 @@ include("../config/conexao.php");
     <table id="tabela-usuarios" class="centered highlight display compact">
       <thead>
         <tr>
-          <th>ID</th>
+          <th >ID</th>
           <th>NOME</th>
           <th>CPF</th>
           <th>TIPO</th>
+          <th>DEPARTAMENTO</th>
+          <th>TELEFONE</th>
           <th>AÇÃO</th>
         </tr>
       </thead>
@@ -49,7 +51,8 @@ include("../config/conexao.php");
                 }
               ?>
             </td>
-            
+            <td><?php echo $usuario['departamento']; ?></td>
+            <td><?php echo $usuario['telefone']; ?></td>
             <td></td>
           </tr>
         <?php
@@ -66,7 +69,7 @@ include("../config/conexao.php");
   </div>
 
   <!-- Modal-Cadastro -->
-  <div id="modal1" class="modal ">
+  <div id="modal1" class="modal">
     <div class="modal-content">
       <div class="container">
         <h3 class="center">Usuário</h3>
@@ -83,21 +86,22 @@ include("../config/conexao.php");
             </div>
             <div class="row">
               <div class="input-field col l6 m6 s12">
-                <select id="tipo-usuario">
-                  <option selected  required="required">Selecione</option>
-                  <option value="U">COMUM</option>
-                  <option value="A">ADMIN</option>
+                <select id="tipo-usuario" required>
+                <option value="" disabled selected>Selecione</option>
+                <option value="U">COMUM</option>
+                <option value="A">ADMIN</option>
                 </select>
                 <label>Tipo de usuario</label>
               </div>
               <div class="input-field col l6 m6 s12">
-                <input id="cpf" type="text" name="cpf"  data-length="11" minlength="11" maxlength="11" autocomplete="off" required>
+                <input id="cpf" type="text" name="cpf" minlength="11" maxlength="11" autocomplete="off" required>
                 <label class="active" for="cpf">CPF</label>
-                <span id="validate" class="helper-text" data-success="Sucesso"></span>
+                <span id="span_cpf"class="helper-text"></span>
               </div>
               <div class="input-field col l6 m6 s12">
                 <input id="telefone" type="text" name="telefone" data-length="11" minlength="11" maxlength="11" autocomplete="off" required>
                 <label for="telefone">Telefone</label>
+                <span id="span_telefone" class="helper-text"></span>
               </div>
               <div class="input-field col l6 m6 s12">
                 <input id="senha" type="password"  name="senha" required>
@@ -108,7 +112,7 @@ include("../config/conexao.php");
               <button type="button" class="modal-close btn waves-effect red darken-1">Cancelar
                 <i class="material-icons left">cancel</i>
               </button>
-              <button class="btn waves-effect right" type="submit" name="submit">Salvar
+              <button id="btn-salvar" class="btn waves-effect right" type="submit" >Salvar
                 <i class="material-icons right">send</i>
               </button>
             </div>
@@ -141,6 +145,7 @@ include("../config/conexao.php");
   </div>
 
   <?php include ("../components/scripts.php") ?>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
   <script src="../scripts/usuarios.js"></script>
 </body>
 </html>
