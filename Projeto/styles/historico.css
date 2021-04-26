@@ -1,0 +1,10 @@
+header {
+	display: flex;
+	align-items: center;
+	padding: 2rem 0;
+}
+
+header h1 {
+	display: inline;
+	margin: 0 0 0 1rem;
+}
