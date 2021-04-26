@@ -14,19 +14,23 @@
     <form action="./config/login.php" method="POST">
       <div class="input-field">
         <i class="material-icons prefix">account_circle</i>
-        <label for="cpf"></label>
-        <input type="number" name="cpf" id="cpf" autocomplete="off" placeholder="CPF" />
+        <input type="number" name="cpf" id="cpf" autocomplete="off" />
+        <label for="cpf">CPF</label>
       </div>
       <div class="input-field">
         <i class="material-icons prefix">lock</i>
-        <label for="senha"></label>
-        <input type="password" name="senha" id="senha" autocomplete="off" placeholder="SENHA"/>
+        <input type="password" name="senha" id="senha" autocomplete="off"/>
+        <label for="senha">Senha</label>
       </div>
       <button class="btn waves-effect" type="submit" name="submit">Entrar
         <i class="material-icons right">send</i>
       </button>
     </form>
   </div>
+  <?php include "./components/scripts.php"; ?>
+  <script>
+    M.updateTextFields();
+  </script>
 </body>
 
 </html>
