@@ -2,6 +2,9 @@
 include("./config/conexao.php");
 session_start();
 
+if ($_SESSION["status"] != "ok") {
+  header('location: ./index.php');
+}
 
 // Verificar se o usuario é admin ou comum
 if ($_SESSION["tipo"] == "A"){

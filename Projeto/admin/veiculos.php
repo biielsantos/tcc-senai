@@ -1,6 +1,14 @@
 <?php
 session_start();
 include("../config/conexao.php");
+
+if ($_SESSION["status"] != "ok") {
+  header('location: ../index.php');
+}
+
+if ($_SESSION["tipo"] != "A") {
+  header('location: ../index.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

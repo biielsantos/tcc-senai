@@ -1,4 +1,8 @@
 <?php
+if ($_SESSION["status"] != "ok") {
+  header('location: ../index.php');
+}
+
 include("conexao.php");
 
 if(isset($_POST['modelo']) && isset($_POST['placa']) && $_POST['proprietario']){

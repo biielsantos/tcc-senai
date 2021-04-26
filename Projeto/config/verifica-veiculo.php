@@ -1,5 +1,9 @@
 <?php
 
+if ($_SESSION["status"] != "ok") {
+    header('location: ../index.php');
+}
+
 include ("conexao.php");
 
 if(isset($_POST['validation'])){
