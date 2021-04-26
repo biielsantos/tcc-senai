@@ -14,13 +14,13 @@
     <form action="./config/login.php" method="POST">
       <div class="input-field">
         <i class="material-icons prefix">account_circle</i>
-        <label for="cpf">CPF</label>
-        <input type="number" name="cpf" id="cpf" autocomplete="off" />
+        <label for="cpf"></label>
+        <input type="number" name="cpf" id="cpf" autocomplete="off" placeholder="CPF" />
       </div>
       <div class="input-field">
         <i class="material-icons prefix">lock</i>
-        <label for="senha">Senha</label>
-        <input type="password" name="senha" id="senha" autocomplete="off" />
+        <label for="senha"></label>
+        <input type="password" name="senha" id="senha" autocomplete="off" placeholder="SENHA"/>
       </div>
       <button class="btn waves-effect" type="submit" name="submit">Entrar
         <i class="material-icons right">send</i>
