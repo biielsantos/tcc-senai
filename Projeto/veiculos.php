@@ -43,7 +43,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       var calendarEl = document.getElementById('calendar');
       var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'timeGridWeek',
+        initialView: 'listWeek',
         locale: 'pt-br',
         events: events,
         eventContent: function(arg) {
@@ -58,12 +58,13 @@
             `
           }
         },
+        noEventsContent: "Não há nenhuma reserva hoje",
         height: 550,
         nowIndicator: true,
         headerToolbar: {
           start: "today prev,next",
           center: "title",
-          end: "dayGridMonth timeGridWeek timeGridDay listWeek"
+          end: "listWeek dayGridMonth timeGridWeek timeGridDay"
         },
         slotLabelFormat: {
           hour: 'numeric',
