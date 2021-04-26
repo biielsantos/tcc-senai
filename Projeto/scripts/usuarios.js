@@ -59,7 +59,7 @@ $(document).on("click", ".btnEdit", function(){
 
   //Trazer todos os dados para o modal de atualização
   $.ajax({
-    url: "crud-usuarios.php",
+    url: "../config/crud-usuarios.php",
     type: 'POST',
     dataType: 'json',
     data:{id:id, option:option},
@@ -112,7 +112,7 @@ $("#form-usuario").submit(function(e){
   $("#btn-salvar").attr("disabled", true);
   if(!$('#cpf').hasClass("invalid")){
     $.ajax({
-      url: "crud-usuarios.php",
+      url: "../config/crud-usuarios.php",
       type: 'POST',
       dataType: 'json',
       data:{option:option, nome:nome, tipo:tipo, cpf:cpf, departamento:departamento,telefone:telefone, senha,senha,id:id},
@@ -163,7 +163,7 @@ $(document).on("input", "#confirm", function(){
 $("#form-delete").submit(function(e){
   e.preventDefault();
   $.ajax({
-    url: "crud-usuarios.php",
+    url: "../config/crud-usuarios.php",
     type: 'POST',
     dataType: 'json',
     data:{option:option, id:id},
@@ -202,7 +202,7 @@ $(document).on("input", "#cpf", function(){
 //Validar Input
 function validarInput(dados, span, input, msg) {
   $.ajax({
-    url: "verifica-usuario.php",
+    url: "../config/verifica-usuario.php",
     type: 'POST',
     dataType: 'json',
     data: dados,
