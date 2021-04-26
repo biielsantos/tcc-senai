@@ -27,11 +27,13 @@ mysqli_close($conn);
 <head>
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
   <?php include "./components/head.php"; ?>
+  <link rel="stylesheet" href="./styles/navbar.css">
   <link rel="stylesheet" href="./styles/historico.css">
   <title>SRV | Histórico</title>
   
 </head>
 <body>
+  <?php include "./components/navbar.php" ?>
   <div class="container">
     <header>
       <i class="material-icons" style="font-size: 70px;">watch_later</i>
