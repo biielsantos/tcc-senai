@@ -11,7 +11,7 @@ if (mysqli_num_rows($query) > 0) {
     $_SESSION['nome'] = $usuario['nome'];
     $_SESSION['cpf'] = $usuario['cpf'];
     $_SESSION["tipo"] = $usuario['tipo'];
-    $_SESSION["status"] = "OK";
+    $_SESSION["status"] = "ok";
     header('Location: ../veiculos.php');
 } else {
     echo 'usuario Invalido';
