@@ -8,7 +8,6 @@ $(document).ready(function(){
   TabelaUsuarios = $('#tabela-usuarios').DataTable({
     "columnDefs":[
       { className: "hide-on-small-only", targets: 0 },
-      //{ className: "truncate", targets: 1},
       { className: "hide-on-med-and-down", targets: 5 },
       { className: "hide-on-med-and-down", targets: 4 },
       {
@@ -31,14 +30,13 @@ var linhaTabelaUsuario;
 
 //Botão Novo Usuário
 $(document).on("click", "#btn-novo-usuario", function() {
-  $("#btn-salvar").attr("disabled", false);
-  id="";
+  id= "";
   nome = "";
   cpf = "";
   departamento = "";
   telefone = "";
   ver_cpf="";
-  senha="";
+  senha= "";
   $("#nome").val(nome);
   $("#cpf").val(cpf);
   $("#departamento").val(departamento); 
@@ -46,16 +44,13 @@ $(document).on("click", "#btn-novo-usuario", function() {
   $("#senha").val(senha);
   option = 1;
   cpf_real = null;
-  document.getElementById('cpf').removeAttribute("class");
 });
 
 //Botão EDITAR
 $(document).on("click", ".btnEdit", function(){
-  $("#btn-salvar").attr("disabled", false);
   linhaTabelaUsuario = $(this).closest('tr');
   id=parseInt(linhaTabelaUsuario.find('td').eq(0).text());
   option=4;
-  document.getElementById('cpf').removeAttribute("class");
 
   //Trazer todos os dados para o modal de atualização
   $.ajax({
@@ -80,8 +75,6 @@ $(document).on("click", ".btnEdit", function(){
   });
   
   cpf_real = linhaTabelaUsuario.find('td').eq(2).text();
-  validation=1;
-  
 });
 
 //Botão EXCLUIR
@@ -99,7 +92,6 @@ $(document).on("click", ".btnDelete", function(){
 
 
 //Submit -> Form Cadastrar/Atualizar Usuário
-
 $("#form-usuario").submit(function(e){
   e.preventDefault();
   nome = $("#nome").val().trim();
@@ -139,9 +131,11 @@ $("#form-usuario").submit(function(e){
         var modal_usuario = document.getElementById("modal1");
         var usuario = M.Modal.getInstance(modal_usuario);
         usuario.close();
+        setTimeout(function(){$("#btn-salvar").attr("disabled", false)}, 1000);
+        $('#cpf').removeAttr("class");
       }
     });
-  }else{ //Toast de erro
+  }else{ //Msg erro
     var msg = '<span>Preencha os campos Corretamente</span>';
     M.toast({html: msg, classes: 'rounded #ef5350 red lighten-1'})
     $("#btn-salvar").attr("disabled", false); 

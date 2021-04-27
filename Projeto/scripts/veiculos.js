@@ -23,15 +23,14 @@ var linhaTabelaVeiculo;
 //Botão Novo Veículo
 $(document).on("click", "#btn-novo-veiculo", function() {
   id="";
-  modelo= null;
-  placa= null;
-  proprietario= null;
-  ver_placa="";
+  modelo= "";
+  placa= "";
+  proprietario= "";
   $('#modelo').val(modelo);
   $('#placa').val(placa);
   $('#proprietario').val(proprietario);
   option=1;
-  validation=1;
+  placa_real = null;
   document.getElementById('placa').removeAttribute("class");
 });
 
@@ -53,6 +52,7 @@ $(document).on("click", ".btnEdit", function(){
       $('#placa').val(data[2]);
       $('#proprietario').val(data[3]);
       option=2;
+      M.updateTextFields();
     },error(x, y, z){
       console.log(x);
       console.log(y);
@@ -60,8 +60,7 @@ $(document).on("click", ".btnEdit", function(){
     }
   });
   
-  ver_placa = linhaTabelaVeiculo.find('td').eq(2).text();
-  validation=2;
+  placa_real = linhaTabelaVeiculo.find('td').eq(2).text();
 });
 
 
@@ -73,7 +72,7 @@ $(document).on("click", ".btnDelete", function(){
   placa =  linhaTabelaVeiculo.closest('tr').find('td').eq(2).text();
   option=3;
   var confirm = document.getElementById("confirm-delete");
-  confirm.innerHTML =  "Esta ação não pode ser desfeita.<br>Isso excluirá permanentemente o veículo <b>"+modelo+"</b> cujo a placa é <b>"+placa+"</b><br><br>"+"Digite <b>"+placa+" </b>para confirmar." ;
+  confirm.innerHTML =  `Esta ação não pode ser desfeita.<br>Isso excluirá permanentemente o veículo <b>${modelo}</b> cujo a placa é <b>${placa}</b><br><br>Digite <b>${placa}</b> para confirmar.`;
   $('#confirm').val("");
   $("#submitDelete").addClass("disabled");
 });
@@ -85,9 +84,8 @@ $("#form-veiculo").submit(function(e){
   modelo = $('#modelo').val().trim();
   placa = $('#placa').val().toUpperCase();
   proprietario = $('#proprietario').val().trim();
-  M.Toast.dismissAll();
   
-
+  $("#btn-salvar").attr("disabled", true);
   if(!$('#placa').hasClass("invalid")){
     $.ajax({
       url: "../config/crud-veiculos.php",
@@ -111,83 +109,45 @@ $("#form-veiculo").submit(function(e){
           var msg = '<span>Veículo atualizado com Sucesso</span>';
           M.toast({html: msg, classes: 'rounded #66bb6a green lighten-1'});
         }
-    
+
+        var elem = document.getElementById("modal1");
+        var instance = M.Modal.getInstance(elem);
+        instance.close();
+        $('#cpf').removeAttr("class");
+        setTimeout(function(){$("#btn-salvar").attr("disabled", false)}, 1000);
       },error(x,y,z){
         console.log(x);
         console.log(y);
         console.log(z);
       }
     });
-
-    var elem = document.getElementById("modal1");
-    var instance = M.Modal.getInstance(elem);
-    instance.close();
-    
-  }else{ //Erro
+ 
+  }else{ //Msg Erro
     var msg = '<span>Preencha os campos Corretamente</span>';
-    M.toast({html: msg, classes: 'rounded #ef5350 red lighten-1'})
-      
+    M.toast({html: msg, classes: 'rounded #ef5350 red lighten-1'});
+    $("#btn-salvar").attr("disabled", false);
   }
 });
-
-//Bloqueia caracteres especiais do campo #placa
-var input = document.querySelector("#placa");
-input.addEventListener("keypress", function(e) {
-    if(!checkChar(e)) {
-      e.preventDefault();
-  }
-});
-function checkChar(e) {
-    var char = String.fromCharCode(e.keyCode);
-    var pattern = '[a-zA-Z0-9]';
-    if (char.match(pattern)) {
-      return true;
-  }
-}
 
 //Verifica placa repetida
-const verifica_placa = document.getElementById('placa');
-var validar = document.getElementById("validate");
+span_placa = $("#span_placa");
+placa_msg = {successo: "Placa válida", erro: "Placa ja cadastrada"};
 
-verifica_placa.addEventListener('input', function(){
-  placa = $('#placa').val().toUpperCase();
-  if(placa.length == 7){
-    $.ajax({
-      url: "../config/verifica-veiculo.php",
-      type: 'POST',
-      dataType: 'json',
-      data:{validation:validation, placa:placa, ver_placa:ver_placa},
-      success:function(data){
-        switch (data) {
-          case 1: //Disponivel
-            validar.setAttribute("data-success" , "Placa Disponivel");
-            $("#placa").removeClass("invalid").addClass("valid");
-            break;
-          case 2: //Indisponivel
-            validar.setAttribute("data-error" , "Esta placa ja está cadastrada no sistema");
-            $("#placa").addClass("invalid");
-            break;
-          case 3: //Não Alterou
-            verifica_placa.removeAttribute("class");
-            break;
-        }
-      },error(x,y,z){
-        console.log(x);
-        console.log(y);
-        console.log(z);
-      }
-    });
+$(document).on("input", "#placa", function(){
+  placa = $('#placa');
+  placa_dados = {validation_option: "placa", placa: placa.val().toUpperCase() , placa_real: placa_real};
+  if(placa.val().length == 7){
+    console.log("7");
+    validarInput(placa_dados, span_placa, placa, placa_msg)
   }else{
-    validar.setAttribute("data-error" , "Minimo de caracteres é 7");
-    $("#placa").removeClass("valid").addClass("invalid");
+    span_placa.attr("data-error" , "Minimo de caracteres é 7");
+    placa.removeClass("valid").addClass("invalid");
   }
 });
 
 
 //Verifica confirmação ao Excluir
-const verifica_delete = document.getElementById('confirm');
-
-verifica_delete.addEventListener('input', function(){
+$(document).on("input", "#confirm", function(){
   if($('#confirm').val().toUpperCase().trim() == placa){
     $("#submitDelete").removeClass("disabled");
   }else{
@@ -218,3 +178,59 @@ $("#form-delete").submit(function(e){
   var instance = M.Modal.getInstance(elem);
   instance.close();
 });
+
+
+//Validar Input
+function validarInput(dados, span, input, msg) {
+  $.ajax({
+    url: "../config/verifica-veiculo.php",
+    type: 'POST',
+    dataType: 'json',
+    data: dados,
+    success:function(data){
+      switch (data) {
+        case 1: //Disponivel
+          span.attr("data-success" , msg.successo);
+          input.removeClass("invalid").addClass("valid");
+          
+          break;
+        case 2: //Indisponivel
+          span.attr("data-error" , msg.erro);
+          input.addClass("invalid");
+        
+          break;
+        case 3: //Não Alterou
+          input.removeAttr("class");
+        break;
+      }
+    },error(x,y,z){
+      console.log(x);
+      console.log(y);
+      console.log(z);
+    }
+  });
+}
+
+//Bloqueia "Enter" form-delete
+$(document).on("keypress", '#form-delete', function (e) {
+  var code = e.keyCode || e.which;
+  if (code == 13) {
+      e.preventDefault();
+      return false;
+  }
+});
+
+//Bloqueia caracteres especiais do campo #placa
+var input = document.querySelector("#placa");
+input.addEventListener("keypress", function(e) {
+    if(!checkChar(e)) {
+      e.preventDefault();
+  }
+});
+function checkChar(e) {
+    var char = String.fromCharCode(e.keyCode);
+    var pattern = '[a-zA-Z0-9]';
+    if (char.match(pattern)) {
+      return true;
+  }
+};

@@ -70,13 +70,12 @@ include("../config/conexao.php");
         ?>
       </tbody>
     </table>
-    <br><br>
-    <a id="btn-novo-usuario" class="waves-effect waves-light btn modal-trigger right" href="#modal1">Novo Usuário
-      <i class="material-icons right">add</i>
-    </a>
+    </div>
   </div>
-  </div>
-
+    
+  <a id="btn-novo-usuario" class="#0277bd light-blue darken-3 btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#modal1">
+    <i class="material-icons right">add</i>
+  </a>
   <!-- Modal-Cadastro -->
   <div id="modal1" class="modal">
     <div class="modal-content">
@@ -130,6 +129,7 @@ include("../config/conexao.php");
       </div>
     </div>
   </div>
+
 
   <!-- Modal Confirmação Excluir-->
   <div id="modal2" class="modal">
