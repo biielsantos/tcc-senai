@@ -57,7 +57,7 @@ include("../config/conexao.php");
     </table>
   </div>
   
-  <a id="btn-novo-veiculo" class="#0277bd light-blue darken-3 btn-floating btn-large waves-effect waves-light btn modal-trigger right" href="#modal1">
+  <a id="btn-novo-veiculo" class="#0277bd light-blue darken-3 btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#modal1">
     <i class="material-icons right">add</i>
   </a>
 
@@ -77,7 +77,7 @@ include("../config/conexao.php");
               <div class="input-field col s6">
                 <input id="placa" type="text"  name="placa" data-length="7" minlength="7" maxlength="7" autocomplete="off" required>
                 <label for="placa">Placa</label>
-                <span id="validate" class="helper-text" data-success="Sucesso"></span>
+                <span id="span_placa" class="helper-text" data-success="Sucesso"></span>
               </div>
             </div>
             <div class="input-field">
@@ -87,8 +87,8 @@ include("../config/conexao.php");
             <div class="button-container">
               <button type="button" class="modal-close btn waves-effect red darken-1">Cancelar
                 <i class="material-icons left">cancel</i>
-              </a>
-              <button class="btn waves-effect right" type="submit" name="submit">Salvar
+              </button>
+              <button id="btn-salvar" class="btn waves-effect right" type="submit" name="submit">Salvar
                 <i class="material-icons right">send</i>
               </button>
             </div>

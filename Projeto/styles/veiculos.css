@@ -6,11 +6,7 @@ select{
   display: inline-block!important;
 }
 
-#placa{
-  text-transform: uppercase;
-}
-
-#confirm{
+#confirm, #placa{
   text-transform: uppercase;
 }
 
@@ -34,17 +30,12 @@ select{
   transform: translate(-50%);
   max-height: 250px;
 }
-/*.toast{
-  margin-top: 5px;
-  max-width: 90vw !important;
-  margin: auto;
-}*/
 
 #btn-novo-veiculo{
   position: fixed;
-  top: 84vh;
-  left: 87vw;
-  box-shadow: 1px 3px 9px rgba(0, 0, 0, 0.5)
+  right: 6vw;
+  bottom: 7vh;
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.5);
 }
 #submitDelete{
 left: 50%;

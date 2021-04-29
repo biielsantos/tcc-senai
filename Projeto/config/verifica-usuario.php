@@ -1,6 +1,6 @@
 <?php
 
-include ("../config/conexao.php");
+include ("conexao.php");
 
 $validation_option = $_POST['validation_option'];
 
