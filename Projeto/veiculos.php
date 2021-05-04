@@ -12,93 +12,14 @@
   <script src='./lib/main.js'></script>
   <title>SRV | Veículos</title>
 
-  <script>
-    <?php
-      include "./config/conexao.php";
-      $sql = "SELECT id_reserva, data_saida, data_retorno, status_reserva, estado, cidade, rua, nome, modelo FROM reserva JOIN usuario ON reserva.fk_id_usuario = usuario.id_usuario JOIN veiculo ON reserva.fk_id_veiculo = veiculo.id_veiculo";
-      $res = mysqli_query($conn, $sql);
-      $reservas = mysqli_fetch_all($res, MYSQLI_ASSOC);
-
-      mysqli_free_result($res);
-      mysqli_close($conn);
-    ?>
-    const reservas = <?php echo json_encode($reservas) ?>;
-    console.log(reservas);
-    const events = [];
-    reservas.forEach(reserva => {
-      events.push({
-        title: reserva.modelo,
-        start: reserva.data_saida,
-        end: reserva.data_retorno,
-        extendedProps: {
-          usuario: reserva.nome,
-          destino: `${reserva.rua} (${reserva.cidade} ${reserva.estado})`,
-          estado: reserva.estado,
-          cidade: reserva.cidade,
-          rua: reserva.rua,
-        }
-      })
-    })
-
-    document.addEventListener('DOMContentLoaded', function() {
-      var calendarEl = document.getElementById('calendar');
-      var calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'listWeek',
-        locale: 'pt-br',
-        events: events,
-        eventContent: function(arg) {
-          return {
-            html: `
-              <div class="event">
-                <p class="eventTag"><strong>${arg.timeText}</strong></p>
-                <p class="eventTag"><strong>Veículo</strong>: ${arg.event.title}</p>
-                <p class="eventTag"><strong>Usuário</strong>: ${arg.event.extendedProps.usuario}</p>
-                <p class="eventTag"><strong>Destino</strong>: ${arg.event.extendedProps.destino}</p>
-              </div>
-            `
-          }
-        },
-        noEventsContent: "Não há nenhuma reserva hoje",
-        height: 550,
-        nowIndicator: true,
-        headerToolbar: {
-          start: "today prev,next",
-          center: "title",
-          end: "listWeek dayGridMonth timeGridWeek timeGridDay"
-        },
-        slotLabelFormat: {
-          hour: 'numeric',
-          minute: '2-digit',
-          omitZeroMinute: false,
-          meridiem: 'short'
-        },
-        views: {
-          dayGridMonth: {
-            titleFormat: {
-              day: '2-digit',
-              month: 'long',
-              year: 'numeric'
-            }
-          },
-        },
-        buttonText: {
-          today: 'Hoje',
-          month: 'Mês',
-          week: 'Semana',
-          day: 'Dia',
-          list: 'Lista'
-        }
-      });
-      calendar.render();
-    });
-  </script>
+  <?php include "./config/setup-calendario-reservas.php" ?>
 </head>
 <body>
   <?php include "./components/navbar.php" ?>
   <div class="container">
-    <h2>Consultar veículos</h2>
+    <h2>Reservas de veículos</h2>
     <div id='calendar'></div>
-    <form class="reserva">
+    <form id="form-reserva" class="reserva">
       <div class="date-inputs">
         <div class="row">
           <div class="input-field col s6">
@@ -123,7 +44,7 @@
       </div>
       <div class="selecionar-veiculo">
         <div class="input-field">
-          <select required>
+          <select id="select-veiculo" required>
             <option value="" disabled selected>Selecione um veículo</option>
             <?php
               include "./config/conexao.php";
@@ -155,22 +76,59 @@
               <h4>Finalizar reserva</h4>
               <i class="material-icons">directions_car</i>
             </header>
-            <div class="input-field">
-              <input id="destino" type="text" name="destino" required>
-              <label for="destino">Destino</label>
+            <div class="row">
+              <div class="col s12">
+                <div class="input-field">
+                  <input id="destino" type="text" name="destino" required>
+                  <label for="destino">Destino</label>
+                </div>
+              </div>
             </div>
-            <div class="input-field">
-              <input id="responsavel" type="text" name="responsavel" required>
-              <label for="responsavel">Responsável</label>
+            <div class="row">
+              <div class="col s6">
+                <div class="input-field">
+                  <input id="condutor" type="text" name="condutor" required>
+                  <label for="condutor">Condutor</label>
+                </div>
+              </div>
+              <div class="col s6">
+                <div class="input-field">
+                  <input id="responsavel" type="text" value="<?php echo $_SESSION["nome"]; ?>" name="responsavel" required disabled>
+                  <label for="responsavel">Responsável</label>
+                </div>
+              </div>
             </div>
-            <div class="input-field">
-              <input id="usuario" type="text" name="usuario" required>
-              <label for="usuario">Usuário</label>
+            <div class="row">
+              <div class="col s12">
+                <div class="input-field">
+                  <select id="departamento">
+                    <?php
+                      include "./config/conexao.php";
+                      $sql = "SELECT DISTINCT departamento FROM usuario";
+                      $res = mysqli_query($conn, $sql);
+                      $departamentos = mysqli_fetch_all($res, MYSQLI_ASSOC);
+
+                      mysqli_close($conn);
+                    ?>
+                    <?php foreach($departamentos as $departamento) { ?>
+                      <option value="<?php echo $departamento["departamento"]; ?>"><?php echo $departamento["departamento"]; ?></option>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12">
+                <div class="input-field">
+                  <input type="text" name="motivo" id="motivo" required>
+                  <label for="motivo">Motivo da reserva</label>
+                </div>
+              </div>
             </div>
           </div>
-          </div>
+        </div>
         <div class="modal-footer">
-          <button type="submit" class="waves-effect waves-light btn">
+          <button type="submit" id="btn-confirmar" class="waves-effect waves-light btn">
             Confirmar
           </button>
         </div>
