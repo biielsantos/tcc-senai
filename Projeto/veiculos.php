@@ -7,9 +7,9 @@
 <head>
   <?php include "./components/head.php" ?>
   <link rel="stylesheet" href="./styles/navbar.css">
-  <link rel='stylesheet' href='./lib/main.css' />
+  <link rel='stylesheet' href='./lib/main.min.css' />
   <link rel="stylesheet" href="./styles/consultar.css" />
-  <script src='./lib/main.js'></script>
+
   <title>SRV | Veículos</title>
 
   <?php include "./config/setup-calendario-reservas.php" ?>
@@ -44,8 +44,8 @@
       </div>
       <div class="selecionar-veiculo">
         <div class="input-field">
-          <select id="select-veiculo" required>
-            <option value="" disabled selected>Selecione um veículo</option>
+          <select id="veiculo" required>
+            <option disabled selected>Selecione um veículo</option>
             <?php
               include "./config/conexao.php";
               $sql = "SELECT id_veiculo, modelo FROM veiculo";
@@ -93,7 +93,8 @@
               </div>
               <div class="col s6">
                 <div class="input-field">
-                  <input id="responsavel" type="text" value="<?php echo $_SESSION["nome"]; ?>" name="responsavel" required disabled>
+                  <input type="text" value="<?php echo $_SESSION["nome"]; ?>" name="responsavel" required disabled>
+                  <input type="hidden" id="responsavel" value="<?php echo $_SESSION["id"]; ?>">
                   <label for="responsavel">Responsável</label>
                 </div>
               </div>
@@ -101,7 +102,8 @@
             <div class="row">
               <div class="col s12">
                 <div class="input-field">
-                  <select id="departamento">
+                  <select id="departamento" required>
+                    <option disabled selected>Selecione um departamento</option>
                     <?php
                       include "./config/conexao.php";
                       $sql = "SELECT DISTINCT departamento FROM usuario";
@@ -135,7 +137,10 @@
       </div>
     </form>
   </div>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
+  <script src='./lib/main.min.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="./scripts/consultar.js"></script>
 </body>
-<?php include ("./components/scripts.php") ?>
-<script src="./scripts/consultar.js"></script>
 </html>
