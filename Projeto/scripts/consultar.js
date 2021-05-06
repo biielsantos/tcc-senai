@@ -36,34 +36,17 @@ $("#form-reserva").submit(function(e) {
       motivo,
       option
     },
-    success: function(data) {
-      console.log(data);
+    success: function(reserva) {
       $(".modal").modal('close');
-      $.ajax({
-        url: "./config/crud-reservas.php",
-        type: 'POST',
-        dataType: 'json',
-        data:{option: "SELECT ALL"},
-        success: function(reservas) {
-          reservas.forEach(reserva => {
-            events.push({
-              title: reserva.modelo,
-              start: reserva.data_saida,
-              end: reserva.data_retorno,
-              extendedProps: {
-                usuario: reserva.nome,
-                destino: reserva.destino,
-                estado: reserva.estado,
-                cidade: reserva.cidade,
-                rua: reserva.rua,
-              }
-            })
-          })
-        },
-        error: function(error) {
-          console.log(error);
+      calendar.addEvent({
+        title: reserva[0].modelo,
+        start: reserva[0].data_saida,
+        end: reserva[0].data_retorno,
+        extendedProps: {
+          usuario: reserva[0].nome,
+          destino: reserva[0].destino
         }
-      })
+      });
     },
     error: function(error) {
       console.log(error);

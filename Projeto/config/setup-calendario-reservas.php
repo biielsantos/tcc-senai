@@ -1,5 +1,6 @@
 <script>
   const events = [];
+  var calendar;
   $.ajax({
     url: "./config/crud-reservas.php",
     type: 'POST',
@@ -14,9 +15,6 @@
           extendedProps: {
             usuario: reserva.nome,
             destino: reserva.destino,
-            estado: reserva.estado,
-            cidade: reserva.cidade,
-            rua: reserva.rua,
           }
         })
       })
@@ -30,7 +28,7 @@
 
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'listWeek',
       locale: 'pt-br',
       events: events,
