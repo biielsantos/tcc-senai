@@ -63,7 +63,7 @@
           </select>
           <label>Veículo</label>
         </div>
-        <a class="btn waves-effect waves-light modal-trigger" href="#modal-reserva">Reservar
+        <a class="btn waves-effect waves-light" href="#modal-reserva" id="finalizar-reserva">Finalizar reserva
           <i class="material-icons left">done</i>
         </a>
       </div>
@@ -127,12 +127,15 @@
                 </div>
               </div>
             </div>
+            <div class="buttons">
+              <a class="modal-close btn waves-effect red darken-1">
+                Cancelar<i class="material-icons left">cancel</i>
+              </a>
+              <button type="submit" id="btn-confirmar" class="waves-effect waves-light btn right">
+                Confirmar<i class="material-icons right">send</i>
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" id="btn-confirmar" class="waves-effect waves-light btn">
-            Confirmar
-          </button>
         </div>
       </div>
     </form>
