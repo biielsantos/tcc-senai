@@ -90,9 +90,19 @@ $("#form-reserva").submit(function(e) {
     },
     success: function(reserva) {
       $(".modal").modal('close');
+      $("#form-reserva").trigger("reset");  
 
       // Atualizar dados no calendário
       calendar.addEvent({
+        title: reserva[0].modelo,
+        start: reserva[0].data_saida,
+        end: reserva[0].data_retorno,
+        extendedProps: {
+          usuario: reserva[0].nome,
+          destino: reserva[0].destino
+        }
+      });
+      events.push({
         title: reserva[0].modelo,
         start: reserva[0].data_saida,
         end: reserva[0].data_retorno,
