@@ -30,8 +30,6 @@
     var calendarEl = document.getElementById('calendar');
     calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'listWeek',
-      locale: 'pt-br',
-      events: events,
       eventContent: function(arg) {
         return {
           html: `
@@ -44,6 +42,8 @@
           `
         }
       },
+      locale: 'pt-br',
+      events: events,
       noEventsContent: "Não há nenhuma reserva hoje",
       height: 550,
       expandRows: true,

@@ -23,21 +23,21 @@
       <div class="date-inputs">
         <div class="row">
           <div class="input-field col s6">
-            <input id="dataSaida" type="date" class="validate" required>
+            <input id="dataSaida" type="text" class="datepicker validate" required>
             <label for="dataSaida">Data saída</label>
           </div>
           <div class="input-field col s6">
-            <input id="dataRetorno" type="date" class="validate" required>
+            <input id="dataRetorno" type="text" class="datepicker validate" required>
             <label for="dataRetorno">Data retorno</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s6">
-            <input id="horarioSaida" type="time" class="validate" required>
+            <input id="horarioSaida" type="text" class="timepicker validate" required>
             <label for="horarioSaida">Horário Saída</label>
           </div>
           <div class="input-field col s6">
-            <input id="horarioRetorno" type="time" class="validate" required>
+            <input id="horarioRetorno" type="text" class="timepicker validate" required>
             <label for="horarioRetorno">Horário Retorno</label>
           </div>
         </div>
