@@ -8,6 +8,8 @@ if(isset($_POST['nome']) && isset($_POST['tipo']) && isset($_POST['cpf']) && iss
     $telefone = $_POST['telefone'];
     $departamento = $_POST['departamento'];
 	$senha = $_POST['senha'];
+	$cnh = $_POST['cnh'];
+	$validade_carteira = $_POST['validade'];
 }
 
 if(isset($_POST['id'])){
@@ -18,7 +20,7 @@ $option = $_POST['option'];
 
 switch ($option) {
 	case 1:
-		$query = "INSERT INTO usuario (nome, cpf, departamento, tipo, telefone, senha) VALUES ('$nome', '$cpf', '$departamento', '$tipo', '$telefone', '$senha')";
+		$query = "INSERT INTO usuario (nome, cpf, departamento, tipo, telefone, senha, cnh, validade_carteira) VALUES ('$nome', '$cpf', '$departamento', '$tipo', '$telefone', '$senha', '$cnh', '$validade_carteira')";
 		mysqli_query($conn, $query);
 
 		$query = "SELECT * FROM usuario ORDER BY id_usuario DESC LIMIT 1";
@@ -26,7 +28,7 @@ switch ($option) {
 		$data = mysqli_fetch_array($result);
 		break;
 	case 2:
-		$query = "UPDATE usuario SET nome='$nome', cpf='$cpf', departamento='$departamento', tipo='$tipo', telefone='$telefone',senha='$senha' WHERE id_usuario = $id";
+		$query = "UPDATE usuario SET nome='$nome', cpf='$cpf', departamento='$departamento', tipo='$tipo', telefone='$telefone',senha='$senha', cnh='$cnh', validade_carteira='$validade_carteira' WHERE id_usuario = $id";
 		mysqli_query($conn, $query);
 
 		$query = "SELECT * FROM usuario WHERE id_usuario = $id";

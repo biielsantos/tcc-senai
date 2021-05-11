@@ -3,6 +3,7 @@ $(document).ready(function(){
   $('select').formSelect();
   $('.modal').modal();
   $('.sidenav').sidenav();
+  
  
   //DataTables
   TabelaUsuarios = $('#tabela-usuarios').DataTable({
@@ -37,11 +38,14 @@ $(document).on("click", "#btn-novo-usuario", function() {
   telefone = "";
   ver_cpf="";
   senha= "";
+  cnh = "";
+  $("#validade_carteira").val('');
   $("#nome").val(nome);
   $("#cpf").val(cpf);
   $("#departamento").val(departamento); 
   $("#telefone").val(telefone);
   $("#senha").val(senha);
+  $("#cnh").val(cnh);
   option = 1;
   cpf_real = null;
 });
@@ -65,6 +69,8 @@ $(document).on("click", ".btnEdit", function(){
       $("#tipo-usuario").val(data[4]).formSelect();
       $("#departamento").val(data[5]); 
       $("#telefone").val(data[6]).trigger('input');
+      $("#cnh").val(data[7]).trigger('input');
+      $("#validade_carteira").val(data[8]);
       M.updateTextFields();
       option=2;
     },error(x, y, z){
@@ -99,6 +105,8 @@ $("#form-usuario").submit(function(e){
   cpf = $("#cpf").val().replace(/[^\d]+/g,"");
   departamento =$("#departamento").val().trim(); 
   telefone = $("#telefone").val().replace(/[^\d]+/g,"");
+  cnh = $("#cnh").val();
+  validade_carteira = $("#validade_carteira").val() 
   senha = $("#senha").val().trim();
   
   $("#btn-salvar").attr("disabled", true);
@@ -107,7 +115,18 @@ $("#form-usuario").submit(function(e){
       url: "../config/crud-usuarios.php",
       type: 'POST',
       dataType: 'json',
-      data:{option:option, nome:nome, tipo:tipo, cpf:cpf, departamento:departamento,telefone:telefone, senha,senha,id:id},
+      data:{
+        option: option,
+        nome: nome,
+        tipo: tipo,
+        cpf: cpf,
+        departamento: departamento,
+        telefone:telefone,
+        senha:senha,
+        cnh: cnh,
+        validade: validade_carteira,
+        id:id
+      },
       success:function(data){
         id = data[0];
         if(tipo == "A"){
@@ -133,6 +152,8 @@ $("#form-usuario").submit(function(e){
         usuario.close();
         setTimeout(function(){$("#btn-salvar").attr("disabled", false)}, 1000);
         $('#cpf').removeAttr("class");
+      },error(erro){
+        console.log(erro)
       }
     });
   }else{ //Msg erro

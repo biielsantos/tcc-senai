@@ -107,6 +107,14 @@ include("../config/conexao.php");
                 <span id="span_cpf"class="helper-text"></span>
               </div>
               <div class="input-field col l6 m6 s12">
+                <input id="cnh" type="text" name="cnh" minlength="11" maxlength="11" autocomplete="off" required>
+                <label class="active" for="cnh">CNH</label>
+              </div>
+              <div class="input-field col l6 m6 s12">
+                <input id="validade_carteira" type="date">
+                <label class="active" for="validade_carteira">VALIDADE DA CARTEIRA</label>
+              </div>
+              <div class="input-field col l6 m6 s12">
                 <input id="telefone" type="text" name="telefone" data-length="11" minlength="11" maxlength="11" autocomplete="off" required>
                 <label for="telefone">Telefone</label>
                 <span id="span_telefone" class="helper-text"></span>
