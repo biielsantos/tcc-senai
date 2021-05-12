@@ -2,6 +2,7 @@ $(document).ready(function(){
   // Inicializar componentes
   $('select').formSelect();
   $('.modal').modal();
+  $('.tooltipped').tooltip();
   $('.datepicker').datepicker({
     i18n: {
     months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
@@ -20,7 +21,7 @@ $(document).ready(function(){
     selectMonths: true,
     selectYears: 15,
     },
-    format: 'dd/mm/yyyy',
+    format: 'yyyy-mm-dd',
     container: 'body',
     minDate: new Date(),
   });
@@ -54,9 +55,14 @@ $(document).on("click", "#finalizar-reserva", function() {
 
   // Verificar se os campos estão vazios
   if (!dataSaida || !dataRetorno || !horarioSaida || !horarioRetorno || veiculo === "Selecione um veículo") {
-    console.log("vazio");
     valid = false;
     msg = "Preencha todos os campos";
+  }
+
+  // Verificar se a data de retorno é anterior a data de saída
+  if (dataRetornoInput < dataSaidaInput) {
+    valid = false;
+    msg = "Data de retorno inferior a data de saída";
   }
   
   // Verificar se ja existe uma reserva no mesmo horário

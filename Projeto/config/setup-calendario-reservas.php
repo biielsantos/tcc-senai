@@ -13,6 +13,7 @@
           start: reserva.data_saida,
           end: reserva.data_retorno,
           extendedProps: {
+            id: reserva.id_reserva,
             usuario: reserva.nome,
             destino: reserva.destino,
           }
@@ -33,7 +34,7 @@
       eventContent: function(arg) {
         return {
           html: `
-            <div class="event">
+            <div class="event" data-id="${arg.event.extendedProps.id}">
               <p class="eventTag"><strong>${arg.timeText}</strong></p>
               <p class="eventTag"><strong>Veículo</strong>: ${arg.event.title}</p>
               <p class="eventTag"><strong>Usuário</strong>: ${arg.event.extendedProps.usuario}</p>
