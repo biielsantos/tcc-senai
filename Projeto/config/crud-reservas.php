@@ -22,7 +22,7 @@
       $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
       break;
     case "SELECT ALL":
-      $sql = "SELECT id_reserva, data_saida, data_retorno, status_reserva, destino, condutor, motivo, reserva.departamento AS departamento, nome, modelo FROM reserva JOIN usuario ON reserva.fk_id_usuario = usuario.id_usuario JOIN veiculo ON reserva.fk_id_veiculo = veiculo.id_veiculo";
+      $sql = "SELECT id_reserva, data_saida, data_retorno, destino, condutor, motivo, reserva.departamento AS departamento, nome, modelo FROM reserva JOIN usuario ON reserva.fk_id_usuario = usuario.id_usuario JOIN veiculo ON reserva.fk_id_veiculo = veiculo.id_veiculo";
       $res = mysqli_query($conn, $sql);
       $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
       break;

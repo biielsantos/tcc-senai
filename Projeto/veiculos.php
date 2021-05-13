@@ -68,7 +68,7 @@
         </a>
       </div>
 
-      <!-- Modal -->
+      <!-- Modal reserva -->
       <div id="modal-reserva" class="modal">
         <div class="modal-content">
           <div class="container">
@@ -140,6 +140,27 @@
       </div>
     </form>
   </div>
+
+  <!-- Modal detalhes reserva -->
+  <div id="modal-detalhes" class="modal">
+    <div class="modal-content">
+      <div class="container">
+        <h4>Detalhes da reserva</h4>
+        <p><strong>Veículo: </strong><span id="det-veiculo"></span></p>
+        <p><strong>Destino: </strong><span id="det-destino"></span></p>
+        <p><strong>Motivo: </strong><span id="det-motivo"></span></p>
+        <p><strong>Data saída: </strong><span id="det-data-saida"></span></p>
+        <p><strong>Data Retorno: </strong><span id="det-data-retorno"></span></p>
+        <p><strong>Condutor: </strong><span id="det-condutor"></span> (Reservado por <span id="det-usuario"></span>)</p>
+        <p><strong>Departamento: </strong><span id="det-departamento"></span></p>
+        <div class="det-buttons">
+          <button class="btn orange darken-1 waves-effect waves-light"><i class='material-icons right'>edit</i>EDITAR</button>
+          <button class="btn red darken-1 waves-effect waves-light"><i class='material-icons right'>delete</i>EXCLUIR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
   <script src='./lib/main.min.js'></script>

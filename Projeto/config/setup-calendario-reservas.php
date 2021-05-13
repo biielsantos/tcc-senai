@@ -15,7 +15,10 @@
           extendedProps: {
             id: reserva.id_reserva,
             usuario: reserva.nome,
+            condutor: reserva.condutor,
             destino: reserva.destino,
+            motivo: reserva.motivo,
+            departamento: reserva.departamento
           }
         })
       })
@@ -31,17 +34,17 @@
     var calendarEl = document.getElementById('calendar');
     calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'listWeek',
-      eventContent: function(arg) {
-        return {
-          html: `
-            <div class="event" data-id="${arg.event.extendedProps.id}">
-              <p class="eventTag"><strong>${arg.timeText}</strong></p>
-              <p class="eventTag"><strong>Veículo</strong>: ${arg.event.title}</p>
-              <p class="eventTag"><strong>Usuário</strong>: ${arg.event.extendedProps.usuario}</p>
-              <p class="eventTag"><strong>Destino</strong>: ${arg.event.extendedProps.destino}</p>
-            </div>
-          `
-        }
+      eventClick: function(info) {
+        console.log(info);
+        $("#modal-detalhes").modal("open");
+        document.getElementById("det-veiculo").innerText = info.event.title;
+        document.getElementById("det-destino").innerText = info.event.extendedProps.destino;
+        document.getElementById("det-motivo").innerText = info.event.extendedProps.motivo;
+        document.getElementById("det-data-saida").innerText = info.event.start.toLocaleString();
+        document.getElementById("det-data-retorno").innerText = info.event.end.toLocaleString();
+        document.getElementById("det-condutor").innerText = info.event.extendedProps.condutor;
+        document.getElementById("det-usuario").innerText = info.event.extendedProps.usuario;
+        document.getElementById("det-departamento").innerText = info.event.extendedProps.departamento;
       },
       locale: 'pt-br',
       events: events,
