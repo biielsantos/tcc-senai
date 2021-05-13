@@ -1,5 +1,5 @@
 <script>
-  const events = [];
+  var events = [];
   var calendar;
   $.ajax({
     url: "./config/crud-reservas.php",
@@ -9,11 +9,11 @@
     success: function(reservas) {
       reservas.forEach(reserva => {
         events.push({
+          id: reserva.id_reserva,
           title: reserva.modelo,
           start: reserva.data_saida,
           end: reserva.data_retorno,
           extendedProps: {
-            id: reserva.id_reserva,
             usuario: reserva.nome,
             condutor: reserva.condutor,
             destino: reserva.destino,
@@ -23,10 +23,8 @@
         })
       })
     },
-    error: function(x, y, z) {
-      console.log(x);
-      console.log(y);
-      console.log(z);
+    error: function(error) {
+      console.log(error);
     }
   })
 
@@ -35,7 +33,6 @@
     calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'listWeek',
       eventClick: function(info) {
-        console.log(info);
         $("#modal-detalhes").modal("open");
         document.getElementById("det-veiculo").innerText = info.event.title;
         document.getElementById("det-destino").innerText = info.event.extendedProps.destino;
@@ -45,6 +42,8 @@
         document.getElementById("det-condutor").innerText = info.event.extendedProps.condutor;
         document.getElementById("det-usuario").innerText = info.event.extendedProps.usuario;
         document.getElementById("det-departamento").innerText = info.event.extendedProps.departamento;
+
+        document.getElementById("det-id").value = info.event.id;
       },
       locale: 'pt-br',
       events: events,

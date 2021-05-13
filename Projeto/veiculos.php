@@ -23,21 +23,21 @@
       <div class="date-inputs">
         <div class="row">
           <div class="input-field col s6">
-            <input id="dataSaida" type="text" class="datepicker validate" required>
+            <input id="dataSaida" type="text" class="datepicker validate" autocomplete="off" required>
             <label for="dataSaida">Data saída</label>
           </div>
           <div class="input-field col s6">
-            <input id="dataRetorno" type="text" class="datepicker validate" required>
+            <input id="dataRetorno" type="text" class="datepicker validate" autocomplete="off" required>
             <label for="dataRetorno">Data retorno</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s6">
-            <input id="horarioSaida" type="text" class="timepicker validate" required>
+            <input id="horarioSaida" type="text" class="timepicker validate" autocomplete="off" required>
             <label for="horarioSaida">Horário Saída</label>
           </div>
           <div class="input-field col s6">
-            <input id="horarioRetorno" type="text" class="timepicker validate" required>
+            <input id="horarioRetorno" type="text" class="timepicker validate" autocomplete="off" required>
             <label for="horarioRetorno">Horário Retorno</label>
           </div>
         </div>
@@ -154,8 +154,9 @@
         <p><strong>Condutor: </strong><span id="det-condutor"></span> (Reservado por <span id="det-usuario"></span>)</p>
         <p><strong>Departamento: </strong><span id="det-departamento"></span></p>
         <div class="det-buttons">
+          <input type="hidden" id="det-id" value="" />
           <button class="btn orange darken-1 waves-effect waves-light"><i class='material-icons right'>edit</i>EDITAR</button>
-          <button class="btn red darken-1 waves-effect waves-light"><i class='material-icons right'>delete</i>EXCLUIR</button>
+          <button id="det-excluir" class="btn red darken-1 waves-effect waves-light"><i class='material-icons right'>delete</i>EXCLUIR</button>
         </div>
       </div>
     </div>

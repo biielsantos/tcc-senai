@@ -17,7 +17,7 @@
       $query = "INSERT INTO reserva (data_saida, data_retorno, status_reserva, destino, condutor, motivo, departamento, fk_id_usuario, fk_id_veiculo) VALUES ('$dataSaida', '$dataRetorno', 'A', '$destino', '$condutor', '$motivo', '$departamento', '$usuario', '$veiculo');";
       mysqli_query($conn, $query);
 
-      $query = "SELECT modelo, data_saida, data_retorno, nome, destino FROM reserva JOIN veiculo ON reserva.fk_id_veiculo = veiculo.id_veiculo JOIN usuario ON reserva.fk_id_usuario = usuario.id_usuario ORDER BY id_reserva DESC LIMIT 1";
+      $query = "SELECT * FROM reserva JOIN veiculo ON reserva.fk_id_veiculo = veiculo.id_veiculo JOIN usuario ON reserva.fk_id_usuario = usuario.id_usuario ORDER BY id_reserva DESC LIMIT 1";
       $res = mysqli_query($conn, $query);
       $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
       break;
@@ -25,6 +25,15 @@
       $sql = "SELECT id_reserva, data_saida, data_retorno, destino, condutor, motivo, reserva.departamento AS departamento, nome, modelo FROM reserva JOIN usuario ON reserva.fk_id_usuario = usuario.id_usuario JOIN veiculo ON reserva.fk_id_veiculo = veiculo.id_veiculo";
       $res = mysqli_query($conn, $sql);
       $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
+      break;
+    case "DELETE":
+      $id = $_POST["id"];
+
+      $query = "SELECT * FROM reserva WHERE id_reserva = $id";
+      $res = mysqli_query($conn, $query);
+      $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
+
+      mysqli_query($conn, "DELETE FROM reserva WHERE id_reserva = $id");
       break;
   }
 

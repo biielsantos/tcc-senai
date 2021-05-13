@@ -33,11 +33,8 @@ $(document).ready(function(){
   });
 });
 
-
-
 // Checar reservas no botão de finalizar reserva
 $(document).on("click", "#finalizar-reserva", function() {
-  console.log("click event");
   M.Toast.dismissAll();
 
   let dataSaida = $("#dataSaida").val().trim().split("/");
@@ -128,23 +125,57 @@ $("#form-reserva").submit(function(e) {
 
       // Atualizar dados no calendário
       calendar.addEvent({
+        id: reserva[0].id_reserva,
         title: reserva[0].modelo,
         start: reserva[0].data_saida,
         end: reserva[0].data_retorno,
         extendedProps: {
           usuario: reserva[0].nome,
-          destino: reserva[0].destino
+          condutor: reserva[0].condutor,
+          destino: reserva[0].destino,
+          motivo: reserva[0].motivo,
+          departamento: reserva[0].departamento
         }
       });
       events.push({
+        id: reserva[0].id_reserva,
         title: reserva[0].modelo,
         start: reserva[0].data_saida,
         end: reserva[0].data_retorno,
         extendedProps: {
           usuario: reserva[0].nome,
-          destino: reserva[0].destino
+          condutor: reserva[0].condutor,
+          destino: reserva[0].destino,
+          motivo: reserva[0].motivo,
+          departamento: reserva[0].departamento
         }
       });
+    },
+    error: function(error) {
+      console.log(error);
+    }
+  })
+});
+
+$(document).on("click", "#det-excluir", function() {
+  let id = document.getElementById("det-id").value;
+  let option = "DELETE";
+
+  $.ajax({
+    url: "./config/crud-reservas.php",
+    type: "POST",
+    dataType: "json",
+    data: {
+      id,
+      option
+    },
+    success: function(data) {
+      $(".modal").modal('close');
+      let id = data[0].id_reserva;
+
+      events = events.filter(event => event.id !== id);
+      let event = calendar.getEventById(id);
+      event.remove();
     },
     error: function(error) {
       console.log(error);
