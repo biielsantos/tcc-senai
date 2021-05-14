@@ -60,6 +60,12 @@ $(document).on("click", "#finalizar-reserva", function() {
     msg = "Preencha todos os campos";
   }
 
+  // Verificar se existem viajantes do tempo (tolerância de 5 min)
+  if (new Date(dataSaidaInput.getTime() + 5*60000) < new Date() || new Date(dataRetornoInput.getTime() + 5*60000) < new Date()) {
+    valid = false;
+    msg = "Data de reserva inferior a data atual";
+  }
+
   // Verificar se a data de retorno é anterior a data de saída
   if (dataRetornoInput < dataSaidaInput) {
     valid = false;
