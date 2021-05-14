@@ -65,7 +65,7 @@ $(document).on("click", ".btnEdit", function(){
     success:function(data){
       $('#nome').val(data[1]);
       $("#cpf").val(data[2]).trigger('input');
-      $("#senha").val(data[3]);
+    $("#senha").val(atob(data[3])); //base64 provisório
       $("#tipo-usuario").val(data[4]).formSelect();
       $("#telefone").val(data[5]).trigger('input');
       $("#validade_carteira").val(data[6]);
@@ -128,9 +128,9 @@ $("#form-usuario").submit(function(e){
         id:id
       },
       success:function(data){
+        console.log(data.senha);
         id = data[0];
         departamento = data.departamento;
-        console.log(data);
         if(tipo == "A"){
           tipo = "ADMIN";
         }else if(tipo == "U"){

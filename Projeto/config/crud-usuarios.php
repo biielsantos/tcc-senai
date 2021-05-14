@@ -7,7 +7,7 @@ if(isset($_POST['nome']) && isset($_POST['tipo']) && isset($_POST['cpf']) && iss
 	$cpf = $_POST['cpf'];
     $telefone = $_POST['telefone'];
     $departamento = $_POST['departamento'];
-	$senha = $_POST['senha'];
+	$senha = base64_encode($_POST['senha']);
 	$cnh = $_POST['cnh'];
 	$validade_cnh = $_POST['validade'];
 }
