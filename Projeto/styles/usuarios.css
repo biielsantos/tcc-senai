@@ -19,7 +19,7 @@ select{
   display: inline-block!important;
 }
 
-#tipo-usuario{
+#tipo-usuario, #departamento{
   display: none !important;
 }
 

@@ -34,7 +34,6 @@ $(document).on("click", "#btn-novo-usuario", function() {
   id= "";
   nome = "";
   cpf = "";
-  departamento = "";
   telefone = "";
   ver_cpf="";
   senha= "";
@@ -42,10 +41,11 @@ $(document).on("click", "#btn-novo-usuario", function() {
   $("#validade_carteira").val('');
   $("#nome").val(nome);
   $("#cpf").val(cpf);
-  $("#departamento").val(departamento); 
   $("#telefone").val(telefone);
   $("#senha").val(senha);
   $("#cnh").val(cnh);
+  $("#departamento").val("").formSelect();
+  $("#tipo-usuario").val("").formSelect();
   option = 1;
   cpf_real = null;
 });
@@ -67,10 +67,10 @@ $(document).on("click", ".btnEdit", function(){
       $("#cpf").val(data[2]).trigger('input');
       $("#senha").val(data[3]);
       $("#tipo-usuario").val(data[4]).formSelect();
-      $("#departamento").val(data[5]); 
-      $("#telefone").val(data[6]).trigger('input');
+      $("#telefone").val(data[5]).trigger('input');
+      $("#validade_carteira").val(data[6]);
       $("#cnh").val(data[7]).trigger('input');
-      $("#validade_carteira").val(data[8]);
+      $("#departamento").val(data[8]).formSelect();
       M.updateTextFields();
       option=2;
     },error(x, y, z){
@@ -103,12 +103,12 @@ $("#form-usuario").submit(function(e){
   nome = $("#nome").val().trim();
   tipo = $("#tipo-usuario").val();
   cpf = $("#cpf").val().replace(/[^\d]+/g,"");
-  departamento =$("#departamento").val().trim(); 
+  departamento = $("#departamento").val(); 
   telefone = $("#telefone").val().replace(/[^\d]+/g,"");
   cnh = $("#cnh").val();
   validade_carteira = $("#validade_carteira").val() 
-  senha = $("#senha").val().trim();
-  
+  senha = $("#senha").val();
+
   $("#btn-salvar").attr("disabled", true);
   if(!$('#cpf').hasClass("invalid")){
     $.ajax({
@@ -129,6 +129,8 @@ $("#form-usuario").submit(function(e){
       },
       success:function(data){
         id = data[0];
+        departamento = data.departamento;
+        console.log(data);
         if(tipo == "A"){
           tipo = "ADMIN";
         }else if(tipo == "U"){
