@@ -138,7 +138,7 @@ $("#form-reserva").submit(function(e) {
     data: data,
     success: function(reserva) {
       $(".modal").modal('close');
-      $("#form-reserva").trigger("reset");  
+      $("#form-reserva").trigger("reset");
 
       // Atualizar dados no calendário
       if (editing) {
@@ -265,4 +265,12 @@ $(document).on("click", "#det-editar", function() {
       console.log(error);
     }
   })
+});
+
+// Botão cancelar
+$(document).on("click", "#btn-cancelar", function() {
+  $("#form-reserva").trigger("reset");
+  editing = false;
+  option = "CREATE";
+  M.updateTextFields();
 });

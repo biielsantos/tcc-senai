@@ -132,7 +132,7 @@
               </div>
             </div>
             <div class="buttons">
-              <a class="modal-close btn waves-effect red darken-1">
+              <a id="btn-cancelar" class="modal-close btn waves-effect red darken-1">
                 Cancelar<i class="material-icons left">cancel</i>
               </a>
               <button type="submit" id="btn-confirmar" class="waves-effect waves-light btn right">
