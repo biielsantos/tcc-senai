@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2021 at 06:04 PM
+-- Generation Time: May 03, 2021 at 05:38 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -32,12 +32,13 @@ CREATE TABLE `reserva` (
   `data_saida` datetime DEFAULT NULL,
   `data_retorno` datetime DEFAULT NULL,
   `status_reserva` tinytext DEFAULT NULL,
-  `estado` char(2) DEFAULT NULL,
-  `cidade` varchar(75) DEFAULT NULL,
-  `rua` varchar(100) DEFAULT NULL,
+  `destino` varchar(150) DEFAULT NULL,
+  `condutor` varchar(100) DEFAULT NULL,
+  `motivo` varchar(150) DEFAULT NULL,
+  `departamento` varchar(45) DEFAULT NULL,
   `fk_id_usuario` int(11) NOT NULL,
   `fk_id_veiculo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -53,7 +54,7 @@ CREATE TABLE `usuario` (
   `tipo` tinytext DEFAULT NULL,
   `departamento` varchar(45) DEFAULT NULL,
   `telefone` varchar(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -67,7 +68,7 @@ CREATE TABLE `veiculo` (
   `placa` varchar(7) DEFAULT NULL,
   `proprietario` varchar(45) DEFAULT NULL,
   `status_veiculo` tinytext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
