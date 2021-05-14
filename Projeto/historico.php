@@ -10,7 +10,7 @@ include("./config/conexao.php");
 // Verificar se o usuario é admin ou comum
 if ($_SESSION["tipo"] == "A"){
 
-  $sql = "SELECT nome, cidade, rua, estado, modelo, data_saida, data_retorno FROM usuario JOIN reserva ON usuario.id_usuario = reserva.fk_id_usuario INNER JOIN veiculo ON reserva.fk_id_veiculo = veiculo.id_veiculo";
+  $sql = "SELECT nome, destino, condutor, motivo, departamento, modelo, data_saida, data_retorno FROM usuario JOIN reserva ON usuario.id_usuario = reserva.fk_id_usuario JOIN veiculo ON reserva.fk_id_veiculo = veiculo.id_veiculo JOIN departamento ON usuario.fk_id_departamento = departamento.id_departamento";
   $result = mysqli_query($conn, $sql);
   $reservas = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
@@ -18,7 +18,7 @@ if ($_SESSION["tipo"] == "A"){
   
   $id = $_SESSION["id"];
 
-  $sql = "SELECT nome, cidade, rua, estado, modelo, data_saida, data_retorno FROM usuario JOIN reserva ON usuario.id_usuario = reserva.fk_id_usuario INNER JOIN veiculo ON reserva.fk_id_veiculo = veiculo.id_veiculo WHERE id_usuario = '$id'";
+  $sql = "SELECT nome, destino, condutor, motivo, departamento, modelo, data_saida, data_retorno FROM usuario JOIN reserva ON usuario.id_usuario = reserva.fk_id_usuario INNER JOIN veiculo ON reserva.fk_id_veiculo = veiculo.id_veiculo JOIN departamento ON usuario.fk_id_departamento = departamento.id_departamento WHERE id_usuario = '$id'";
   $result = mysqli_query($conn, $sql);
   $reservas = mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
@@ -46,9 +46,10 @@ mysqli_close($conn);
     <table id="historico">
       <thead>
         <tr>
-          <th>Usuários</th>
+          <th>Usuário</th>
+          <th>Condutor</th>
+          <th>Modelo</th>
           <th>Destino</th>
-          <th>Veículos</th>
           <th>Data Saída</th>
           <th>Data Entrada</th>
         </tr>
@@ -58,8 +59,9 @@ mysqli_close($conn);
         foreach ($reservas as $reserva) { ?>
           <tr>
             <td><?php echo $reserva['nome']; ?></td>
-            <td><?php echo $reserva['cidade']; ?></td>
+            <td><?php echo $reserva['condutor']; ?></td>
             <td><?php echo $reserva['modelo']; ?></td>
+            <td><?php echo $reserva['destino']; ?></td>
             <td><?php echo $reserva['data_saida']; ?></td>
             <td><?php echo $reserva['data_retorno']; ?></td>
           </tr>
