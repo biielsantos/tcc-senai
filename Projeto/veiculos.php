@@ -13,6 +13,10 @@
   <title>SRV | Veículos</title>
 
   <?php include "./config/setup-calendario-reservas.php" ?>
+
+  <script>
+    var session = <?php echo json_encode($_SESSION); ?>;
+  </script>
 </head>
 <body>
   <?php include "./components/navbar.php" ?>
@@ -93,7 +97,7 @@
               </div>
               <div class="col s6">
                 <div class="input-field">
-                  <input type="text" value="<?php echo $_SESSION["nome"]; ?>" name="responsavel" required disabled>
+                  <input type="text" id="nome-responsavel" value="<?php echo $_SESSION["nome"]; ?>" name="responsavel" required disabled>
                   <input type="hidden" id="responsavel" value="<?php echo $_SESSION["id"]; ?>">
                   <label for="responsavel">Responsável</label>
                 </div>
@@ -106,14 +110,14 @@
                     <option disabled selected>Selecione um departamento</option>
                     <?php
                       include "./config/conexao.php";
-                      $sql = "SELECT DISTINCT departamento FROM usuario";
+                      $sql = "SELECT * FROM departamento";
                       $res = mysqli_query($conn, $sql);
                       $departamentos = mysqli_fetch_all($res, MYSQLI_ASSOC);
 
                       mysqli_close($conn);
                     ?>
                     <?php foreach($departamentos as $departamento) { ?>
-                      <option value="<?php echo $departamento["departamento"]; ?>"><?php echo $departamento["departamento"]; ?></option>
+                      <option value="<?php echo $departamento["id_departamento"]; ?>"><?php echo $departamento["departamento"]; ?></option>
                     <?php } ?>
                   </select>
                 </div>
@@ -155,7 +159,7 @@
         <p><strong>Departamento: </strong><span id="det-departamento"></span></p>
         <div class="det-buttons">
           <input type="hidden" id="det-id" value="" />
-          <button class="btn orange darken-1 waves-effect waves-light"><i class='material-icons right'>edit</i>EDITAR</button>
+          <button id="det-editar" class="btn orange darken-1 waves-effect waves-light"><i class='material-icons right'>edit</i>EDITAR</button>
           <button id="det-excluir" class="btn red darken-1 waves-effect waves-light"><i class='material-icons right'>delete</i>EXCLUIR</button>
         </div>
       </div>
