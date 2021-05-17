@@ -38,12 +38,6 @@ nav .nav-wrapper .usuario i.account-circle {
   margin-right: 0.5rem;
 }
 
-#nav-dropdown {
-  display: flex;
-  align-items: center;
-  z-index: 0;
-}
-
 #nav-dropdown li>* {
   display: flex;
   align-items: center;
