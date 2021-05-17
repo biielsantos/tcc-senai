@@ -1,34 +1,37 @@
 <script>
   var events = [];
   var calendar;
-  $.ajax({
-    url: "./config/crud-reservas.php",
-    type: 'POST',
-    dataType: 'json',
-    data:{option: "SELECT ALL"},
-    success: function(reservas) {
-      reservas.forEach(reserva => {
-        events.push({
-          id: reserva.id_reserva,
-          title: reserva.modelo,
-          start: reserva.data_saida,
-          end: reserva.data_retorno,
-          extendedProps: {
-            usuario: reserva.nome,
-            condutor: reserva.condutor,
-            destino: reserva.destino,
-            motivo: reserva.motivo,
-            departamento: reserva.departamento
-          }
-        })
-      })
-    },
-    error: function(error) {
-      console.log(error);
-    }
-  })
+  function getEvents(callback) {
+    $.ajax({
+      url: "./config/crud-reservas.php",
+      type: 'POST',
+      dataType: 'json',
+      data:{option: "SELECT ALL"},
+      success: function(reservas) {
+        reservas.forEach(reserva => {
+          events.push({
+            id: reserva.id_reserva,
+            title: reserva.modelo,
+            start: reserva.data_saida,
+            end: reserva.data_retorno,
+            extendedProps: {
+              usuario: reserva.nome,
+              condutor: reserva.condutor,
+              destino: reserva.destino,
+              motivo: reserva.motivo,
+              departamento: reserva.departamento
+            }
+          })
+        });
+        callback();
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    });
+  }
 
-  document.addEventListener('DOMContentLoaded', function() {
+  function setupCalendar() {
     var calendarEl = document.getElementById('calendar');
     calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'listWeek',
@@ -80,5 +83,9 @@
       }
     });
     calendar.render();
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    getEvents(setupCalendar);
   });
 </script>

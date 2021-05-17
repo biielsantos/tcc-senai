@@ -1,7 +1,11 @@
 <?php
   include "./conexao.php";
 
-  $option = $_POST["option"];
+  if ($_SERVER["REQUEST_METHOD"] === "GET") {
+    $option = "SELECT ALL";
+  } else {
+    $option = $_POST["option"];
+  }
 
   switch ($option) {
     case "CREATE":
