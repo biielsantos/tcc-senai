@@ -30,11 +30,30 @@ nav .nav-wrapper .usuario {
 nav .nav-wrapper .usuario .nome {
   font-size: 1.25rem;
   font-weight: 500;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 
-nav .nav-wrapper .usuario i {
+nav .nav-wrapper .usuario i.account-circle {
 	font-size: 32px;
+  margin-right: 0.5rem;
+}
+
+#nav-dropdown {
+  display: flex;
+  align-items: center;
+  z-index: 0;
+}
+
+#nav-dropdown li>* {
+  display: flex;
+  align-items: center;
+}
+#nav-dropdown {
+  width: auto !important;
+}
+/* optional */
+#nav-dropdown a> i {
+  margin-right: 16px;
 }
 
 .sidenav {
