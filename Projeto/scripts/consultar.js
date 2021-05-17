@@ -28,12 +28,14 @@ $(document).ready(function(){
     format: 'yyyy-mm-dd',
     container: 'body',
     minDate: new Date(),
+    autoClose: true
   });
 
   $('.timepicker').timepicker({
     defaultTime: 'now',
     twelveHour: false,
-    vibrate: true 
+    vibrate: true,
+    autoClose: true
   });
 });
 
