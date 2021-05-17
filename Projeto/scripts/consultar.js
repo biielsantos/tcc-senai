@@ -52,7 +52,6 @@ $(document).on("click", "#finalizar-reserva", function() {
   let dataSaidaInput = new Date(dataSaida[2] + "/" + dataSaida[1] + "/" + dataSaida[0] + " " + horarioSaida + ":00");
   let dataRetornoInput = new Date(dataRetorno + " " + horarioRetorno + ":00");
 
-  // Verificações dos campos
   let valid = true;
   let msg = "";
 
@@ -60,6 +59,12 @@ $(document).on("click", "#finalizar-reserva", function() {
   if (!dataSaida || !dataRetorno || !horarioSaida || !horarioRetorno || veiculo === "Selecione um veículo") {
     valid = false;
     msg = "Preencha todos os campos";
+  }
+
+  // Verificar tempo mínimo de reserva (15 min)
+  if (dataRetornoInput < new Date(dataSaidaInput.getTime() + 15*60000)) {
+    valid = false;
+    msg = "Reserva deve conter no mínimo 15 minutos";
   }
 
   // Verificar se existem viajantes do tempo (tolerância de 5 min)
