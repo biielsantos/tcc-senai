@@ -10,7 +10,10 @@
     </ul>
     <div class="usuario">
       <span class="nome"><?php echo $_SESSION['nome']; ?></span>
-      <i class="material-icons">account_circle</i>
+      <i class="material-icons account-circle">account_circle</i>
+      <a data-target="nav-dropdown" class="dropdown-trigger">
+        <i class="material-icons">keyboard_arrow_down</i>
+      </a>
     </div>
   </div>
 </nav>
@@ -37,8 +40,16 @@
   </div>
 </ul>
 
+<!-- Dropdown -->
+<ul id="nav-dropdown" class="dropdown-content">
+  <li>
+    <a href="/tcc/config/sair.php"><i class="material-icons left">logout</i>Sair</a>
+  </li>
+</ul>
+
 <script>
 $(document).ready(function(){
   $('.sidenav').sidenav();
+  $('.dropdown-trigger').dropdown();
 });
 </script>
