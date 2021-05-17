@@ -2,8 +2,8 @@
 //Iniciar uma sessão
 session_start();
 include("./conexao.php");
-$cpf = $_POST['cpf'];
-$senha = $_POST['senha'];
+$cpf = mysqli_escape_string($conn, $_POST['cpf']);
+$senha = mysqli_escape_string($conn, base64_encode($_POST['senha']));
 $query = mysqli_query($conn, "SELECT * FROM usuario WHERE cpf = '$cpf' AND senha = '$senha'") or die(mysqli_connect_error());
 if (mysqli_num_rows($query) > 0) {
     $usuario = mysqli_fetch_array($query);

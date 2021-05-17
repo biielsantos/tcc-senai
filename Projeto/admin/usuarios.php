@@ -44,7 +44,7 @@ include("../config/conexao.php");
       </thead>
       <tbody>
         <?php
-        $query = mysqli_query($conn, "SELECT * FROM usuario") or die(mysqli_connect_error());
+        $query = mysqli_query($conn, "SELECT * FROM usuario JOIN departamento ON fk_id_departamento=id_departamento") or die(mysqli_connect_error());
         while ($usuario = mysqli_fetch_array($query)) {
         ?>
           <tr>
@@ -66,7 +66,6 @@ include("../config/conexao.php");
           </tr>
         <?php
         }
-        mysqli_close($conn);
         ?>
       </tbody>
     </table>
@@ -89,15 +88,24 @@ include("../config/conexao.php");
               <label for="nome">Nome</label>
             </div>
             <div class="input-field col-s12">
-                <input id="departamento" type="text" name="departamento" required>
-                <label for="departamento">Departamento</label>
+              <select id="departamento" required>
+                <option value="" disabled selected>Selecione</option>
+                <?php
+                $query2 = mysqli_query($conn, "SELECT * FROM departamento") or die(mysqli_connect_error());
+                while ($departamento = mysqli_fetch_array($query2)){
+                echo "<option value=".$departamento['id_departamento'].">".$departamento['departamento']."</option>";
+                }
+                mysqli_close($conn);
+                ?>
+              </select>
+              <label for="departamento">Departamento</label>
             </div>
             <div class="row">
               <div class="input-field col l6 m6 s12">
                 <select id="tipo-usuario" required>
                 <option value="" disabled selected>Selecione</option>
-                <option value="U">COMUM</option>
-                <option value="A">ADMIN</option>
+                  <option value="U">COMUM</option>
+                  <option value="A">ADMIN</option>
                 </select>
                 <label>Tipo de usuario</label>
               </div>
@@ -105,6 +113,14 @@ include("../config/conexao.php");
                 <input id="cpf" type="text" name="cpf" minlength="11" maxlength="11" autocomplete="off" required>
                 <label class="active" for="cpf">CPF</label>
                 <span id="span_cpf"class="helper-text"></span>
+              </div>
+              <div class="input-field col l6 m6 s12">
+                <input id="cnh" type="text" name="cnh" minlength="11" maxlength="11" autocomplete="off" required>
+                <label class="active" for="cnh">CNH</label>
+              </div>
+              <div class="input-field col l6 m6 s12">
+                <input id="validade_carteira" type="date">
+                <label class="active" for="validade_carteira">VALIDADE DA CARTEIRA</label>
               </div>
               <div class="input-field col l6 m6 s12">
                 <input id="telefone" type="text" name="telefone" data-length="11" minlength="11" maxlength="11" autocomplete="off" required>
