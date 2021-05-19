@@ -11,8 +11,10 @@
 <head>
   <?php include "./components/head.php" ?>
   <link rel="stylesheet" href="./styles/navbar.css">
-  <link rel='stylesheet' href='./lib/main.min.css' />
   <link rel="stylesheet" href="./styles/consultar.css" />
+  <link rel='stylesheet' href='./lib/main.min.css' />
+  <script src='./lib/main.min.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
   <title>SRV | Veículos</title>
 
@@ -170,10 +172,6 @@
     </div>
   </div>
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
-  <script src='./lib/main.min.js'></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="./scripts/consultar.js"></script>
 </body>
 </html>

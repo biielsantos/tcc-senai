@@ -49,8 +49,11 @@ $(document).on("click", "#finalizar-reserva", function() {
   let horarioRetorno = $("#horarioRetorno").val().trim();
   let veiculo = $("#veiculo option:selected").text();
 
-  let dataSaidaInput = new Date(dataSaida[2] + "/" + dataSaida[1] + "/" + dataSaida[0] + " " + horarioSaida + ":00");
-  let dataRetornoInput = new Date(dataRetorno + " " + horarioRetorno + ":00");
+  let dataSaidaStr = dataSaida + " " + horarioSaida + ":00";
+  let dataRetornoStr = dataRetorno + " " + horarioRetorno + ":00";
+
+  let dataSaidaInput = new Date(dataSaidaStr.replace(/ /g,'T'));
+  let dataRetornoInput = new Date(dataRetornoStr.replace(/ /g,'T'));
 
   let valid = true;
   let msg = "";
@@ -242,9 +245,11 @@ $(document).on("click", "#det-editar", function() {
       option = "UPDATE";
 
       let dataSaida = data[0].data_saida.split(" ")[0];
-      let horarioSaida = data[0].data_saida.split(" ")[1];
+      let horarioSaidaStr = data[0].data_saida.split(" ")[1];
+      let horarioSaida = horarioSaidaStr.substr(0, horarioSaidaStr.length - 3);
       let dataRetorno = data[0].data_retorno.split(" ")[0];
-      let horarioRetorno = data[0].data_retorno.split(" ")[1];
+      let horarioRetornoStr = data[0].data_retorno.split(" ")[1];
+      let horarioRetorno = horarioRetornoStr.substr(0, horarioRetornoStr.length - 3);
       let veiculo = data[0].fk_id_veiculo;
       let destino = data[0].destino;
       let condutor = data[0].condutor;
