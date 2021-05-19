@@ -41,6 +41,7 @@ $(document).ready(function(){
 
 // Checar reservas no botão de finalizar reserva
 $(document).on("click", "#finalizar-reserva", function() {
+  console.log("reservar button click");
   M.Toast.dismissAll();
 
   let dataSaida = $("#dataSaida").val().trim().split("/");
@@ -49,8 +50,13 @@ $(document).on("click", "#finalizar-reserva", function() {
   let horarioRetorno = $("#horarioRetorno").val().trim();
   let veiculo = $("#veiculo option:selected").text();
 
-  let dataSaidaInput = new Date(dataSaida[2] + "/" + dataSaida[1] + "/" + dataSaida[0] + " " + horarioSaida + ":00");
-  let dataRetornoInput = new Date(dataRetorno + " " + horarioRetorno + ":00");
+  let dataSaidaStr = dataSaida + " " + horarioSaida + ":00";
+  let dataRetornoStr = dataRetorno + " " + horarioRetorno + ":00";
+
+  let dataSaidaInput = new Date(dataSaidaStr.replace(/ /g,'T'));
+  let dataRetornoInput = new Date(dataRetornoStr.replace(/ /g,'T'));
+
+  console.log(dataSaidaInput, dataRetornoInput);
 
   let valid = true;
   let msg = "";
@@ -61,11 +67,15 @@ $(document).on("click", "#finalizar-reserva", function() {
     msg = "Preencha todos os campos";
   }
 
+  console.log(valid, msg);
+
   // Verificar tempo mínimo de reserva (15 min)
   if (dataRetornoInput < new Date(dataSaidaInput.getTime() + 15*60000)) {
     valid = false;
     msg = "Reserva deve conter no mínimo 15 minutos";
   }
+
+  console.log(valid, msg);
 
   // Verificar se existem viajantes do tempo (tolerância de 5 min)
   if (new Date(dataSaidaInput.getTime() + 5*60000) < new Date() || new Date(dataRetornoInput.getTime() + 5*60000) < new Date()) {
@@ -73,11 +83,15 @@ $(document).on("click", "#finalizar-reserva", function() {
     msg = "Data de reserva inferior a data atual";
   }
 
+  console.log(valid, msg);
+
   // Verificar se a data de retorno é anterior a data de saída
   if (dataRetornoInput < dataSaidaInput) {
     valid = false;
     msg = "Data de retorno inferior a data de saída";
   }
+
+  console.log(valid, msg);
   
   // Verificar se ja existe uma reserva no mesmo horário
   if (!editing) {
@@ -97,6 +111,8 @@ $(document).on("click", "#finalizar-reserva", function() {
       }
     })
   }
+
+  console.log(valid, msg);
 
   if (valid) {
     $("#modal-reserva").modal('open');

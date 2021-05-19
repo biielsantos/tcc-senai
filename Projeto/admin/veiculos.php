@@ -15,8 +15,9 @@ include("../config/conexao.php");
 <html lang="pt-br">
 
 <head>
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
   <?php include "../components/head.php" ?>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
   <link rel="stylesheet" href="../styles/veiculos.css">
   <link rel="stylesheet" href="../styles/navbar.css">
   <title>SRV | Gerenciar veículos</title>
