@@ -1,5 +1,9 @@
 <?php
   session_start();
+
+  if ($_SESSION["status"] != "ok") {
+    header('location: ./index.php');
+  }
 ?>
 
 <!DOCTYPE html>
