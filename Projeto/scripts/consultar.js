@@ -41,7 +41,6 @@ $(document).ready(function(){
 
 // Checar reservas no botão de finalizar reserva
 $(document).on("click", "#finalizar-reserva", function() {
-  console.log("reservar button click");
   M.Toast.dismissAll();
 
   let dataSaida = $("#dataSaida").val().trim().split("/");
@@ -56,8 +55,6 @@ $(document).on("click", "#finalizar-reserva", function() {
   let dataSaidaInput = new Date(dataSaidaStr.replace(/ /g,'T'));
   let dataRetornoInput = new Date(dataRetornoStr.replace(/ /g,'T'));
 
-  console.log(dataSaidaInput, dataRetornoInput);
-
   let valid = true;
   let msg = "";
 
@@ -67,15 +64,11 @@ $(document).on("click", "#finalizar-reserva", function() {
     msg = "Preencha todos os campos";
   }
 
-  console.log(valid, msg);
-
   // Verificar tempo mínimo de reserva (15 min)
   if (dataRetornoInput < new Date(dataSaidaInput.getTime() + 15*60000)) {
     valid = false;
     msg = "Reserva deve conter no mínimo 15 minutos";
   }
-
-  console.log(valid, msg);
 
   // Verificar se existem viajantes do tempo (tolerância de 5 min)
   if (new Date(dataSaidaInput.getTime() + 5*60000) < new Date() || new Date(dataRetornoInput.getTime() + 5*60000) < new Date()) {
@@ -83,15 +76,11 @@ $(document).on("click", "#finalizar-reserva", function() {
     msg = "Data de reserva inferior a data atual";
   }
 
-  console.log(valid, msg);
-
   // Verificar se a data de retorno é anterior a data de saída
   if (dataRetornoInput < dataSaidaInput) {
     valid = false;
     msg = "Data de retorno inferior a data de saída";
   }
-
-  console.log(valid, msg);
   
   // Verificar se ja existe uma reserva no mesmo horário
   if (!editing) {
@@ -111,8 +100,6 @@ $(document).on("click", "#finalizar-reserva", function() {
       }
     })
   }
-
-  console.log(valid, msg);
 
   if (valid) {
     $("#modal-reserva").modal('open');
@@ -258,9 +245,11 @@ $(document).on("click", "#det-editar", function() {
       option = "UPDATE";
 
       let dataSaida = data[0].data_saida.split(" ")[0];
-      let horarioSaida = data[0].data_saida.split(" ")[1];
+      let horarioSaidaStr = data[0].data_saida.split(" ")[1];
+      let horarioSaida = horarioSaidaStr.substr(0, horarioSaidaStr.length - 3);
       let dataRetorno = data[0].data_retorno.split(" ")[0];
-      let horarioRetorno = data[0].data_retorno.split(" ")[1];
+      let horarioRetornoStr = data[0].data_retorno.split(" ")[1];
+      let horarioRetorno = horarioRetornoStr.substr(0, horarioRetornoStr.length - 3);
       let veiculo = data[0].fk_id_veiculo;
       let destino = data[0].destino;
       let condutor = data[0].condutor;
