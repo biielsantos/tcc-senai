@@ -3,8 +3,31 @@ $(document).ready(function(){
   $('select').formSelect();
   $('.modal').modal();
   $('.sidenav').sidenav();
+  $('.tooltipped').tooltip();
+  $('.datepicker').datepicker({
+    i18n: {
+      months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+      monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+      weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabádo'],
+      weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+      weekdaysAbbrev: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+      today: 'Hoje',
+      clear: 'Limpar',
+      cancel: 'Sair',
+      done: 'Confirmar',
+      labelMonthNext: 'Próximo mês',
+      labelMonthPrev: 'Mês anterior',
+      labelMonthSelect: 'Selecione um mês',
+      labelYearSelect: 'Selecione um ano',
+      selectMonths: true,
+      selectYears: 15,
+    },
+    format: 'yyyy-mm-dd',
+    container: 'body',
+    minDate: new Date(),
+    autoClose: true
+  });
   
- 
   //DataTables
   TabelaUsuarios = $('#tabela-usuarios').DataTable({
     "columnDefs":[
@@ -25,47 +48,47 @@ $(document).ready(function(){
   //Jquery Mask
   $('#cpf').mask("000.000.000-00");
   $('#telefone').mask("(00) 00000-0000");
+  $('#cnh').mask("00000000000");
 });
 
 var linhaTabelaUsuario;
 
 //Botão Novo Usuário
 $(document).on("click", "#btn-novo-usuario", function() {
-  id= "";
-  nome = "";
-  cpf = "";
-  telefone = "";
-  ver_cpf="";
-  senha= "";
-  cnh = "";
-  $("#validade_carteira").val('');
-  $("#nome").val(nome);
-  $("#cpf").val(cpf);
-  $("#telefone").val(telefone);
-  $("#senha").val(senha);
-  $("#cnh").val(cnh);
-  $("#departamento").val("").formSelect();
-  $("#tipo-usuario").val("").formSelect();
+  id="";
+  $("#form-usuario").trigger("reset");
+  $("#titulo-modal").html("Inserir Usuário");
   option = 1;
-  cpf_real = null;
+  cpfAtual = null;
+  telefoneAtual = null;
+  cnhAtual = null;
 });
 
 //Botão EDITAR
 $(document).on("click", ".btnEdit", function(){
+  $("#titulo-modal").html("Editar Usuário");
   linhaTabelaUsuario = $(this).closest('tr');
   id=parseInt(linhaTabelaUsuario.find('td').eq(0).text());
   option=4;
+  $("#form-usuario").trigger("reset");
 
   //Trazer todos os dados para o modal de atualização
   $.ajax({
     url: "../config/crud-usuarios.php",
     type: 'POST',
     dataType: 'json',
-    data:{id:id, option:option},
+    async: false,
+    data:{
+      id:id,
+      option:option
+    },
     success:function(data){
+      cnhAtual = data.cnh;
+      cpfAtual = data.cpf;
+      telefoneAtual = data.telefone;
       $('#nome').val(data[1]);
       $("#cpf").val(data[2]).trigger('input');
-    $("#senha").val(atob(data[3])); //base64 provisório
+      $("#senha").val(atob(data[3])); //base64 provisório
       $("#tipo-usuario").val(data[4]).formSelect();
       $("#telefone").val(data[5]).trigger('input');
       $("#validade_carteira").val(data[6]);
@@ -73,14 +96,8 @@ $(document).on("click", ".btnEdit", function(){
       $("#departamento").val(data[8]).formSelect();
       M.updateTextFields();
       option=2;
-    },error(x, y, z){
-      console.log(x);
-      console.log(y);
-      console.log(z);
     }
   });
-  
-  cpf_real = linhaTabelaUsuario.find('td').eq(2).text();
 });
 
 //Botão EXCLUIR
@@ -88,14 +105,13 @@ $(document).on("click", ".btnDelete", function(){
   linhaTabelaUsuario = $(this);
   id=parseInt(linhaTabelaUsuario.closest('tr').find('td').eq(0).text());
   nome = linhaTabelaUsuario.closest('tr').find('td').eq(1).text();
-  cpf =  linhaTabelaUsuario.closest('tr').find('td').eq(2).text();
+  cpf = linhaTabelaUsuario.closest('tr').find('td').eq(2).text();
   option=3;
   var confirm = document.getElementById("confirm-delete");
   confirm.innerHTML =  "Esta ação não pode ser desfeita.<br>Isso excluirá permanentemente o usuário <b>"+nome+"</b> cujo o CPF é <b>"+cpf+"</b><br><br>"+"Digite <b>"+cpf+" </b>para confirmar." ;
   $('#confirm').val("");
   $("#submitDelete").addClass("disabled");
 });
-
 
 //Submit -> Form Cadastrar/Atualizar Usuário
 $("#form-usuario").submit(function(e){
@@ -108,9 +124,88 @@ $("#form-usuario").submit(function(e){
   cnh = $("#cnh").val();
   validade_carteira = $("#validade_carteira").val() 
   senha = $("#senha").val();
+  let valid = true;
+  let empty = false;
 
+  //Verificar campos vazios 
+  if(!nome){
+    msg = 'Preencha o campo NOME'
+    emptyField = $('#nome');
+    empty = true;
+  }else if(!departamento){
+    msg = 'Selecione um departamento';
+    emptyField = $('#departamento');
+    empty = true;
+  }else if(!tipo){
+    msg = 'Selecione o TIPO de USUARIO';
+    emptyField = $('#tipo-usuario');
+    empty = true;
+  }else if(!cpf){
+    msg = 'Preencha o campo CPF';
+    emptyField = $('#cpf');
+    empty = true;
+  }else if(!cnh){
+    msg = 'Preencha o campo CNH';
+    emptyField = $('#cnh');
+    empty = true;
+  }else if(!validade_carteira){
+    msg = 'Selecione a data de VALIDADE DA CARTEIRA';
+    emptyField = $('#validade_carteira');
+    emptyField.click();
+    empty = true;
+  }else if(!telefone){
+    msg = 'Preencha o campo TELEFONE';
+    emptyField = $('#telefone');
+    empty = true;
+  }else if(!senha){
+    msg = 'Preencha o campo SENHA';
+    emptyField = $('#senha');
+    empty = true;
+  }
+  
+  //Verificar data
+  let dataAtual = new Date();
+  let data = new Date(validade_carteira + ' 23:59:00');
+  let dateValid = true;
+
+  if(data.getTime() < dataAtual.getTime()){
+    msg = 'Data Inferior a data atual';
+    $('#validade_carteira').click();
+    dateValid = false;
+  }
+  
+
+  //Varificar dados repetidos
+  if(!empty){
+    if(telefone != telefoneAtual){
+      if(verificaDadosRepetidos("telefone", telefone)){
+        msg = 'Ja existe um Usuario com esse TELEFONE';
+        $("#telefone").addClass("invalid")
+        valid = false;
+      }
+    }
+    if(cnh != cnhAtual){
+      if(verificaDadosRepetidos("cnh", cnh)){
+        msg = 'Ja existe um Usuario com esse CNH';
+        $("#cnh").addClass("invalid")
+        valid = false;
+      }
+    }
+    if(cpf != cpfAtual){
+      if(verificaDadosRepetidos("cpf", cpf)){
+        msg = 'Ja existe um Usuario com esse CPF';
+        $("#cpf").addClass("invalid");
+        valid = false;
+      }
+    }
+  }else{
+    emptyField.addClass("invalid");
+    emptyField.focus();
+  }
+  
   $("#btn-salvar").attr("disabled", true);
-  if(!$('#cpf').hasClass("invalid")){
+  if(valid && !empty && dateValid){
+    $("#carregando").html("<img src='../images/loading.gif'>");
     $.ajax({
       url: "../config/crud-usuarios.php",
       type: 'POST',
@@ -126,9 +221,9 @@ $("#form-usuario").submit(function(e){
         cnh: cnh,
         validade: validade_carteira,
         id:id
-      },
+      },  
       success:function(data){
-        console.log(data.senha);
+        $("#carregando").empty();
         id = data[0];
         departamento = data.departamento;
         if(tipo == "A"){
@@ -159,13 +254,33 @@ $("#form-usuario").submit(function(e){
       }
     });
   }else{ //Msg erro
-    var msg = '<span>Preencha os campos Corretamente</span>';
-    M.toast({html: msg, classes: 'rounded #ef5350 red lighten-1'})
-    $("#btn-salvar").attr("disabled", false); 
+    M.toast({
+      html: msg,
+      classes: 'rounded #ef5350 red lighten-1'
+    });
+    $("#btn-salvar").attr("disabled", false);
   }
-
-  
 });
+
+function verificaDadosRepetidos(validationOption, value){
+  let valid = false;
+  $.ajax({
+    url: "../config/validar-usuario.php",
+    type: 'POST',
+    async: false,
+    dataType: 'json',
+    data: {
+      validationOption: validationOption,
+      value: value,
+    },
+    success: function(data){
+      if(data){
+        valid = true;
+      }
+    }
+  });
+  return valid
+};
 
 //Verifica confirmação ao Excluir
 $(document).on("input", "#confirm", function(){
@@ -200,52 +315,46 @@ $("#form-delete").submit(function(e){
   instance.close();
 });
 
-//Verifica CPF repetido
-span_cpf = $("#span_cpf");
-cpf_msg = {successo: "CPF válido", erro: "CPF ja cadastrado"};
+//Verifica dado repetido enquanto digita
+validarInput("cpf");
+validarInput("telefone");
+validarInput("cnh");
 
-$(document).on("input", "#cpf", function(){
-  cpf = $("#cpf");
-  cpf_dados = {validation_option: "cpf", cpf: cpf.val().replace(/[^\d]+/g,"") , cpf_real: cpf_real};
-
-  if(cpf.val().replace(/[^\d]+/g,"").length == 11){
-    validarInput(cpf_dados, span_cpf, cpf, cpf_msg);
-  }else{
-    span_cpf.attr("data-error" , "Minimo de caracteres é 11");
-    cpf.removeClass("valid").addClass("invalid");
-  }
-});
-
-//Validar Input
-function validarInput(dados, span, input, msg) {
-  $.ajax({
-    url: "../config/verifica-usuario.php",
-    type: 'POST',
-    dataType: 'json',
-    data: dados,
-    success:function(data){
-      switch (data) {
-        case 1: //Disponivel
-          span.attr("data-success" , msg.successo);
-          input.removeClass("invalid").addClass("valid");
-          
+function validarInput(input){
+  let currentValue;
+  $(document).on("input", "#"+input, function(){
+    let span = $("#span-"+input);
+    let element = $(this);
+    let value = element.val().replace(/[^\d]+/g,"");
+    if(value.length == 11){
+      switch (input) {
+        case "cpf":
+          currentValue = cpfAtual;
           break;
-        case 2: //Indisponivel
-          span.attr("data-error" , msg.erro);
-          input.addClass("invalid");
-        
+        case "cnh":
+          currentValue = cnhAtual;
           break;
-        case 3: //Não Alterou
-          input.removeAttr("class");
-        break;
+        case "telefone":
+          currentValue = telefoneAtual;
+          break;
       }
-    },error(x,y,z){
-      console.log(x);
-      console.log(y);
-      console.log(z);
+      if(currentValue != value){
+        if(verificaDadosRepetidos(input, value)){
+          element.addClass("invalid");
+          span.attr("data-error", input.toUpperCase() + " ja cadastrado")
+        }else{
+          span.attr("data-success", input.toUpperCase() + " valido")
+          element.removeClass('invalid').addClass('valid');
+        }
+      }else{
+        element.removeAttr("class")
+      }
+    }else{
+      span.attr("data-error", "Minimo de caracteres é 11");
+      element.addClass("invalid")
     }
   });
-}
+};
 
 //Bloqueia "Enter" form-delete
 $(document).on("keypress", '#form-delete', function (e) {

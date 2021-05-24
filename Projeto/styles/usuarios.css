@@ -51,3 +51,15 @@ select{
   bottom: 7vh;
   box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.5);
 }
+
+#carregando{
+  width: 50px;
+}
+#carregando img{
+  width: 100%;
+}
+
+.button-container{
+  display: flex;
+  justify-content: space-between;
+}

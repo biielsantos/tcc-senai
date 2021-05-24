@@ -29,7 +29,6 @@ include("../config/conexao.php");
     <p class="left user-icon"><i class="fas fa-user-circle fa-5x"></i></p>
     <h3 class="left">Usuários</h3>
 
-
     <!--Tabela Usuários -->
     <table id="tabela-usuarios" class="centered highlight display compact">
       <thead>
@@ -76,20 +75,21 @@ include("../config/conexao.php");
   <a id="btn-novo-usuario" class="#0277bd light-blue darken-3 btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#modal1">
     <i class="material-icons right">add</i>
   </a>
+  
   <!-- Modal-Cadastro -->
   <div id="modal1" class="modal">
     <div class="modal-content">
       <div class="container">
-        <h3 class="center">Usuário</h3>
+        <h3 id="titulo-modal" class="center"></h3>
         <p class="center"><i class="material-icons medium">account_circle</i></p>
         <div class="row">
           <form id="form-usuario" class="col s12">
             <div class="input-field">
-              <input id="nome" type="text"  name="nome" required>
+              <input id="nome" type="text" name="nome" class="validate">
               <label for="nome">Nome</label>
             </div>
             <div class="input-field col-s12">
-              <select id="departamento" required>
+              <select id="departamento">
                 <option value="" disabled selected>Selecione</option>
                 <?php
                 $query2 = mysqli_query($conn, "SELECT * FROM departamento") or die(mysqli_connect_error());
@@ -103,7 +103,7 @@ include("../config/conexao.php");
             </div>
             <div class="row">
               <div class="input-field col l6 m6 s12">
-                <select id="tipo-usuario" required>
+                <select id="tipo-usuario">
                 <option value="" disabled selected>Selecione</option>
                   <option value="U">COMUM</option>
                   <option value="A">ADMIN</option>
@@ -111,25 +111,27 @@ include("../config/conexao.php");
                 <label>Tipo de usuario</label>
               </div>
               <div class="input-field col l6 m6 s12">
-                <input id="cpf" type="text" name="cpf" minlength="11" maxlength="11" autocomplete="off" required>
+                <input id="cpf" type="text" name="cpf" minlength="11" maxlength="11" autocomplete="off">
                 <label class="active" for="cpf">CPF</label>
-                <span id="span_cpf"class="helper-text"></span>
+                <span id="span-cpf"class="helper-text"></span>
               </div>
               <div class="input-field col l6 m6 s12">
-                <input id="cnh" type="text" name="cnh" minlength="11" maxlength="11" autocomplete="off" required>
+                <input id="cnh" type="text" name="cnh" minlength="11" maxlength="11" autocomplete="off">
                 <label class="active" for="cnh">CNH</label>
+                <span id="span-cnh"class="helper-text"></span>
               </div>
               <div class="input-field col l6 m6 s12">
-                <input id="validade_carteira" type="date">
+                <input id="validade_carteira" type="text" class="datepicker validate">
                 <label class="active" for="validade_carteira">VALIDADE DA CARTEIRA</label>
+                <span id="span-cnh"class="helper-text"></span>
               </div>
               <div class="input-field col l6 m6 s12">
-                <input id="telefone" type="text" name="telefone" data-length="11" minlength="11" maxlength="11" autocomplete="off" required>
+                <input id="telefone" type="text" name="telefone" data-length="11" minlength="11" maxlength="11" autocomplete="off">
                 <label for="telefone">Telefone</label>
-                <span id="span_telefone" class="helper-text"></span>
+                <span id="span-telefone" class="helper-text"></span>
               </div>
               <div class="input-field col l6 m6 s12">
-                <input id="senha" type="password"  name="senha" required>
+                <input id="senha" type="password" name="senha" class="validate">
                 <label class="active" for="senha">Senha</label>
               </div>
             </div>
@@ -137,7 +139,8 @@ include("../config/conexao.php");
               <button type="button" class="modal-close btn waves-effect red darken-1">Cancelar
                 <i class="material-icons left">cancel</i>
               </button>
-              <button id="btn-salvar" class="btn waves-effect right" type="submit" >Salvar
+              <div id="carregando"></div>
+              <button id="btn-salvar" class="btn waves-effect" type="submit" >Salvar
                 <i class="material-icons right">send</i>
               </button>
             </div>
@@ -151,7 +154,7 @@ include("../config/conexao.php");
   <!-- Modal Confirmação Excluir-->
   <div id="modal2" class="modal">
     <div class="modal-content">
-      <i class="modal-close material-icons right">close</i>
+      <i class="modal-close material-icons right tooltipped" data-position="bottom" data-tooltip="Fechar">close</i>
       <h4>Você tem certeza?</h4>
       <p id="confirm-delete"></p>
     </div>
@@ -172,6 +175,7 @@ include("../config/conexao.php");
 
   <?php include ("../components/scripts.php") ?>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
   <script src="../scripts/usuarios.js"></script>
 </body>
 </html>
