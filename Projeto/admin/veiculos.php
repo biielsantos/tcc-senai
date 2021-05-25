@@ -66,30 +66,31 @@ include("../config/conexao.php");
   <div id="modal1" class="modal">
     <div class="modal-content">
       <div class="container">
-        <h3 class="center">Veículo</h3>
+        <h3 id="titulo-modal" class="center"></h3>
         <p class="center"><i class="material-icons medium">directions_car</i></p>
         <div class="row">
           <form id="form-veiculo" class="col s12">
             <div class="row">
               <div class="input-field col s6">
-                <input id="modelo" type="text" name="modelo" required>
+                <input class="validate" id="modelo" type="text" name="modelo">
                 <label for="modelo">Modelo</label>
               </div>
               <div class="input-field col s6">
-                <input id="placa" type="text"  name="placa" data-length="7" minlength="7" maxlength="7" autocomplete="off" required>
+                <input id="placa" type="text"  name="placa" data-length="7" minlength="7" maxlength="7" autocomplete="off">
                 <label for="placa">Placa</label>
-                <span id="span_placa" class="helper-text" data-success="Sucesso"></span>
+                <span id="span-placa" class="helper-text"></span>
               </div>
             </div>
             <div class="input-field">
-              <input id="proprietario" type="text"  name="proprietario" required>
+              <input class="validate" id="proprietario" type="text"  name="proprietario">
               <label for="proprietario">Proprietario</label>
             </div>
-            <div class="button-container">
+            <div id="button-container">
               <button type="button" class="modal-close btn waves-effect red darken-1">Cancelar
                 <i class="material-icons left">cancel</i>
               </button>
-              <button id="btn-salvar" class="btn waves-effect right" type="submit" name="submit">Salvar
+              <div id="carregando"></div>
+              <button id="btn-salvar" class="btn waves-effect" type="submit" name="submit">Salvar
                 <i class="material-icons right">send</i>
               </button>
             </div>
