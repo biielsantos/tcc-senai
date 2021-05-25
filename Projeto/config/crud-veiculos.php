@@ -7,7 +7,7 @@ if ($_SESSION["status"] != "ok") {
 
 include("conexao.php");
 
-if(isset($_POST['modelo']) && isset($_POST['placa']) && $_POST['proprietario']){
+if(isset($_POST['modelo']) && isset($_POST['placa']) && isset($_POST['proprietario'])){
 	$modelo = $_POST['modelo'];
 	$placa = $_POST['placa'];
 	$proprietario = $_POST['proprietario'];

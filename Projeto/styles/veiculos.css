@@ -37,7 +37,21 @@ select{
   bottom: 7vh;
   box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.5);
 }
+
 #submitDelete{
 left: 50%;
 transform: translate(-50%);
 };
+
+#carregando{
+  background-color: #000000bc;
+  width: 50px;
+}
+#carregando img{
+  width: 50px;
+}
+
+#button-container{
+  display: flex;
+  justify-content: space-between;
+}
