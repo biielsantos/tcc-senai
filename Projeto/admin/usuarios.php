@@ -16,7 +16,7 @@ include("../config/conexao.php");
 
 <head>
   <?php include "../components/head.php" ?>
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="../styles/dataTables.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
   <link rel="stylesheet" href="../styles/usuarios.css">
   <link rel="stylesheet" href="../styles/navbar.css">
@@ -25,11 +25,18 @@ include("../config/conexao.php");
 
 <body>
   <?php include "../components/navbar.php" ?>
-  <div class="container">
-    <p class="left user-icon"><i class="fas fa-user-circle fa-5x"></i></p>
-    <h3 class="left">Usuários</h3>
 
     <!--Tabela Usuários -->
+    <div class="row">
+        <div id="man" class="col s12">
+          <div class="card material-table">
+            <div class="table-header">
+              <span class="table-title"><i class="fas fa-user-circle fa-5x center"></i> Lista de Usuários</span>
+              <div class="actions">
+                <a href="#modal1" id="btn-novo-usuario" class="modal-trigger waves-effect btn-flat nopadding"><i class="material-icons">person_add</i></a>
+                <a class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+              </div>
+            </div>
     <table id="tabela-usuarios" class="centered highlight display compact">
       <thead>
         <tr>
@@ -70,12 +77,9 @@ include("../config/conexao.php");
       </tbody>
     </table>
     </div>
-  </div>
-    
-  <a id="btn-novo-usuario" class="#0277bd light-blue darken-3 btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#modal1">
-    <i class="material-icons right">add</i>
-  </a>
-  
+        </div>
+      </div>
+
   <!-- Modal-Cadastro -->
   <div id="modal1" class="modal">
     <div class="modal-content">
@@ -175,7 +179,7 @@ include("../config/conexao.php");
 
   <?php include ("../components/scripts.php") ?>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script src="../scripts/dataTables.js"></script>
   <script src="../scripts/usuarios.js"></script>
 </body>
 </html>

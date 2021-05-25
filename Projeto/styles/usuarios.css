@@ -15,14 +15,6 @@
   float: right !important;
 }
 
-select{
-  display: inline-block!important;
-}
-
-#tipo-usuario, #departamento{
-  display: none !important;
-}
-
 #toast-container {
   top: 5px !important;
   right: auto !important;
@@ -45,13 +37,6 @@ select{
   margin-right: 4%;
 }
 
-#btn-novo-usuario{
-  position: fixed;
-  right: 6vw;
-  bottom: 7vh;
-  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.5);
-}
-
 #carregando{
   width: 50px;
 }
@@ -62,4 +47,12 @@ select{
 .button-container{
   display: flex;
   justify-content: space-between;
+}
+
+.btnEdit:hover {
+  background-color: rgba(0, 0, 0, 0.082);
+}
+
+.btnDelete:hover {
+  background-color: rgba(0, 0, 0, 0.082);
 }

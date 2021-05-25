@@ -29,48 +29,55 @@ mysqli_close($conn);
 <html lang="pt-br">
 <!DOCTYPE html>
 <head>
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="./styles/dataTables.css">
   <?php include "./components/head.php"; ?>
   <link rel="stylesheet" href="./styles/navbar.css">
   <link rel="stylesheet" href="./styles/historico.css">
-  <title>SRV | Histórico</title>
-  
+  <title>Histórico</title>
 </head>
 <body>
   <?php include "./components/navbar.php" ?>
-  <div class="container">
-    <header>
-      <i class="material-icons" style="font-size: 70px;">watch_later</i>
-      <h1 class="titulo">Histórico</h1>
-    </header>
-    <table id="historico">
-      <thead>
-        <tr>
-          <th>Usuário</th>
-          <th>Condutor</th>
-          <th>Modelo</th>
-          <th>Destino</th>
-          <th>Data Saída</th>
-          <th>Data Entrada</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-        foreach ($reservas as $reserva) { ?>
-          <tr>
-            <td><?php echo $reserva['nome']; ?></td>
-            <td><?php echo $reserva['condutor']; ?></td>
-            <td><?php echo $reserva['modelo']; ?></td>
-            <td><?php echo $reserva['destino']; ?></td>
-            <td><?php echo $reserva['data_saida']; ?></td>
-            <td><?php echo $reserva['data_retorno']; ?></td>
-          </tr>
-        <?php } ?>
-      </tbody>
-    </table>
-  </div>
+    
+    <div class="row">
+        <div id="man" class="col s12">
+          <div class="card material-table">
+            <div class="table-header">
+              <span class="table-title"><i class="material-icons center">watch_later</i> Histórico</span>
+              <div class="actions">
+                <a class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+              </div>
+            </div>
+            <table id="historico">
+              <thead>
+                <tr>
+                  <th>Usuário</th>
+                  <th>Condutor</th>
+                  <th>Modelo</th>
+                  <th>Destino</th>
+                  <th>Data Saída</th>
+                  <th>Data Entrada</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                foreach ($reservas as $reserva) { ?>
+                  <tr>
+                    <td><?php echo $reserva['nome']; ?></td>
+                    <td><?php echo $reserva['condutor']; ?></td>
+                    <td><?php echo $reserva['modelo']; ?></td>
+                    <td><?php echo $reserva['destino']; ?></td>
+                    <td><?php echo $reserva['data_saida']; ?></td>
+                    <td><?php echo $reserva['data_retorno']; ?></td>
+                  </tr>
+                <?php } ?>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
 
   <?php include ("./components/scripts.php")?>
+  <script src="./scripts/dataTables.js"></script>
   <script src="./scripts/historico.js"></script>
 </body>
 </html>
