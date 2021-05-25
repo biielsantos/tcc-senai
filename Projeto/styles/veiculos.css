@@ -31,13 +31,6 @@ select{
   max-height: 250px;
 }
 
-#btn-novo-veiculo{
-  position: fixed;
-  right: 6vw;
-  bottom: 7vh;
-  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.5);
-}
-
 #submitDelete{
 left: 50%;
 transform: translate(-50%);
@@ -54,4 +47,12 @@ transform: translate(-50%);
 #button-container{
   display: flex;
   justify-content: space-between;
+}
+
+.btnEdit:hover {
+  background-color: rgba(0, 0, 0, 0.082);
+}
+
+.btnDelete:hover {
+  background-color: rgba(0, 0, 0, 0.082);
 }

@@ -16,7 +16,7 @@ include("../config/conexao.php");
 
 <head>
   <?php include "../components/head.php" ?>
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="../styles/dataTables.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
   <link rel="stylesheet" href="../styles/veiculos.css">
   <link rel="stylesheet" href="../styles/navbar.css">
@@ -25,42 +25,47 @@ include("../config/conexao.php");
 
 <body>
   <?php include "../components/navbar.php" ?>
-  <div class="container">
-    <p class="left car-icon"><i class="fas fa-car fa-5x"></i></p>
-    <h3 class="left">Veículos</h3>
-
-    <!--Tabela Veiculos-->
-    <table id="tabela-veiculos" class="centered highlight display compact">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>MODELO</th>
-          <th>PLACA</th>
-          <th>AÇÃO</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-        $query = mysqli_query($conn, "SELECT * FROM veiculo") or die(mysqli_connect_error());
-        while ($veiculo = mysqli_fetch_array($query)) {
-        ?>
-          <tr>
-            <td><?php echo $veiculo['id_veiculo']; ?></td>
-            <td><?php echo $veiculo['modelo']; ?></td>
-            <td><?php echo $veiculo['placa']; ?></td>
-            <td></td>
-          </tr>
-        <?php
-        }
-        mysqli_close($conn);
-        ?>
-      </tbody>
-    </table>
-  </div>
   
-  <a id="btn-novo-veiculo" class="#0277bd light-blue darken-3 btn-floating btn-large waves-effect waves-light btn modal-trigger" href="#modal1">
-    <i class="material-icons right">add</i>
-  </a>
+  <!--Tabela Veiculos-->
+    <div class="row">
+        <div id="man" class="col s12">
+          <div class="card material-table">
+            <div class="table-header">
+              <span class="table-title"><i class="fas fa-car fa-5x center"></i> Lista de Veículos</span>
+              <div class="actions">
+                <a href="#modal1" id="btn-novo-veiculo" class="modal-trigger waves-effect btn-flat nopadding"><i class="fas fa-car fa-5x center"></i></a>
+                <a class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+              </div>
+            </div>
+            <table id="tabela-veiculos" class="centered highlight display compact">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>MODELO</th>
+                  <th>PLACA</th>
+                  <th>AÇÃO</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $query = mysqli_query($conn, "SELECT * FROM veiculo") or die(mysqli_connect_error());
+                while ($veiculo = mysqli_fetch_array($query)) {
+                ?>
+                  <tr>
+                    <td><?php echo $veiculo['id_veiculo']; ?></td>
+                    <td><?php echo $veiculo['modelo']; ?></td>
+                    <td><?php echo $veiculo['placa']; ?></td>
+                    <td></td>
+                  </tr>
+                <?php
+                }
+                mysqli_close($conn);
+                ?>
+              </tbody>
+            </table>
+        </div>
+      </div>
+              </div>
 
   <!-- Modal-Veiculo -->
   <div id="modal1" class="modal">
@@ -123,6 +128,7 @@ include("../config/conexao.php");
   </div>
   
   <?php include ("../components/scripts.php")?>
+  <script src="../scripts/dataTables.js"></script>
   <script src="../scripts/veiculos.js"></script>
 </body>
 
