@@ -19,9 +19,9 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container grey lighten-5">
+    <p class="center" id="p-car-icon"><i class="material-icons medium">directions_car</i></p>
     <h3 class="center">Login</h3>
-    <p class="center"><i class="material-icons large">directions_car</i></p>
     <form id="form-login" method="POST">
       <div class="input-field">
         <i class="material-icons prefix">account_circle</i>
@@ -33,9 +33,11 @@
         <input type="password" id="senha" autocomplete="off"/>
         <label for="senha">Senha</label>
       </div>
-      <button class="btn waves-effect" type="submit" name="submit">Entrar
-        <i class="material-icons right">send</i>
-      </button>
+      <div class="buttons">
+        <button class="btn waves-effect" type="submit" name="submit">Entrar
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
     </form>
   </div>
   <form id="submit-form" action="./config/login.php" method="POST">
