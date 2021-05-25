@@ -10,6 +10,11 @@ body {
 }
 
 form {
-  text-align: center;
   width: 50%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

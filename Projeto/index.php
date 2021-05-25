@@ -33,9 +33,11 @@
         <input type="password" id="senha" autocomplete="off"/>
         <label for="senha">Senha</label>
       </div>
-      <button class="btn waves-effect" type="submit" name="submit">Entrar
-        <i class="material-icons right">send</i>
-      </button>
+      <div class="buttons">
+        <button class="btn waves-effect" type="submit" name="submit">Entrar
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
     </form>
   </div>
   <form id="submit-form" action="./config/login.php" method="POST">
