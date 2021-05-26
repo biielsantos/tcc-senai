@@ -89,3 +89,121 @@
   transform: translate(-50%);
   max-height: 250px;
 }
+
+@media screen and (max-width: 800px) {
+  .fc-header-toolbar {
+    flex-direction: column;
+    flex-flow: column;
+    align-items: flex-start !important;
+  }
+
+  .fc-header-toolbar > * {
+    margin-bottom: 1rem;
+  }
+
+  .reserva {
+    flex-direction: column;
+  }
+
+  .date-inputs {
+    width: 100%;
+  }
+
+  .selecionar-veiculo {
+    width: 100%;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .selecionar-veiculo .input-field {
+    width: 50%;
+  }
+
+  .selecionar-veiculo a {
+    width: 45%;
+  }
+
+  .quick-access {
+    display: flex;
+    align-items: center;
+  }
+
+  .quick-access > *:first-child {
+    height: 40px;
+  }
+
+  .quick-access .sidenav-trigger {
+    position: relative;
+    bottom: .75rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .quick-access .sidenav-trigger {
+    bottom: .25rem;
+  }
+
+  #modal-reserva .container > *:nth-child(3) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #modal-reserva .container > *:nth-child(3) > * {
+    width: 100%;
+  }
+
+  #modal-reserva .buttons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #modal-reserva .buttons > * {
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  .date-inputs .row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .date-inputs .row > * {
+    width: 100% !important;
+    margin: 0 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .selecionar-veiculo {
+    padding: .75rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .selecionar-veiculo > * {
+    width: 100% !important;
+  }
+
+  .quick-access > *:last-child {
+    display: none;
+  }
+
+  .quick-access .sidenav-trigger {
+    bottom: 0;
+    width: 40px;
+    height: 40px;
+  }
+
+  .det-buttons {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .det-buttons button {
+    margin-bottom: 1rem;
+  }
+}
