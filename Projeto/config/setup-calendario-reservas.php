@@ -57,7 +57,7 @@
       headerToolbar: {
         start: "today prev,next",
         center: "title",
-        end: "listWeek dayGridMonth timeGridWeek timeGridDay"
+        end: $(window).width() < 765 ? '' : 'listWeek dayGridMonth timeGridWeek timeGridDay'
       },
       slotLabelFormat: {
         hour: 'numeric',
