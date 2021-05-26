@@ -1,8 +1,10 @@
 <?php
   session_start();
 
-  if ($_SESSION["status"] == "ok") {
-    header('location: ./veiculos.php');
+  if (isset($_SESSION) && isset($_SESSION["status"])) {
+    if ($_SESSION["status"] == "ok") {
+      header('location: ./veiculos.php');
+    }
   }
 ?>
 
