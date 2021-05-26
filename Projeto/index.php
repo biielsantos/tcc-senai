@@ -1,3 +1,11 @@
+<?php
+  session_start();
+
+  if ($_SESSION["status"] == "ok") {
+    header('location: ./veiculos.php');
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
