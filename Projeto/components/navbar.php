@@ -31,8 +31,9 @@
     <?php if ($_SESSION['tipo'] === "A") { ?>
       <li><div class="divider"></div></li>
       <li><a class="subheader">Admin</a></li>
-      <li><a href="/tcc/admin/usuarios.php" class="waves-effect"><i class="material-icons"">account_circle</i>Usuários</a></li>
-      <li><a href="/tcc/admin/veiculos.php" class="waves-effect"><i class="material-icons"">local_shipping</i>Veículos</a></li>
+      <li><a href="/tcc/admin/usuarios.php" class="waves-effect"><i class="material-icons">account_circle</i>Usuários</a></li>
+      <li><a href="/tcc/admin/veiculos.php" class="waves-effect"><i class="material-icons">local_shipping</i>Veículos</a></li>
+      <li><a href="/tcc/admin/departamentos.php" class="waves-effect"><i class="material-icons">business</i>Departamentos</a></li>
     <?php } ?>
   </div>
   <div>
