@@ -91,7 +91,7 @@ include("../config/conexao.php");
     <div class="modal-content">
       <div class="container">
         <h3 id="titulo-modal" class="center"></h3>
-        <p class="center"><i class="material-icons medium">directions_car</i></p>
+        <p class="center"><i class="material-icons medium">business</i></p>
         <div class="row">
         <form id="form-departamento" class="col s12">
               <div class="input-field col s12">
