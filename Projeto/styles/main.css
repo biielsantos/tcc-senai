@@ -89,14 +89,18 @@ input[type=number] {
 input.valid {
   border-bottom: 1px solid var(--indigo) !important;
   -webkit-box-shadow: 0 1px 0 0 var(--indigo) !important;
-  box-shadow: 0 1px 0 0 var(--indigo) !important;
+  box-shadow: none !important;
 }
 
 input:focus {
   border-bottom: 1px solid var(--indigo) !important;
-  box-shadow: 0 1px 0 0 var(--indigo) !important;
+  box-shadow: none !important;
 }
 
 label.active {
   color: var(--indigo) !important;
+}
+
+#btn-salvar {
+  background-color: var(--confirm);
 }
