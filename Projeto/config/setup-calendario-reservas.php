@@ -47,6 +47,17 @@
         document.getElementById("det-departamento").innerText = info.event.extendedProps.departamento;
 
         document.getElementById("det-id").value = info.event.id;
+
+        document.getElementsByClassName("det-buttons")[0].style.display = "flex";
+        if (session.tipo === "U") {
+          if (info.event.extendedProps.usuario != session.nome) {
+            document.getElementsByClassName("det-buttons")[0].style.display = "none";
+          }
+        }
+
+        if (info.event.end.getTime() < new Date().getTime()) {
+          document.getElementsByClassName("det-buttons")[0].style.display = "none";
+        }
       },
       locale: 'pt-br',
       events: events,
