@@ -1,3 +1,22 @@
+:root {
+  --indigo-lighten-5: #e8eaf6;
+  --indigo-lighten-4: #c5cae9;
+  --indigo-lighten-3: #9fa8da;
+  --indigo-lighten-2: #7986cb;
+  --indigo-lighten-1: #5c6bc0;
+  --indigo: #3f51b5;
+  --indigo-darken-1: #3949ab;
+  --indigo-darken-2: #303f9f;
+  --indigo-darken-3: #283593;
+  --indigo-darken-4: #1a237e;
+  --indigo-accent-1: #8c9eff;
+  --indigo-accent-2: #536dfe;
+  --indigo-accent-3: #3d5afe;
+  --indigo-accent-4: #304ffe;
+  --indigo-semi-transparent: rgba(63, 81, 181, 0.25);
+  --confirm: #2C3E50;
+}
+
 html, body {
   height: 100%;
   padding: 0;
@@ -19,4 +38,69 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+/* THEME */
+.datepicker-date-display, .timepicker-digital-display {
+  background-color: var(--indigo) !important;
+}
+
+.datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done, .timepicker-close {
+  color: var(--indigo) !important;
+}
+
+.datepicker-table .is-today {
+  color: var(--indigo) !important;
+}
+
+.datepicker-day-button:focus {
+  background-color: var(--indigo-semi-transparent) !important;
+}
+
+.datepicker-table .is-selected {
+  background-color: var(--indigo-lighten-1) !important;
+  color: #fff !important;
+}
+
+.datepicker-controls button:focus {
+  background-color: transparent;
+}
+
+.timepicker-svg g line {
+  stroke: var(--indigo-lighten-1);
+}
+
+.timepicker-svg g circle {
+  fill: var(--indigo-lighten-1);
+}
+
+.timepicker-tick:hover {
+  background-color: var(--indigo-semi-transparent);
+}
+
+.select-dropdown li span {
+  color: var(--indigo);
+}
+
+.select-wrapper .select-dropdown:focus {
+  border-bottom: 1px solid var(--indigo);
+}
+
+input.valid {
+  border-bottom: 1px solid var(--indigo) !important;
+  -webkit-box-shadow: 0 1px 0 0 var(--indigo) !important;
+  box-shadow: none !important;
+}
+
+input:focus {
+  border-bottom: 1px solid var(--indigo) !important;
+  box-shadow: none !important;
+}
+
+label.active {
+  color: var(--indigo) !important;
+}
+
+#btn-salvar {
+  background-color: var(--confirm);
 }
