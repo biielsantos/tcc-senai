@@ -45,6 +45,10 @@
   margin-left: 0.5rem;
 }
 
+#finalizar-reserva, #btn-confirmar {
+  background-color: var(--confirm) !important;
+}
+
 .fc-event{
   cursor: pointer;
 }
