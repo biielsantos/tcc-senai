@@ -30,16 +30,16 @@
 
 <body>
   <div class="container grey lighten-5">
-    <p class="center" id="p-car-icon"><i class="material-icons medium">directions_car</i></p>
+    <p class="center" id="p-car-icon"><img src="./images/car.svg" alt="Logo" width="75" height="75" /></p>
     <h3 class="center">Login</h3>
     <form id="form-login" method="POST">
       <div class="input-field">
-        <i class="material-icons prefix">account_circle</i>
+        <img src="./images/person-circle.svg" class="prefix" width="32" height="32" style="padding-right: 1rem;" />
         <input type="number" id="cpf" data-length="11" autocomplete="off" />
         <label for="cpf">CPF</label>
       </div>
       <div class="input-field">
-        <i class="material-icons prefix">lock</i>
+        <img src="./images/key-fill.svg" class="prefix" width="32" height="32" style="padding-right: 1rem;" />
         <input type="password" id="senha" autocomplete="off"/>
         <label for="senha">Senha</label>
       </div>
