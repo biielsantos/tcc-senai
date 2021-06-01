@@ -27,7 +27,7 @@ Tendo em vista o gerenciamento administrativo dos superiores, o sistema disponib
 
 Para acessar as funcionalidades do sistema, o usuário deve estar previamente cadastrado e realizar o processo de login, que consiste dos campos **CPF** e **Senha**.
 
-<p align="center"><img src="./Projeto/images/login.gif" alt="Exemplo Login" /></p>
+<p align="center"><img src="./Projeto/images/demo-login.gif" alt="Exemplo Login" /></p>
 
 ### Cadastro :clipboard:
 
@@ -36,13 +36,13 @@ O sistema permite a criação, edição e exclusão de dados do sistema, que sã
 - Veículos (Modelo, placa e proprietário)
 - Usuários (Nome, CPF, Departamento, Status e Senha)
 
-<p align="center"><img src="./Projeto/images/usuario.jpg" alt="Exemplo cadastro de usuário" /></p>
+<p align="center"><img src="./Projeto/images/demo-usuarios.jpg" alt="Exemplo cadastro de usuário" /></p>
 
 ### Reserva de veículos :car:
 
 Refere-se a principal funcionalidade do sistema, onde o sistema exibe uma lista com os veículos e os horários em que se encontra disponível ou não para reserva. O usuário pode então selecionar um horário válido e reservar o veículo para uso, registrando o destino e quem utilizará o veículo.
 
-<p align="center"><img src="./Projeto/images/reserva.gif" alt="Exemplo cadastro de reserva" /></p>
+<p align="center"><img src="./Projeto/images/demo-reserva.gif" alt="Exemplo cadastro de reserva" /></p>
 
 ### Histórico :clock3:
 
