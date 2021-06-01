@@ -101,6 +101,6 @@ label.active {
   color: var(--indigo) !important;
 }
 
-#btn-salvar {
+#btn-salvar, #btn-login {
   background-color: var(--confirm);
 }

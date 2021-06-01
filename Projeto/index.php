@@ -44,7 +44,7 @@
         <label for="senha">Senha</label>
       </div>
       <div class="buttons">
-        <button class="btn waves-effect" type="submit" name="submit">Entrar
+        <button id="btn-login" class="btn waves-effect" type="submit" name="submit">Entrar
           <i class="material-icons right">send</i>
         </button>
       </div>
