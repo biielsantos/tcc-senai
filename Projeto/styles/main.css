@@ -78,7 +78,7 @@ input[type=number] {
   background-color: var(--indigo-semi-transparent);
 }
 
-.select-dropdown li span {
+.select-dropdown li span, #nav-dropdown > li > a {
   color: var(--indigo);
 }
 
