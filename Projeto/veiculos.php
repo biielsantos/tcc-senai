@@ -173,15 +173,15 @@
             <p><strong>Data Retorno: <br/></strong><span id="det-data-retorno"></span></p>
           </div>
           <div class="col s6">
-            <p><strong>Data saída real: <br/></strong><span id="det-data-saida-real"></span>Indefinido</p>
-            <p><strong>Data retorno real: <br/></strong><span id="det-data-retorno-real"></span>Indefinido</p>
+            <p><strong>Data saída real: <br/></strong><span id="det-data-saida-real"></span></p>
+            <p><strong>Data retorno real: <br/></strong><span id="det-data-retorno-real"></span></p>
           </div>
         </div>
         <div class="det-buttons">
           <input type="hidden" id="det-id" value="" />
           <div class="det-retirada">
             <div class="input-field">
-              <input type="text" name="km" id="km" required>
+              <input type="number" name="km" id="km" required>
               <label for="km">Km atual</label>
             </div>
             <button id="det-btn-retirada" class="btn waves-effect waves-light"><i class='material-icons right'>check</i>Retirar Veículo</button>

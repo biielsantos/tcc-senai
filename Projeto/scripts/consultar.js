@@ -169,7 +169,11 @@ $("#form-reserva").submit(function(e) {
           condutor: reserva[0].condutor,
           destino: reserva[0].destino,
           motivo: reserva[0].motivo,
-          departamento: reserva[0].departamento
+          departamento: reserva[0].departamento,
+          data_saida_real: reserva[0].data_saida_real,
+          data_retorno_real: reserva[0].data_retorno_real,
+          km_saida: reserva[0].km_saida,
+          km_retorno: reserva[0].km_retorno
         }
       });
 
@@ -183,7 +187,11 @@ $("#form-reserva").submit(function(e) {
           condutor: reserva[0].condutor,
           destino: reserva[0].destino,
           motivo: reserva[0].motivo,
-          departamento: reserva[0].departamento
+          departamento: reserva[0].departamento,
+          data_saida_real: reserva[0].data_saida_real,
+          data_retorno_real: reserva[0].data_retorno_real,
+          km_saida: reserva[0].km_saida,
+          km_retorno: reserva[0].km_retorno
         }
       });
 
@@ -285,4 +293,86 @@ $(document).on("click", "#btn-cancelar", function() {
   editing = false;
   option = "CREATE";
   M.updateTextFields();
+});
+
+// Botão Retirar/Entregar veículo
+$(document).on("click", "#det-btn-retirada", function() {
+  let optionText = $("#det-btn-retirada").text();
+  let km = $("#km").val().trim();
+  let id = document.getElementById("det-id").value;
+
+  let option;
+  if (optionText.includes("Retirar")) {
+    option = "RETIRAR"
+  } else if (optionText.includes("Entregar")) {
+    option ="ENTREGAR"
+  }
+
+  let data = new Date().toISOString();
+
+  $.ajax({
+    url: "./config/crud-reservas.php",
+    type: "POST",
+    dataType: "json",
+    data: {
+      id,
+      km,
+      data,
+      option
+    },
+    success: function(reserva) {
+      console.log(reserva);
+      $("#km").val("");
+      $(".modal").modal('close');
+      M.updateTextFields();
+      M.toast({html: "Operação bem sucedida", classes: 'rounded #66bb6a green lighten-1'});
+
+      // Atualizar calendário
+      let id = reserva[0].id_reserva;
+
+      events = events.filter(event => event.id !== id);
+      let event = calendar.getEventById(id);
+      event.remove();
+
+      calendar.addEvent({
+        id: reserva[0].id_reserva,
+        title: reserva[0].modelo,
+        start: reserva[0].data_saida,
+        end: reserva[0].data_retorno,
+        extendedProps: {
+          usuario: reserva[0].nome,
+          condutor: reserva[0].condutor,
+          destino: reserva[0].destino,
+          motivo: reserva[0].motivo,
+          departamento: reserva[0].departamento,
+          data_saida_real: reserva[0].data_saida_real,
+          data_retorno_real: reserva[0].data_retorno_real,
+          km_saida: reserva[0].km_saida,
+          km_retorno: reserva[0].km_retorno
+        }
+      });
+
+      events.push({
+        id: reserva[0].id_reserva,
+        title: reserva[0].modelo,
+        start: reserva[0].data_saida,
+        end: reserva[0].data_retorno,
+        extendedProps: {
+          usuario: reserva[0].nome,
+          condutor: reserva[0].condutor,
+          destino: reserva[0].destino,
+          motivo: reserva[0].motivo,
+          departamento: reserva[0].departamento,
+          data_saida_real: reserva[0].data_saida_real,
+          data_retorno_real: reserva[0].data_retorno_real,
+          km_saida: reserva[0].km_saida,
+          km_retorno: reserva[0].km_retorno
+        }
+      });
+    },
+    error: function(error) {
+      console.log(error);
+      M.toast({html: "Houve um problema ao " + option.toLowerCase() + " o veículo", classes: 'rounded #ef5350 red lighten-1'})
+    }
+  })
 });

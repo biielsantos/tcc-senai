@@ -26,7 +26,7 @@
       $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
       break;
     case "SELECT ALL":
-      $sql = "SELECT id_reserva, data_saida, data_retorno, destino, condutor, motivo, departamento, nome, modelo FROM reserva JOIN usuario ON reserva.fk_id_usuario = usuario.id_usuario JOIN veiculo ON reserva.fk_id_veiculo = veiculo.id_veiculo JOIN departamento ON reserva.fk_id_departamento = departamento.id_departamento";
+      $sql = "SELECT id_reserva, data_saida, data_retorno, destino, condutor, motivo, departamento, nome, modelo, data_saida_real, data_retorno_real, km_saida, km_retorno FROM reserva JOIN usuario ON reserva.fk_id_usuario = usuario.id_usuario JOIN veiculo ON reserva.fk_id_veiculo = veiculo.id_veiculo JOIN departamento ON reserva.fk_id_departamento = departamento.id_departamento";
       $res = mysqli_query($conn, $sql);
       $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
       break;
@@ -63,6 +63,29 @@
       $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
 
       mysqli_query($conn, "DELETE FROM reserva WHERE id_reserva = $id");
+      break;
+    case "RETIRAR":
+      $km = $_POST["km"];
+      $data_saida_real = $_POST["data"];
+      $id = $_POST["id"];
+
+      mysqli_query($conn, "UPDATE reserva SET km_saida = '$km', data_saida_real = '$data_saida_real' WHERE id_reserva = $id");
+
+      $query = "SELECT * FROM reserva JOIN veiculo ON reserva.fk_id_veiculo = veiculo.id_veiculo JOIN usuario ON reserva.fk_id_usuario = usuario.id_usuario JOIN departamento ON reserva.fk_id_departamento = departamento.id_departamento WHERE id_reserva = $id";
+      $res = mysqli_query($conn, $query);
+      $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
+
+      break;
+    case "ENTREGAR":
+      $km = $_POST["km"];
+      $data_retorno_real = $_POST["data"];
+      $id = $_POST["id"];
+
+      mysqli_query($conn, "UPDATE reserva SET km_retorno = '$km', data_retorno_real = '$data_retorno_real' WHERE id_reserva = $id");
+
+      $query = "SELECT * FROM reserva JOIN veiculo ON reserva.fk_id_veiculo = veiculo.id_veiculo JOIN usuario ON reserva.fk_id_usuario = usuario.id_usuario JOIN departamento ON reserva.fk_id_departamento = departamento.id_departamento WHERE id_reserva = $id";
+      $res = mysqli_query($conn, $query);
+      $data = mysqli_fetch_all($res, MYSQLI_ASSOC);
       break;
   }
 
