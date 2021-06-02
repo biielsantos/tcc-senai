@@ -24,7 +24,8 @@
               data_retorno_real: reserva.data_retorno_real,
               km_saida: reserva.km_saida,
               km_retorno: reserva.km_retorno
-            }
+            },
+            backgroundColor: reserva.data_saida_real != null && reserva.data_retorno_real == null ? "#EE0000" : ""
           })
         });
         callback();

@@ -174,7 +174,8 @@ $("#form-reserva").submit(function(e) {
           data_retorno_real: reserva[0].data_retorno_real,
           km_saida: reserva[0].km_saida,
           km_retorno: reserva[0].km_retorno
-        }
+        },
+        backgroundColor: reserva.data_saida_real != null && reserva.data_retorno_real == null ? "#EE0000" : ""
       });
 
       events.push({
@@ -192,7 +193,8 @@ $("#form-reserva").submit(function(e) {
           data_retorno_real: reserva[0].data_retorno_real,
           km_saida: reserva[0].km_saida,
           km_retorno: reserva[0].km_retorno
-        }
+        },
+        backgroundColor: reserva.data_saida_real != null && reserva.data_retorno_real == null ? "#EE0000" : ""
       });
 
       option = "CREATE";
@@ -349,7 +351,8 @@ $(document).on("click", "#det-btn-retirada", function() {
           data_retorno_real: reserva[0].data_retorno_real,
           km_saida: reserva[0].km_saida,
           km_retorno: reserva[0].km_retorno
-        }
+        },
+        backgroundColor: reserva.data_saida_real != null && reserva.data_retorno_real == null ? "#EE0000" : ""
       });
 
       events.push({
@@ -367,7 +370,8 @@ $(document).on("click", "#det-btn-retirada", function() {
           data_retorno_real: reserva[0].data_retorno_real,
           km_saida: reserva[0].km_saida,
           km_retorno: reserva[0].km_retorno
-        }
+        },
+        backgroundColor: reserva.data_saida_real != null && reserva.data_retorno_real == null ? "#EE0000" : ""
       });
     },
     error: function(error) {
