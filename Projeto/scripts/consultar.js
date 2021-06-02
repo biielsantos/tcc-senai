@@ -175,7 +175,7 @@ $("#form-reserva").submit(function(e) {
           km_saida: reserva[0].km_saida,
           km_retorno: reserva[0].km_retorno
         },
-        backgroundColor: reserva.data_saida_real != null && reserva.data_retorno_real == null ? "#EE0000" : ""
+        backgroundColor: reserva[0].data_saida_real != null && reserva[0].data_retorno_real == null ? "#EE0000" : ""
       });
 
       events.push({
@@ -194,7 +194,7 @@ $("#form-reserva").submit(function(e) {
           km_saida: reserva[0].km_saida,
           km_retorno: reserva[0].km_retorno
         },
-        backgroundColor: reserva.data_saida_real != null && reserva.data_retorno_real == null ? "#EE0000" : ""
+        backgroundColor: reserva[0].data_saida_real != null && reserva[0].data_retorno_real == null ? "#EE0000" : ""
       });
 
       option = "CREATE";
@@ -310,6 +310,16 @@ $(document).on("click", "#det-btn-retirada", function() {
     option ="ENTREGAR"
   }
 
+  if (option === "ENTREGAR") {
+    let str = document.getElementById("det-data-saida-real").innerText;
+    let kmSaida = parseInt(str.split("(")[1].slice(0, 4));
+    
+    if (km < kmSaida) {
+      M.toast({html: "Valor inserido inferior ao Km de saída", classes: 'rounded #ef5350 red lighten-1'});
+      return;
+    }
+  }
+
   let data = new Date().toISOString();
 
   $.ajax({
@@ -352,7 +362,7 @@ $(document).on("click", "#det-btn-retirada", function() {
           km_saida: reserva[0].km_saida,
           km_retorno: reserva[0].km_retorno
         },
-        backgroundColor: reserva.data_saida_real != null && reserva.data_retorno_real == null ? "#EE0000" : ""
+        backgroundColor: reserva[0].data_saida_real != null && reserva[0].data_retorno_real == null ? "#EE0000" : ""
       });
 
       events.push({
@@ -371,7 +381,7 @@ $(document).on("click", "#det-btn-retirada", function() {
           km_saida: reserva[0].km_saida,
           km_retorno: reserva[0].km_retorno
         },
-        backgroundColor: reserva.data_saida_real != null && reserva.data_retorno_real == null ? "#EE0000" : ""
+        backgroundColor: reserva[0].data_saida_real != null && reserva[0].data_retorno_real == null ? "#EE0000" : ""
       });
     },
     error: function(error) {
