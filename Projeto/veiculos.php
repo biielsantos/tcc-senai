@@ -156,17 +156,40 @@
     <div class="modal-content">
       <div class="container">
         <h4>Detalhes da reserva</h4>
-        <p><strong>Veículo: </strong><span id="det-veiculo"></span></p>
-        <p><strong>Destino: </strong><span id="det-destino"></span></p>
-        <p><strong>Motivo: </strong><span id="det-motivo"></span></p>
-        <p><strong>Data saída: </strong><span id="det-data-saida"></span></p>
-        <p><strong>Data Retorno: </strong><span id="det-data-retorno"></span></p>
-        <p><strong>Condutor: </strong><span id="det-condutor"></span> (Reservado por <span id="det-usuario"></span>)</p>
-        <p><strong>Departamento: </strong><span id="det-departamento"></span></p>
+        <div class="row">
+          <div class="col s6">
+            <p><strong>Veículo: <br/></strong><span id="det-veiculo"></span></p>
+            <p><strong>Departamento: <br/></strong><span id="det-departamento"></span></p>
+            <p><strong>Condutor: <br/></strong><span id="det-condutor"></span> (Reservado por <span id="det-usuario"></span>)</p>
+          </div>
+          <div class="col s6">
+            <p><strong>Destino: <br/></strong><span id="det-destino"></span></p>
+            <p><strong>Motivo: <br/></strong><span id="det-motivo"></span></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            <p><strong>Data saída: <br/></strong><span id="det-data-saida"></span></p>
+            <p><strong>Data Retorno: <br/></strong><span id="det-data-retorno"></span></p>
+          </div>
+          <div class="col s6">
+            <p><strong>Data saída real: <br/></strong><span id="det-data-saida-real"></span>Indefinido</p>
+            <p><strong>Data retorno real: <br/></strong><span id="det-data-retorno-real"></span>Indefinido</p>
+          </div>
+        </div>
         <div class="det-buttons">
           <input type="hidden" id="det-id" value="" />
-          <button id="det-editar" class="btn orange darken-1 waves-effect waves-light"><i class='material-icons right'>edit</i>EDITAR</button>
-          <button id="det-excluir" class="btn red darken-1 waves-effect waves-light"><i class='material-icons right'>delete</i>EXCLUIR</button>
+          <div class="det-retirada">
+            <div class="input-field">
+              <input type="text" name="km" id="km" required>
+              <label for="km">Km atual</label>
+            </div>
+            <button id="det-btn-retirada" class="btn waves-effect waves-light"><i class='material-icons right'>check</i>Retirar Veículo</button>
+          </div>
+          <div class="det-buttons-actions">
+            <button id="det-editar" class="btn-floating  orange darken-1 waves-effect waves-light"><i class='material-icons left'>edit</i>EDITAR</button>
+            <button id="det-excluir" class="btn-floating   red darken-1 waves-effect waves-light"><i class='material-icons left'>delete</i>EXCLUIR</button>
+          </div>
         </div>
       </div>
     </div>
