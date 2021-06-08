@@ -1,7 +1,16 @@
 $(document).ready(function(){
   //Materialize
   $('select').formSelect();
-  $('.modal').modal();
+  $('.modal').modal({
+    onCloseEnd(){
+      $('#btn-salvar').children().eq(0).addClass('hide');
+      $('#btn-salvar').children().eq(1).removeClass('hide');
+      $('#btn-salvar').children().eq(2).removeClass('hide');
+    },
+    onCloseStart(){
+      
+    }
+  });
   $('.sidenav').sidenav();
   $('.tooltipped').tooltip();
   $('.datepicker').datepicker({
@@ -34,17 +43,18 @@ $(document).ready(function(){
       { className: "hide-on-small-only", targets: 0 },
       { className: "hide-on-med-and-down", targets: 5 },
       { className: "hide-on-med-and-down", targets: 4 },
+      { className: "hide-on-small-only", targets: 3 },
       {
         "targets": -1,
         "data":null,
-        "defaultContent": "<a href='#modal1' data-target='modal1' class='btnEdit modal-trigger btn-floating btn-flat waves-effect waves-yellow' data-position='bottom' data-tooltip='Editar' type='submit' name='action'><i class='material-icons'>edit</i></a><a href='#modal2' data-target='modal2' class='btnDelete modal-trigger btn-floating btn-flat waves-effect waves-red' type='submit' name='action' ><i class='material-icons'>delete</i></a>"
+        "defaultContent": "<a href='#modal1' data-target='modal1' class='btnEdit modal-trigger btn-floating btn-flat waves-effect waves-blue' data-position='bottom' data-tooltip='Editar' type='submit' name='action'><i class='material-icons'>edit</i></a><a href='#modal2' data-target='modal2' class='btnDelete modal-trigger btn-floating btn-flat waves-effect waves-red' type='submit' name='action' ><i class='material-icons'>delete</i></a>"
       }
     ],
     "oLanguage": {
       "sStripClasses": "",
       "sSearch": "",
       "sSearchPlaceholder": "Palavra-chave",
-      "sInfo": "_START_ -_END_ de _TOTAL_",
+      "sInfo": "_START_-_END_ de _TOTAL_",
       "sLengthMenu": '<span>Linhas por pagina:</span><select class="browser-default">' +
         '<option value="10">10</option>' +
         '<option value="20">20</option>' +
@@ -186,7 +196,6 @@ $("#form-usuario").submit(function(e){
     dateValid = false;
   }
   
-
   //Varificar dados repetidos
   if(!empty){
     if(telefone != telefoneAtual){
@@ -217,7 +226,9 @@ $("#form-usuario").submit(function(e){
   
   $("#btn-salvar").attr("disabled", true);
   if(valid && !empty && dateValid){
-    $("#carregando").html("<img src='../images/loading.gif'>");
+    $('#btn-salvar').children().eq(0).removeClass('hide');
+    $('#btn-salvar').children().eq(1).addClass('hide');
+    $('#btn-salvar').children().eq(2).addClass('hide');
     $.ajax({
       url: "../config/crud-usuarios.php",
       type: 'POST',
@@ -235,7 +246,6 @@ $("#form-usuario").submit(function(e){
         id:id
       },  
       success:function(data){
-        $("#carregando").empty();
         id = data[0];
         departamento = data.departamento;
         if(tipo == "A"){

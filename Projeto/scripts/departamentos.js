@@ -3,7 +3,10 @@ $(document).ready(function(){
     $('.modal').modal({
       onCloseEnd(){
         $("#btn-salvar").attr("disabled", false);
-         $("#submitDelete").attr("disabled", true);
+        $("#submitDelete").attr("disabled", true);
+        $('#btn-salvar').children().eq(0).addClass('hide');
+        $('#btn-salvar').children().eq(1).removeClass('hide');
+        $('#btn-salvar').children().eq(2).removeClass('hide');
       },
     });
     $('select').formSelect();
@@ -96,7 +99,9 @@ $("#form-departamento").submit(function(e){
   
   $("#btn-salvar").attr("disabled", true);
   if(!empty){
-    $("#carregando").html("<img src='../images/loading.gif'>");
+    $('#btn-salvar').children().eq(0).removeClass('hide');
+    $('#btn-salvar').children().eq(1).addClass('hide');
+    $('#btn-salvar').children().eq(2).addClass('hide');
     $.ajax({
       url: "../config/crud-departamentos.php",
       type: 'POST',

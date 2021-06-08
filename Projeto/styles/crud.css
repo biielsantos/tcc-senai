@@ -1,0 +1,135 @@
+#confirm, #placa{
+  text-transform: uppercase;
+}
+
+.btnEdit{
+  margin-right: 4%;
+}
+
+#modal1 {
+  max-height: 96% !important;
+  max-width: 100% !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+.icon-close{
+  position: fixed !important;
+  top: 10%;
+  float: right !important;
+}
+
+#modal2{
+  max-width: 600px !important;
+}
+
+#toast-container {
+  top: 5px !important;
+  right: auto !important;
+  left: 50%;
+  transform: translate(-50%);
+  max-height: 250px;
+}
+
+.buttonContainer{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#submitDelete{
+  left: 50%;
+  transform: translate(-50%);
+};
+
+.btnEdit:hover {
+  background-color: rgba(0, 0, 0, 0.082) ;
+}
+
+.btnDelete:hover {
+  background-color: rgba(0, 0, 0, 0.082);
+}
+
+#btn-salvar[disabled] {
+  background-color: #2c3e50 !important;
+}
+.buttonContainer button{
+  width: 140px;
+}
+
+@media screen and (max-width: 800px) {
+  .fc-header-toolbar {
+    flex-direction: column;
+    flex-flow: column;
+    align-items: flex-start !important;
+  }
+
+  .fc-header-toolbar > * {
+    margin-bottom: 1rem;
+  }
+
+  .date-inputs {
+    width: 100%;
+  }
+
+  .quick-access {
+    display: flex;
+    align-items: center;
+  }
+
+  .quick-access > *:first-child {
+    height: 40px;
+  }
+
+  .quick-access .sidenav-trigger {
+    position: relative;
+    bottom: .75rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .buttonContainer button{
+    width: 100%;
+    margin: 5px;
+  }
+
+  .quick-access .sidenav-trigger {
+    bottom: .25rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  .date-inputs .row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .date-inputs .row > * {
+    width: 100% !important;
+    margin: 0 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .quick-access > *:last-child {
+    display: none;
+  }
+
+  .quick-access .sidenav-trigger {
+    bottom: 0;
+    width: 40px;
+    height: 40px;
+  }
+
+  .det-buttons {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .det-buttons button {
+    margin-bottom: 1rem;
+  }
+}

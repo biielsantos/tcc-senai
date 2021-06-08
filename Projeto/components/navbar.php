@@ -2,10 +2,10 @@
   <div class="nav-wrapper indigo">
     <ul class="quick-access">
       <li>
-        <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large btn-floating btn-flat waves-effect waves-light"><i class="material-icons">menu</i></a>
+        <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large btn-floating btn-flat waves-effect waves-light nopadding"><i class="material-icons">menu</i></a>
       </li>
       <li>
-        <a href="/tcc/veiculos.php" class="waves-effect waves-light btn-flat white-text reservar"><i class="material-icons right">local_shipping</i>Reservar</a>
+        <a href="/tcc/veiculos.php" class="waves-effect waves-light btn-flat white-text reservar hide-on-small-only"><i class="material-icons right">local_shipping</i>Reservar</a>
       </li>
     </ul>
     <div class="usuario">

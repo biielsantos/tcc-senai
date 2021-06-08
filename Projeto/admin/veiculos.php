@@ -18,7 +18,7 @@ include("../config/conexao.php");
   <?php include "../components/head.php" ?>
   <link rel="stylesheet" href="../styles/dataTables.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-  <link rel="stylesheet" href="../styles/veiculos.css">
+  <link rel="stylesheet" href="../styles/crud.css">
   <link rel="stylesheet" href="../styles/navbar.css">
   <title>SRV | Gerenciar veículos</title>
 </head>
@@ -90,12 +90,13 @@ include("../config/conexao.php");
               <input class="validate" id="proprietario" type="text"  name="proprietario">
               <label for="proprietario">Proprietario</label>
             </div>
-            <div id="button-container">
+            <div class="buttonContainer">
               <button type="button" class="modal-close btn waves-effect red darken-1">Cancelar
                 <i class="material-icons left">cancel</i>
               </button>
-              <div id="carregando"></div>
-              <button id="btn-salvar" class="btn waves-effect" type="submit" name="submit">Salvar
+              <button id="btn-salvar" class="btn waves-effect" type="submit" >
+                <img class="hide" src="../images/loading.gif" style="width: 25px; top: 50%; transform: translate(0, -50%)">
+                <span>Salvar</span>
                 <i class="material-icons right">send</i>
               </button>
             </div>

@@ -1,6 +1,15 @@
 $(document).ready(function(){
   //Materialize
-  $('.modal').modal();
+  $('.modal').modal({
+    onCloseEnd(){
+      $('#btn-salvar').children().eq(0).addClass('hide');
+      $('#btn-salvar').children().eq(1).removeClass('hide');
+      $('#btn-salvar').children().eq(2).removeClass('hide');
+    },
+    onCloseStart(){
+      
+    }
+  });
   $('#placa').characterCounter();
   $('select').formSelect();
 
@@ -120,7 +129,9 @@ $("#form-veiculo").submit(function(e){
   
   $("#btn-salvar").attr("disabled", true);
   if(valid && !empty){
-    $("#carregando").html("<img src='../images/loading.gif'>");
+    $('#btn-salvar').children().eq(0).removeClass('hide');
+    $('#btn-salvar').children().eq(1).addClass('hide');
+    $('#btn-salvar').children().eq(2).addClass('hide');
     $.ajax({
       url: "../config/crud-veiculos.php",
       type: 'POST',

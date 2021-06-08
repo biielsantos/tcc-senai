@@ -17,7 +17,7 @@ include("../config/conexao.php");
     <?php include "../components/head.php" ?>
     <link rel="stylesheet" href="../styles/dataTables.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-    <link rel="stylesheet" href="../styles/veiculos.css">
+    <link rel="stylesheet" href="../styles/crud.css">
     <link rel="stylesheet" href="../styles/navbar.css">
     <title>SRV | Departamentos</title>
 </head>
@@ -79,7 +79,7 @@ include("../config/conexao.php");
                 <label for="msg-confirm">Confirmar</label>
               </div>
               <button id="submitDelete" class="btn red darken-1 waves-effect center center-align" type="submit" name="submitDelete" disabled="true">
-              Eu entendo as consequências, exclua este veículo
+              Excluir este departamento
             </button>
             </div> 
           </form>
@@ -97,12 +97,13 @@ include("../config/conexao.php");
               <div class="input-field col s12">
                 <input class="validate" id="nome-departamento" type="text" name="nome-departamento">
                 <label for="nome-departamento">Nome do Departamento</label>
-            <div id="button-container">
+            <div class="buttonContainer">
               <button type="button" class="modal-close btn waves-effect red darken-1">Cancelar
                 <i class="material-icons left">cancel</i>
               </button>
-              <div id="carregando"></div>
-              <button id="btn-salvar" class="btn waves-effect" type="submit" name="submit">Salvar
+              <button id="btn-salvar" class="btn waves-effect" type="submit" >
+                <img class="hide" src="../images/loading.gif" style="width: 25px; top: 50%; transform: translate(0, -50%)">
+                <span>Salvar</span>
                 <i class="material-icons right">send</i>
               </button>
             </div>
