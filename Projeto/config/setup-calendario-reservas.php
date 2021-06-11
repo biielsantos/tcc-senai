@@ -19,8 +19,13 @@
               condutor: reserva.condutor,
               destino: reserva.destino,
               motivo: reserva.motivo,
-              departamento: reserva.departamento
-            }
+              departamento: reserva.departamento,
+              data_saida_real: reserva.data_saida_real,
+              data_retorno_real: reserva.data_retorno_real,
+              km_saida: reserva.km_saida,
+              km_retorno: reserva.km_retorno
+            },
+            backgroundColor: reserva.data_saida_real != null && reserva.data_retorno_real == null ? "#EE0000" : ""
           })
         });
         callback();
@@ -36,6 +41,8 @@
     calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'listWeek',
       eventClick: function(info) {
+        console.log(info.event);
+
         $("#modal-detalhes").modal("open");
         document.getElementById("det-veiculo").innerText = info.event.title;
         document.getElementById("det-destino").innerText = info.event.extendedProps.destino;
@@ -45,8 +52,31 @@
         document.getElementById("det-condutor").innerText = info.event.extendedProps.condutor;
         document.getElementById("det-usuario").innerText = info.event.extendedProps.usuario;
         document.getElementById("det-departamento").innerText = info.event.extendedProps.departamento;
+        if (info.event.extendedProps.data_saida_real != null && info.event.extendedProps.km_saida != null) {
+          document.getElementById("det-data-saida-real").innerText = `${info.event.extendedProps.data_saida_real} (${info.event.extendedProps.km_saida} Km)`;
+        } else {
+          document.getElementById("det-data-saida-real").innerText = "Indefinido";
+        }
+        if (info.event.extendedProps.data_retorno_real != null && info.event.extendedProps.km_retorno != null) {
+          document.getElementById("det-data-retorno-real").innerText = `${info.event.extendedProps.data_retorno_real} (${info.event.extendedProps.km_retorno} Km)`;
+        } else {
+          document.getElementById("det-data-retorno-real").innerText = "Indefinido";
+        }
 
         document.getElementById("det-id").value = info.event.id;
+
+        document.getElementsByClassName("det-retirada")[0].style.display = "flex";
+        if (info.event.extendedProps.data_saida_real != null && info.event.extendedProps.data_retorno_real != null) {
+          document.getElementsByClassName("det-retirada")[0].style.display = "none";
+        } else {
+          if (info.event.extendedProps.data_saida_real == null) {
+            document.getElementById("det-btn-retirada").innerHTML = "<i class='material-icons right'>check</i>Retirar Veículo";
+          } else {
+            document.getElementById("det-btn-retirada").innerHTML = "<i class='material-icons right'>check</i>Entregar Veículo";
+          }
+
+        }
+
 
         document.getElementsByClassName("det-buttons")[0].style.display = "flex";
         if (session.tipo === "U") {

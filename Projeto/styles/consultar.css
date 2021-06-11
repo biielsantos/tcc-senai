@@ -77,11 +77,33 @@
   margin-bottom: 2rem;
 }
 
+#modal-detalhes .col {
+  padding: 0 !important;
+}
+
 #modal-detalhes .det-buttons {
   margin: 2rem 0 1rem 0;
   display: flex;
   justify-content: space-between;
+}
+
+#modal-detalhes .det-retirada {
+  display: flex;
   align-items: center;
+  flex-direction: column;
+}
+
+#modal-detalhes .det-retirada .input-field {
+  width: 100%;
+}
+
+#modal-detalhes .det-buttons-actions {
+  display: flex;  
+  align-items: flex-end;
+}
+
+#modal-detalhes .det-buttons-actions #det-excluir {
+  margin-left: .5rem;
 }
 
 /* Toast */
