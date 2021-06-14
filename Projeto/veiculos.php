@@ -27,7 +27,13 @@
 <body>
   <?php include "./components/navbar.php" ?>
   <div class="container">
-    <h2>Reservas de veículos</h2>
+    <div class="title">
+      <h2>Reservas de veículos</h2>
+      <div class="legenda">
+        <span class="dot d-blue">Dentro do estabelecimento</span>
+        <span class="dot d-red">Fora do estabelecimento</span>
+      </div>
+    </div>
     <div id='calendar'></div>
     <form id="form-reserva" class="reserva">
       <div class="date-inputs">
