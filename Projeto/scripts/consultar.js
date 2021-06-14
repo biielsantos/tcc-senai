@@ -149,6 +149,7 @@ $("#form-reserva").submit(function(e) {
     success: function(reserva) {
       $(".modal").modal('close');
       $("#form-reserva").trigger("reset");
+      M.toast({html: "Reservado com sucesso", classes: 'rounded #66bb6a green lighten-1'})
 
       // Atualizar dados no calendário
       if (editing) {
@@ -203,6 +204,7 @@ $("#form-reserva").submit(function(e) {
     },
     error: function(error) {
       console.log(error);
+      M.toast({html: "Houve um problema na operação", classes: 'rounded #ef5350 red lighten-1'});
     }
   })
 });
@@ -222,6 +224,7 @@ $(document).on("click", "#det-excluir", function() {
     },
     success: function(data) {
       $(".modal").modal('close');
+      M.toast({html: "Excluído com sucesso", classes: 'rounded #66bb6a green lighten-1'})
       let id = data[0].id_reserva;
 
       events = events.filter(event => event.id !== id);
@@ -232,6 +235,7 @@ $(document).on("click", "#det-excluir", function() {
     },
     error: function(error) {
       console.log(error);
+      M.toast({html: "Houve um problema na operação", classes: 'rounded #ef5350 red lighten-1'});
     }
   })
 });
@@ -282,9 +286,11 @@ $(document).on("click", "#det-editar", function() {
       // Corrigir campos (Materialize)
       M.updateTextFields();
       $('select').formSelect();
+      M.toast({html: "Editado com sucesso", classes: 'rounded #66bb6a green lighten-1'})
     },
     error: function(error) {
       console.log(error);
+      M.toast({html: "Houve um problema na operação", classes: 'rounded #ef5350 red lighten-1'});
     }
   })
 });
@@ -333,7 +339,6 @@ $(document).on("click", "#det-btn-retirada", function() {
       option
     },
     success: function(reserva) {
-      console.log(reserva);
       $("#km").val("");
       $(".modal").modal('close');
       M.updateTextFields();
@@ -386,7 +391,7 @@ $(document).on("click", "#det-btn-retirada", function() {
     },
     error: function(error) {
       console.log(error);
-      M.toast({html: "Houve um problema ao " + option.toLowerCase() + " o veículo", classes: 'rounded #ef5350 red lighten-1'})
+      M.toast({html: "Houve um problema na operação", classes: 'rounded #ef5350 red lighten-1'})
     }
   })
 });
