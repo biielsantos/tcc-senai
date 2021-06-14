@@ -41,8 +41,6 @@
     calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'listWeek',
       eventClick: function(info) {
-        console.log(info.event);
-
         $("#modal-detalhes").modal("open");
         document.getElementById("det-veiculo").innerText = info.event.title;
         document.getElementById("det-destino").innerText = info.event.extendedProps.destino;

@@ -1,3 +1,36 @@
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dot {
+  display: block;
+  text-align: right;
+  padding-right: 20px;
+  padding-bottom: 4px;
+  position: relative;
+}
+
+.dot::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.dot.d-red::before {
+  background-color: #ee0000;
+}
+
+.dot.d-blue::before {
+  background-color: #3788d8;
+}
+
 .event {
   height: fit-content;
 }
@@ -117,6 +150,26 @@
 }
 
 @media screen and (max-width: 800px) {
+  .title {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .legenda {
+    margin-bottom: 1rem;
+  }
+
+  .dot {
+    text-align: left;
+    padding-right: 0px;
+    padding-left: 20px;
+    padding-bottom: 0;
+  }
+
+  .dot::before {
+    left: 0;
+  }
+
   .fc-header-toolbar {
     flex-direction: column;
     flex-flow: column;
