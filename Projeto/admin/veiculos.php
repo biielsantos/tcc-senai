@@ -20,7 +20,7 @@ include("../config/conexao.php");
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
   <link rel="stylesheet" href="../styles/crud.css">
   <link rel="stylesheet" href="../styles/navbar.css">
-  <title>SRV | Gerenciar veículos</title>
+  <title>Gerenciar veículos</title>
 </head>
 
 <body>
@@ -31,9 +31,9 @@ include("../config/conexao.php");
         <div id="man" class="col s12">
           <div class="card material-table">
             <div class="table-header">
-              <span class="table-title"><i class="fas fa-car fa-5x center"></i> Lista de Veículos</span>
+              <span class="table-title valign-wrapper"><i class="fas fa-car fa-5x center left"></i>Veículos</span>
               <div class="actions">
-                <a href="#modal1" id="btn-novo-veiculo" class="modal-trigger waves-effect btn-flat nopadding"><i class="fas fa-car fa-5x center"></i></a>
+                <a href="#modal1" id="btn-novo-veiculo" class="modal-trigger waves-effect btn-flat nopadding tooltipped" data-position="bottom" data-tooltip="Adicionar"><i class="fas fa-car fa-5x center"></i></a>
                 <a class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
               </div>
             </div>

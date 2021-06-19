@@ -41,6 +41,7 @@ $(document).ready(function(){
   TabelaUsuarios = $('#tabela-usuarios').DataTable({
     "columnDefs":[
       { className: "hide-on-small-only", targets: 0 },
+      { className: "hide-on-small-only", targets: 2},
       { className: "hide-on-med-and-down", targets: 5 },
       { className: "hide-on-med-and-down", targets: 4 },
       { className: "hide-on-small-only", targets: 3 },
@@ -54,7 +55,11 @@ $(document).ready(function(){
       "sStripClasses": "",
       "sSearch": "",
       "sSearchPlaceholder": "Palavra-chave",
-      "sInfo": "_START_-_END_ de _TOTAL_",
+      "sInfoFiltered": "",
+      "sInfoEmpty": "Sem Resultados",
+      "sEmptyTable": "Tabela vazia",
+      "sZeroRecords": "Nenhum resultado encontrado",
+      "sInfo": "Mostrando _START_-_END_ de _TOTAL_",
       "sLengthMenu": '<span>Linhas por pagina:</span><select class="browser-default">' +
         '<option value="10">10</option>' +
         '<option value="20">20</option>' +

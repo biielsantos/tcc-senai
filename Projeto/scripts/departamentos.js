@@ -13,7 +13,9 @@ $(document).ready(function(){
   
     //DataTables
     TabelaDepartamento= $('#tabela-departamentos').DataTable({
-      "columnDefs":[{
+      "columnDefs":[
+      { className: "hide-on-small-only", targets: 0},
+      {
         "targets": -1,
         "data":null,
         "defaultContent": "<a href='#modal1' data-target='modal1' class='btnEdit modal-trigger btn-floating btn-flat waves-effect waves-yellow' type='submit' name='action'><i class='material-icons'>edit</i></a><a href='#modal2' data-target='modal2' class='btnDelete modal-trigger btn-floating btn-flat waves-effect waves-red' type='submit' name='action' ><i class='material-icons right'>delete</i></a>"
@@ -22,7 +24,11 @@ $(document).ready(function(){
         "sStripClasses": "",
         "sSearch": "",
         "sSearchPlaceholder": "Palavra-chave",
-        "sInfo": "_START_-_END_ de _TOTAL_",
+        "sInfoFiltered": "",
+        "sInfoEmpty": "Sem Resultados",
+        "sEmptyTable": "Tabela vazia",
+        "sZeroRecords": "Nenhum resultado encontrado",
+        "sInfo": "Mostrando _START_-_END_ de _TOTAL_",
         "sLengthMenu": '<span>Linhas por pagina:</span><select class="browser-default">' +
           '<option value="10">10</option>' +
           '<option value="20">20</option>' +

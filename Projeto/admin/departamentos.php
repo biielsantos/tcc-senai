@@ -29,7 +29,7 @@ include("../config/conexao.php");
         <div id="man" class="col s12">
           <div class="card material-table">
             <div class="table-header">
-              <span class="table-title valign-wrapper"><i class="material-icons fa-5x">store</i> Lista de Departamentos</span>
+              <span class="table-title valign-wrapper"><i class="material-icons fa-5x left">store</i>Departamentos</span>
               <div class="actions">
                 <a href="#modal1" id="btn-novo-departamento" class="modal-trigger waves-effect btn-flat nopadding"><i class="material-icons">add_business</i></a>
                 <a class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>

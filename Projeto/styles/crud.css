@@ -40,14 +40,10 @@
 #submitDelete{
   left: 50%;
   transform: translate(-50%);
-};
-
-.btnEdit:hover {
-  background-color: rgba(0, 0, 0, 0.082) ;
 }
 
-.btnDelete:hover {
-  background-color: rgba(0, 0, 0, 0.082);
+.btnDelete:hover, .btnEdit:hover {
+  background-color: rgba(0, 0, 0, 0.082) !important;
 }
 
 #btn-salvar[disabled] {
@@ -98,7 +94,19 @@
   }
 }
 
-@media screen and (max-width: 400px) {
+.table-footer{
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 380px) {
+  .table-title{
+    font-size: 16px !important;
+  }
+
+  .dataTables_length{
+    margin-right: 2px !important;
+  }
+
   h2 {
     font-size: 2.5rem;
   }
@@ -106,12 +114,6 @@
   .date-inputs .row {
     display: flex;
     flex-direction: column;
-  }
-
-  .date-inputs .row > * {
-    width: 100% !important;
-    margin: 0 !important;
-    margin-bottom: 1rem !important;
   }
 
   .quick-access > *:last-child {
