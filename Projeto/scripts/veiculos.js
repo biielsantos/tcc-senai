@@ -1,12 +1,25 @@
 $(document).ready(function(){
   //Materialize
-  $('.modal').modal();
+  $('.modal').modal({
+    onCloseEnd(){
+      $('#btn-salvar').children().eq(0).addClass('hide');
+      $('#btn-salvar').children().eq(1).removeClass('hide');
+      $('#btn-salvar').children().eq(2).removeClass('hide');
+    },
+    onCloseStart(){
+      
+    }
+  });
+  $('.tooltipped').tooltip();
   $('#placa').characterCounter();
   $('select').formSelect();
 
   //DataTables
   TabelaVeiculos = $('#tabela-veiculos').DataTable({
-    "columnDefs":[{
+    "columnDefs":[
+    { className: "hide-on-med-and-down", targets: 0},
+    { className: "hide-on-small-only", targets: 2},
+    {
       "targets": -1,
       "data":null,
       "defaultContent": "<a href='#modal1' data-target='modal1' class='btnEdit modal-trigger btn-floating btn-flat waves-effect waves-yellow' type='submit' name='action'><i class='material-icons'>edit</i></a><a href='#modal2' data-target='modal2' class='btnDelete modal-trigger btn-floating btn-flat waves-effect waves-red' type='submit' name='action' ><i class='material-icons right'>delete</i></a>"
@@ -15,7 +28,11 @@ $(document).ready(function(){
       "sStripClasses": "",
       "sSearch": "",
       "sSearchPlaceholder": "Palavra-chave",
-      "sInfo": "_START_ -_END_ de _TOTAL_",
+      "sInfoFiltered": "",
+      "sInfoEmpty": "Sem Resultados",
+      "sEmptyTable": "Tabela vazia",
+      "sZeroRecords": "Nenhum resultado encontrado",
+      "sInfo": "Mostrando _START_-_END_ de _TOTAL_",
       "sLengthMenu": '<span>Linhas por pagina:</span><select class="browser-default">' +
         '<option value="10">10</option>' +
         '<option value="20">20</option>' +
@@ -120,7 +137,9 @@ $("#form-veiculo").submit(function(e){
   
   $("#btn-salvar").attr("disabled", true);
   if(valid && !empty){
-    $("#carregando").html("<img src='../images/loading.gif'>");
+    $('#btn-salvar').children().eq(0).removeClass('hide');
+    $('#btn-salvar').children().eq(1).addClass('hide');
+    $('#btn-salvar').children().eq(2).addClass('hide');
     $.ajax({
       url: "../config/crud-veiculos.php",
       type: 'POST',

@@ -18,9 +18,9 @@ include("../config/conexao.php");
   <?php include "../components/head.php" ?>
   <link rel="stylesheet" href="../styles/dataTables.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-  <link rel="stylesheet" href="../styles/veiculos.css">
+  <link rel="stylesheet" href="../styles/crud.css">
   <link rel="stylesheet" href="../styles/navbar.css">
-  <title>SRV | Gerenciar veículos</title>
+  <title>Gerenciar veículos</title>
 </head>
 
 <body>
@@ -31,9 +31,9 @@ include("../config/conexao.php");
         <div id="man" class="col s12">
           <div class="card material-table">
             <div class="table-header">
-              <span class="table-title"><i class="fas fa-car fa-5x center"></i> Lista de Veículos</span>
+              <span class="table-title valign-wrapper"><i class="fas fa-car fa-5x left"></i>Veículos</span>
               <div class="actions">
-                <a href="#modal1" id="btn-novo-veiculo" class="modal-trigger waves-effect btn-flat nopadding"><i class="fas fa-car fa-5x center"></i></a>
+                <a href="#modal1" id="btn-novo-veiculo" class="modal-trigger waves-effect btn-flat nopadding tooltipped" data-position="bottom" data-tooltip="Adicionar"><img style=" width: 26px; top: 50%;transform: translateY(-50%); " src="../images/add_car.svg"></a>
                 <a class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
               </div>
             </div>
@@ -90,12 +90,13 @@ include("../config/conexao.php");
               <input class="validate" id="proprietario" type="text"  name="proprietario">
               <label for="proprietario">Proprietario</label>
             </div>
-            <div id="button-container">
+            <div class="buttonContainer">
               <button type="button" class="modal-close btn waves-effect red darken-1">Cancelar
                 <i class="material-icons left">cancel</i>
               </button>
-              <div id="carregando"></div>
-              <button id="btn-salvar" class="btn waves-effect" type="submit" name="submit">Salvar
+              <button id="btn-salvar" class="btn waves-effect" type="submit" >
+                <img class="hide" src="../images/loading.gif" style="width: 25px; top: 50%; transform: translate(0, -50%)">
+                <span>Salvar</span>
                 <i class="material-icons right">send</i>
               </button>
             </div>

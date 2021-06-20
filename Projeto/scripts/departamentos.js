@@ -3,14 +3,19 @@ $(document).ready(function(){
     $('.modal').modal({
       onCloseEnd(){
         $("#btn-salvar").attr("disabled", false);
-         $("#submitDelete").attr("disabled", true);
+        $("#submitDelete").attr("disabled", true);
+        $('#btn-salvar').children().eq(0).addClass('hide');
+        $('#btn-salvar').children().eq(1).removeClass('hide');
+        $('#btn-salvar').children().eq(2).removeClass('hide');
       },
     });
     $('select').formSelect();
   
     //DataTables
     TabelaDepartamento= $('#tabela-departamentos').DataTable({
-      "columnDefs":[{
+      "columnDefs":[
+      { className: "hide-on-small-only", targets: 0},
+      {
         "targets": -1,
         "data":null,
         "defaultContent": "<a href='#modal1' data-target='modal1' class='btnEdit modal-trigger btn-floating btn-flat waves-effect waves-yellow' type='submit' name='action'><i class='material-icons'>edit</i></a><a href='#modal2' data-target='modal2' class='btnDelete modal-trigger btn-floating btn-flat waves-effect waves-red' type='submit' name='action' ><i class='material-icons right'>delete</i></a>"
@@ -19,7 +24,11 @@ $(document).ready(function(){
         "sStripClasses": "",
         "sSearch": "",
         "sSearchPlaceholder": "Palavra-chave",
-        "sInfo": "_START_-_END_ de _TOTAL_",
+        "sInfoFiltered": "",
+        "sInfoEmpty": "Sem Resultados",
+        "sEmptyTable": "Tabela vazia",
+        "sZeroRecords": "Nenhum resultado encontrado",
+        "sInfo": "Mostrando _START_-_END_ de _TOTAL_",
         "sLengthMenu": '<span>Linhas por pagina:</span><select class="browser-default">' +
           '<option value="10">10</option>' +
           '<option value="20">20</option>' +
@@ -96,7 +105,9 @@ $("#form-departamento").submit(function(e){
   
   $("#btn-salvar").attr("disabled", true);
   if(!empty){
-    $("#carregando").html("<img src='../images/loading.gif'>");
+    $('#btn-salvar').children().eq(0).removeClass('hide');
+    $('#btn-salvar').children().eq(1).addClass('hide');
+    $('#btn-salvar').children().eq(2).addClass('hide');
     $.ajax({
       url: "../config/crud-departamentos.php",
       type: 'POST',

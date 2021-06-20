@@ -31,6 +31,9 @@ nav .nav-wrapper .usuario .nome {
   font-size: 1.25rem;
   font-weight: 500;
   margin-right: 0.5rem;
+  line-height: 25px;
+  display: flex;
+  align-items: center;
 }
 
 nav .nav-wrapper .usuario i.account-circle {
@@ -76,6 +79,27 @@ nav .nav-wrapper .usuario i.account-circle {
   background-color: rgba(255, 255, 255, 0.15) !important;
 }
 
+.info-user{
+  display: flex;
+  margin-left: 32px;
+}
+.info-user div{
+  margin-left: 13px;
+  line-height: 25px;
+}
+
+.info-user div span:first-child{
+  letter-spacing: .01785714em;
+    font-family: 'Google Sans',Arial,sans-serif;
+    font-size: 0.875rem;
+    font-weight: 550;
+    line-height: 1.25rem;
+    color: #3c4043;
+}
+.info-user i{
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 40px;
+}
 @media screen and (max-width: 600px) {
   .sidenav {
     width: 100vw;

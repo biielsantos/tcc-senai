@@ -37,12 +37,19 @@ mysqli_close($conn);
 </head>
 <body>
   <?php include "./components/navbar.php" ?>
-    
+  <div id="modal1" class="modal">
+
+    <div class="modal-content">
+      <h4>Detalhes da Reserva</h4>
+      <div id="details"></div>
+    </div>
+  </div>
+
     <div class="row">
         <div id="man" class="col s12">
           <div class="card material-table">
             <div class="table-header">
-              <span class="table-title"><i class="material-icons center">watch_later</i> Histórico</span>
+              <span class="table-title valign-wrapper"><i class="material-icons left">watch_later</i>Histórico</span>
               <div class="actions">
                 <a class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
               </div>
@@ -52,10 +59,11 @@ mysqli_close($conn);
                 <tr>
                   <th>Usuário</th>
                   <th>Condutor</th>
-                  <th>Modelo</th>
+                  <th>Veículo</th>
                   <th>Destino</th>
                   <th>Data Saída</th>
-                  <th>Data Entrada</th>
+                  <th>Data Retorno</th>
+                  <th class="center">Detalhes</th>
                 </tr>
               </thead>
               <tbody>
@@ -68,6 +76,7 @@ mysqli_close($conn);
                     <td><?php echo $reserva['destino']; ?></td>
                     <td><?php echo $reserva['data_saida']; ?></td>
                     <td><?php echo $reserva['data_retorno']; ?></td>
+                    <td><button class="btn-details btn btn-flat waves-effect waves-purple center modal-trigger" href="#modal1" ><i class="material-icons">subject</i></button></td>
                   </tr>
                 <?php } ?>
               </tbody>
