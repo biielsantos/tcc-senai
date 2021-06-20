@@ -26,6 +26,7 @@ if (isset($_POST["cpf"]) && isset($_POST["senha"]) && isset($_POST["option"])) {
 				$_SESSION['id'] = $usuario['id_usuario'];
 				$_SESSION['nome'] = $usuario['nome'];
 				$_SESSION['cpf'] = $usuario['cpf'];
+				$_SESSION['telefone'] = $usuario['telefone'];
 				$_SESSION["tipo"] = $usuario['tipo'];
 				$_SESSION["status"] = "ok";
 				
