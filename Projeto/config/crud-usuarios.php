@@ -40,7 +40,7 @@ switch ($option) {
 		$result = mysqli_query($conn, $query);
 		$data = mysqli_fetch_array($result);
 
-		mysqli_query($conn, "DELETE FROM usuario WHERE id_usuario = $id");
+		mysqli_query($conn, "UPDATE usuario SET status_usuario = 'I' WHERE id_usuario = $id");
 		break;
 	case 4:
 		$query = "SELECT * FROM usuario WHERE id_usuario = $id";

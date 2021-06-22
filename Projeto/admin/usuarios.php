@@ -35,6 +35,7 @@ include("../config/conexao.php");
               <div class="actions">
                 <a href="#modal1" id="btn-novo-usuario" class="modal-trigger waves-effect btn-flat nopadding tooltipped" data-position="bottom" data-tooltip="Adicionar"><i class="material-icons">person_add</i></a>
                 <a class="search-toggle waves-effect btn-flat nopadding tooltipped" data-position="bottom" data-tooltip="Pesquisar"><i class="material-icons">search</i></a>
+                <a href="/tcc/admin/lixeira-usuarios.php" class="waves-effect btn-flat nopadding tooltipped" data-position="bottom" data-tooltip="Lixeira"><i class="material-icons">delete</i></a>
               </div>
             </div>
     <table id="tabela-usuarios" class="centered highlight display compact">
@@ -51,7 +52,7 @@ include("../config/conexao.php");
       </thead>
       <tbody>
         <?php
-        $query = mysqli_query($conn, "SELECT * FROM usuario JOIN departamento ON fk_id_departamento=id_departamento") or die(mysqli_connect_error());
+        $query = mysqli_query($conn, "SELECT * FROM usuario JOIN departamento ON fk_id_departamento=id_departamento WHERE status_usuario = 'A'") or die(mysqli_connect_error());
         while ($usuario = mysqli_fetch_array($query)) {
         ?>
           <tr>
