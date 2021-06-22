@@ -20,7 +20,7 @@ $option = $_POST['option'];
 
 switch ($option) {
 	case 1:
-		$query = "INSERT INTO usuario (nome, cpf, tipo, telefone, senha, cnh, validade_cnh, fk_id_departamento) VALUES ('$nome', '$cpf', '$tipo', '$telefone', '$senha', '$cnh', '$validade_cnh', $departamento)";
+		$query = "INSERT INTO usuario (nome, cpf, tipo, telefone, senha, cnh, validade_cnh, status_usuario, fk_id_departamento) VALUES ('$nome', '$cpf', '$tipo', '$telefone', '$senha', '$cnh', '$validade_cnh', 'A', $departamento)";
 		mysqli_query($conn, $query);
 
 		$query = "SELECT * FROM usuario JOIN departamento ON fk_id_departamento=id_departamento ORDER BY id_usuario DESC LIMIT 1";
