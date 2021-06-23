@@ -35,6 +35,7 @@ include("../config/conexao.php");
               <div class="actions">
                 <a href="#modal1" id="btn-novo-veiculo" class="modal-trigger waves-effect btn-flat nopadding tooltipped" data-position="bottom" data-tooltip="Adicionar"><img style=" width: 26px; top: 50%;transform: translateY(-50%); " src="../images/add_car.svg"></a>
                 <a class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                <a href="/tcc/admin/lixeira-veiculos.php" class="waves-effect btn-flat nopadding tooltipped" data-position="bottom" data-tooltip="Lixeira"><i class="material-icons">delete</i></a>
               </div>
             </div>
             <table id="tabela-veiculos" class="centered highlight display compact">
@@ -48,7 +49,7 @@ include("../config/conexao.php");
               </thead>
               <tbody>
                 <?php
-                $query = mysqli_query($conn, "SELECT * FROM veiculo") or die(mysqli_connect_error());
+                $query = mysqli_query($conn, "SELECT * FROM veiculo WHERE status_veiculo = 'A'") or die(mysqli_connect_error());
                 while ($veiculo = mysqli_fetch_array($query)) {
                 ?>
                   <tr>
