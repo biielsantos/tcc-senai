@@ -41,7 +41,7 @@ switch ($option) {
 		$result = mysqli_query($conn, $query);
 		$data = mysqli_fetch_array($result);
 
-		mysqli_query($conn, "DELETE FROM veiculo WHERE id_veiculo = $id");
+		mysqli_query($conn, "UPDATE veiculo SET status_veiculo = 'I' WHERE id_veiculo = $id");
 		break;
 	case 4:
 		$query = "SELECT * FROM veiculo WHERE id_veiculo = $id";

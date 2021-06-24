@@ -33,6 +33,7 @@ include("../config/conexao.php");
               <div class="actions">
                 <a href="#modal1" id="btn-novo-departamento" class="modal-trigger waves-effect btn-flat nopadding"><i class="material-icons">add_business</i></a>
                 <a class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                <a href="/tcc/admin/lixeira-departamentos.php" class="waves-effect btn-flat nopadding tooltipped" data-position="bottom" data-tooltip="Lixeira"><i class="material-icons">delete</i></a>
               </div>
             </div>
             <table id="tabela-departamentos" class="centered highlight display compact">
@@ -45,7 +46,7 @@ include("../config/conexao.php");
               </thead>
               <tbody>
                 <?php
-                $departamentos = mysqli_query($conn, "SELECT * FROM departamento") or die(mysqli_connect_error());
+                $departamentos = mysqli_query($conn, "SELECT * FROM departamento WHERE status_departamento = 'A'") or die(mysqli_connect_error());
                 while ($departamento = mysqli_fetch_array($departamentos)) {
                 ?>
                   <tr>

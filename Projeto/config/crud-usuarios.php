@@ -20,7 +20,7 @@ $option = $_POST['option'];
 
 switch ($option) {
 	case 1:
-		$query = "INSERT INTO usuario (nome, cpf, tipo, telefone, senha, cnh, validade_cnh, fk_id_departamento) VALUES ('$nome', '$cpf', '$tipo', '$telefone', '$senha', '$cnh', '$validade_cnh', $departamento)";
+		$query = "INSERT INTO usuario (nome, cpf, tipo, telefone, senha, cnh, validade_cnh, status_usuario, fk_id_departamento) VALUES ('$nome', '$cpf', '$tipo', '$telefone', '$senha', '$cnh', '$validade_cnh', 'A', $departamento)";
 		mysqli_query($conn, $query);
 
 		$query = "SELECT * FROM usuario JOIN departamento ON fk_id_departamento=id_departamento ORDER BY id_usuario DESC LIMIT 1";
@@ -40,7 +40,7 @@ switch ($option) {
 		$result = mysqli_query($conn, $query);
 		$data = mysqli_fetch_array($result);
 
-		mysqli_query($conn, "DELETE FROM usuario WHERE id_usuario = $id");
+		mysqli_query($conn, "UPDATE usuario SET status_usuario = 'I' WHERE id_usuario = $id");
 		break;
 	case 4:
 		$query = "SELECT * FROM usuario WHERE id_usuario = $id";
