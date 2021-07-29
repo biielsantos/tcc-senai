@@ -97,7 +97,7 @@ include("../config/conexao.php");
               <select id="departamento">
                 <option value="" disabled selected>Selecione</option>
                 <?php
-                $query2 = mysqli_query($conn, "SELECT * FROM departamento") or die(mysqli_connect_error());
+                $query2 = mysqli_query($conn, "SELECT * FROM departamento WHERE status_departamento = 'A'") or die(mysqli_connect_error());
                 while ($departamento = mysqli_fetch_array($query2)){
                 echo "<option value=".$departamento['id_departamento'].">".$departamento['departamento']."</option>";
                 }
