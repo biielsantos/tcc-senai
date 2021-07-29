@@ -64,7 +64,7 @@
             <option disabled selected>Selecione um veículo</option>
             <?php
               include "./config/conexao.php";
-              $sql = "SELECT id_veiculo, modelo FROM veiculo";
+              $sql = "SELECT id_veiculo, modelo FROM veiculo WHERE status_veiculo = 'A'";
               $res = mysqli_query($conn, $sql);
               $veiculos = mysqli_fetch_all($res, MYSQLI_ASSOC);
         
@@ -122,7 +122,7 @@
                     <option disabled selected>Selecione um departamento</option>
                     <?php
                       include "./config/conexao.php";
-                      $sql = "SELECT * FROM departamento";
+                      $sql = "SELECT * FROM departamento WHERE status_departamento = 'A'";
                       $res = mysqli_query($conn, $sql);
                       $departamentos = mysqli_fetch_all($res, MYSQLI_ASSOC);
 
