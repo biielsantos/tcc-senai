@@ -123,6 +123,10 @@ $("#form-reserva").submit(function(e) {
   let departamento = $("#departamento option:selected").val();
   let motivo = $("#motivo").val().trim();
 
+  if (!condutor) {
+    condutor = session.nome;
+  }
+
   let data = {
     dataSaida,
     dataRetorno,

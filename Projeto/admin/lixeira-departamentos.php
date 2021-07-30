@@ -31,8 +31,8 @@ include("../config/conexao.php");
             <div class="table-header">
               <span class="table-title valign-wrapper"><i class="material-icons fa-5x left">store</i>Departamentos</span>
               <div class="actions">
-                <a href="/tcc/admin/departamentos.php" class="waves-effect btn-flat nopadding tooltipped" data-position="bottom" data-tooltip="Voltar"><i class="material-icons">arrow_back</i></a>
-                <a class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
+                <a href="/tcc/admin/departamentos.php" class="waves-effect btn-flat nopadding"><i class="material-icons">arrow_back</i>Voltar</a>
+                <a class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i>Pesquisar</a>
               </div>
             </div>
             <table id="tabela-departamentos" class="centered highlight display compact">

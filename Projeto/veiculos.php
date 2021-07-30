@@ -34,127 +34,126 @@
         <span class="dot d-red">Fora do estabelecimento</span>
       </div>
     </div>
-    <div id='calendar'></div>
-    <form id="form-reserva" class="reserva">
-      <div class="date-inputs">
-        <div class="row">
-          <div class="input-field col s6">
-            <input id="dataSaida" type="text" class="datepicker validate" autocomplete="off" required>
-            <label for="dataSaida">Data saída</label>
-          </div>
-          <div class="input-field col s6">
-            <input id="dataRetorno" type="text" class="datepicker validate" autocomplete="off" required>
-            <label for="dataRetorno">Data retorno</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <input id="horarioSaida" type="text" class="timepicker validate" autocomplete="off" required>
-            <label for="horarioSaida">Horário Saída</label>
-          </div>
-          <div class="input-field col s6">
-            <input id="horarioRetorno" type="text" class="timepicker validate" autocomplete="off" required>
-            <label for="horarioRetorno">Horário Retorno</label>
-          </div>
-        </div>
-      </div>
-      <div class="selecionar-veiculo">
-        <div class="input-field">
-          <select id="veiculo" required>
-            <option disabled selected>Selecione um veículo</option>
-            <?php
-              include "./config/conexao.php";
-              $sql = "SELECT id_veiculo, modelo FROM veiculo WHERE status_veiculo = 'A'";
-              $res = mysqli_query($conn, $sql);
-              $veiculos = mysqli_fetch_all($res, MYSQLI_ASSOC);
-        
-              mysqli_free_result($res);
-              mysqli_close($conn);
-            ?>
-
-            <?php foreach ($veiculos as $veiculo) { ?>
-              <option value="<?php echo $veiculo["id_veiculo"] ?>"><?php echo $veiculo["modelo"] ?></option>
-            <?php } ?>
-
-          </select>
-          <label>Veículo</label>
-        </div>
-        <a class="btn waves-effect waves-light" href="#modal-reserva" id="finalizar-reserva">Finalizar reserva
-          <i class="material-icons left">done</i>
-        </a>
-      </div>
-
-      <!-- Modal reserva -->
-      <div id="modal-reserva" class="modal">
-        <div class="modal-content">
-          <div class="container">
-            <header>
-              <h4>Finalizar reserva</h4>
-              <i class="material-icons">directions_car</i>
-            </header>
-            <div class="row">
-              <div class="col s12">
-                <div class="input-field">
-                  <input id="destino" type="text" name="destino" required>
-                  <label for="destino">Destino</label>
-                </div>
-              </div>
+    <main>
+      <div id='calendar'></div>
+      <form id="form-reserva" class="reserva">
+        <div class="date-inputs">
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="dataSaida" type="text" class="datepicker validate" autocomplete="off" required>
+              <label for="dataSaida">Data saída</label>
             </div>
-            <div class="row">
-              <div class="col s6">
-                <div class="input-field">
-                  <input id="condutor" type="text" name="condutor" required>
-                  <label for="condutor">Condutor</label>
-                </div>
-              </div>
-              <div class="col s6">
-                <div class="input-field">
-                  <input type="text" id="nome-responsavel" value="<?php echo $_SESSION["nome"]; ?>" name="responsavel" required disabled>
-                  <input type="hidden" id="responsavel" value="<?php echo $_SESSION["id"]; ?>">
-                  <label for="responsavel">Responsável</label>
-                </div>
-              </div>
+            <div class="input-field col s6">
+              <input id="dataRetorno" type="text" class="datepicker validate" autocomplete="off" required>
+              <label for="dataRetorno">Data retorno</label>
             </div>
-            <div class="row">
-              <div class="col s12">
-                <div class="input-field">
-                  <select id="departamento" required>
-                    <option disabled selected>Selecione um departamento</option>
-                    <?php
-                      include "./config/conexao.php";
-                      $sql = "SELECT * FROM departamento WHERE status_departamento = 'A'";
-                      $res = mysqli_query($conn, $sql);
-                      $departamentos = mysqli_fetch_all($res, MYSQLI_ASSOC);
-
-                      mysqli_close($conn);
-                    ?>
-                    <?php foreach($departamentos as $departamento) { ?>
-                      <option value="<?php echo $departamento["id_departamento"]; ?>"><?php echo $departamento["departamento"]; ?></option>
-                    <?php } ?>
-                  </select>
-                </div>
-              </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="horarioSaida" type="text" class="timepicker validate" autocomplete="off" required>
+              <label for="horarioSaida">Horário Saída</label>
             </div>
-            <div class="row">
-              <div class="col s12">
-                <div class="input-field">
-                  <input type="text" name="motivo" id="motivo" required>
-                  <label for="motivo">Motivo da reserva</label>
-                </div>
-              </div>
-            </div>
-            <div class="buttons">
-              <a id="btn-cancelar" class="modal-close btn waves-effect red darken-2">
-                Cancelar<i class="material-icons left">cancel</i>
-              </a>
-              <button type="submit" id="btn-confirmar" class="waves-effect waves-light btn right">
-                Confirmar<i class="material-icons right">send</i>
-              </button>
+            <div class="input-field col s6">
+              <input id="horarioRetorno" type="text" class="timepicker validate" autocomplete="off" required>
+              <label for="horarioRetorno">Horário Retorno</label>
             </div>
           </div>
         </div>
-      </div>
-    </form>
+        <div class="selecionar-veiculo">
+          <div class="input-field">
+            <select id="veiculo" required>
+              <option disabled selected>Selecione um veículo</option>
+              <?php
+                include "./config/conexao.php";
+                $sql = "SELECT id_veiculo, modelo FROM veiculo";
+                $res = mysqli_query($conn, $sql);
+                $veiculos = mysqli_fetch_all($res, MYSQLI_ASSOC);
+      
+                mysqli_free_result($res);
+                mysqli_close($conn);
+              ?>
+              <?php foreach ($veiculos as $veiculo) { ?>
+                <option value="<?php echo $veiculo["id_veiculo"] ?>"><?php echo $veiculo["modelo"] ?></option>
+              <?php } ?>
+            </select>
+            <label>Veículo</label>
+          </div>
+          <a class="btn waves-effect waves-light" href="#modal-reserva" id="finalizar-reserva">Finalizar reserva
+            <i class="material-icons left">done</i>
+          </a>
+        </div>
+        <!-- Modal reserva -->
+        <div id="modal-reserva" class="modal">
+          <div class="modal-content">
+            <div class="container">
+              <header>
+                <h4>Finalizar reserva</h4>
+                <i class="material-icons">directions_car</i>
+              </header>
+              <div class="row">
+                <div class="col s12">
+                  <div class="input-field">
+                    <input id="destino" type="text" name="destino" required>
+                    <label for="destino">Destino</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s6">
+                  <div class="input-field">
+                    <input id="condutor" type="text" name="condutor">
+                    <label for="condutor">Condutor</label>
+                    <span class="helper-text">Deixe em branco para reservar em seu nome</span>
+                  </div>
+                </div>
+                <div class="col s6">
+                  <div class="input-field">
+                    <input type="text" id="nome-responsavel" value="<?php echo $_SESSION["nome"]; ?>" name="responsavel" required disabled>
+                    <input type="hidden" id="responsavel" value="<?php echo $_SESSION["id"]; ?>">
+                    <label for="responsavel">Responsável</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s12">
+                  <div class="input-field">
+                    <select id="departamento" required>
+                      <option disabled selected>Selecione um departamento</option>
+                      <?php
+                        include "./config/conexao.php";
+                        $sql = "SELECT * FROM departamento";
+                        $res = mysqli_query($conn, $sql);
+                        $departamentos = mysqli_fetch_all($res, MYSQLI_ASSOC);
+                        mysqli_close($conn);
+                      ?>
+                      <?php foreach($departamentos as $departamento) { ?>
+                        <option value="<?php echo $departamento["id_departamento"]; ?>"><?php echo $departamento["departamento"]; ?></option>
+                      <?php } ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col s12">
+                  <div class="input-field">
+                    <input type="text" name="motivo" id="motivo" required>
+                    <label for="motivo">Motivo da reserva</label>
+                  </div>
+                </div>
+              </div>
+              <div class="buttons">
+                <a id="btn-cancelar" class="modal-close btn waves-effect red darken-2">
+                  Cancelar<i class="material-icons left">cancel</i>
+                </a>
+                <button type="submit" id="btn-confirmar" class="waves-effect waves-light btn right">
+                  Confirmar<i class="material-icons right">send</i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </main>
   </div>
 
   <!-- Modal detalhes reserva -->

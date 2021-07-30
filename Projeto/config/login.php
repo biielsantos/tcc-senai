@@ -7,7 +7,7 @@ if (isset($_POST["cpf"]) && isset($_POST["senha"]) && isset($_POST["option"])) {
 	$senha = mysqli_escape_string($conn, base64_encode($_POST['senha']));
 	$option = $_POST["option"];
 
-	$query = mysqli_query($conn, "SELECT * FROM usuario WHERE cpf = '$cpf' AND senha = '$senha' AND status_usuario = 'A'") or die(mysqli_connect_error());
+	$query = mysqli_query($conn, "SELECT * FROM usuario WHERE cpf = '$cpf' AND senha = '$senha'") or die(mysqli_connect_error());
 	
 	switch ($option) {
 		case "VERIFY":

@@ -3,13 +3,12 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24-Jun-2021 às 18:20
--- Versão do servidor: 10.4.19-MariaDB
--- versão do PHP: 8.0.7
+-- Tempo de geração: 29-Jul-2021 às 23:13
+-- Versão do servidor: 10.4.20-MariaDB
+-- versão do PHP: 8.0.8
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+CREATE DATABASE reserva_veiculo;
+USE reserva_veiculo;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -44,8 +43,7 @@ INSERT INTO `departamento` (`id_departamento`, `departamento`, `status_departame
 (4, 'Suporte', 'A'),
 (5, 'Gerencia', 'A'),
 (6, 'RH', 'A'),
-(7, 'Diretoria', 'A'),
-(8, 'teste', 'I');
+(7, 'Diretoria', 'A');
 
 -- --------------------------------------------------------
 
@@ -77,7 +75,12 @@ CREATE TABLE `reserva` (
 INSERT INTO `reserva` (`id_reserva`, `data_saida`, `data_saida_real`, `data_retorno`, `data_retorno_real`, `km_saida`, `km_retorno`, `status_reserva`, `destino`, `condutor`, `motivo`, `fk_id_departamento`, `fk_id_usuario`, `fk_id_veiculo`) VALUES
 (1, '2021-06-20 20:54:00', NULL, '2021-06-20 21:54:00', NULL, NULL, NULL, 'A', 'aaaaaa', 'aaaaa', 'aaaaaaa', 1, 1, 1),
 (4, '2021-06-21 10:43:00', NULL, '2021-06-21 11:43:00', NULL, NULL, NULL, 'A', 'cccccc', 'cccccccc', 'cccccccc', 1, 1, 2),
-(5, '2021-06-21 10:51:00', NULL, '2021-06-21 12:51:00', NULL, NULL, NULL, 'A', 'zzz', 'zzzzzz', 'zzzzz', 1, 2, 1);
+(5, '2021-06-21 10:51:00', NULL, '2021-06-21 12:51:00', NULL, NULL, NULL, 'A', 'zzz', 'zzzzzz', 'zzzzz', 1, 2, 1),
+(6, '2021-07-28 15:00:00', '2021-07-28 16:46:29', '2021-07-28 16:45:00', '2021-07-28 16:46:44', 120, 130, 'A', 'Prefeitura de Maringá', 'Luís', 'Conversar com o prefeito', 1, 1, 12),
+(7, '2021-07-31 10:30:00', NULL, '2021-07-31 13:00:00', NULL, NULL, NULL, 'A', 'Sarandi', 'Kleber', 'Conversar com cliente', 2, 1, 3),
+(8, '2021-07-31 15:00:00', NULL, '2021-07-31 17:00:00', NULL, NULL, NULL, 'A', 'Nova Esperança', 'Luís', 'Reunião de negócios', 1, 1, 8),
+(9, '2021-07-30 10:30:00', NULL, '2021-07-30 11:30:00', NULL, NULL, NULL, 'A', 'Castelo Branco', 'Carlos', 'Entrega de cesta básica', 4, 1, 5),
+(10, '2021-07-29 15:00:00', NULL, '2021-07-29 16:00:00', NULL, NULL, NULL, 'A', 'Marinálva', 'Emerson', 'Comprar uva', 5, 1, 6);
 
 -- --------------------------------------------------------
 
@@ -103,14 +106,14 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nome`, `cpf`, `senha`, `tipo`, `telefone`, `validade_cnh`, `cnh`, `status_usuario`, `fk_id_departamento`) VALUES
-(1, 'Shaolin', '12345678901', 'c2hhb2xpbg==', 'A', '44998765432', '2024-06-12', '63563567891', 'A', 1),
-(2, 'Kleblão', '12345678902', 'a2xlYmxhbw==', 'U', '44992138381', '2023-06-14', '32173217312', 'A', 1),
+(1, 'Luis', '12345678901', 'c2hhb2xpbg==', 'A', '44998765432', '2024-06-12', '63563567891', 'A', 1),
+(2, 'Kleber', '12345678902', 'a2xlYmVy', 'U', '44992138381', '2023-06-14', '32173217312', 'A', 1),
 (3, 'Rodrigo Pato', '12345678903', 'cGF0bw==', 'U', '44998765763', '2027-06-17', '82131283128', 'A', 1),
-(4, 'Rafael Gigante', '12345678904', 'YmlnYmln', 'U', '44998767656', '2027-06-23', '36612361723', 'A', 1),
-(5, 'Putzzz Jhony', '12345678905', 'cHV0enp6', 'A', '44998373737', '2027-06-23', '12371273721', 'A', 6),
-(6, 'Carlão', '12345678906', 'cHl0aG9u', 'U', '44973892173', '2027-06-23', '83127893712', 'I', 4),
+(4, 'Rafael Neris', '12345678904', 'YmlnYmln', 'U', '44998767656', '2027-06-23', '36612361723', 'A', 1),
+(5, 'Jhony', '12345678905', 'cHV0enp6', 'A', '44998373737', '2027-06-23', '12371273721', 'I', 4),
+(6, 'Carlos', '12345678906', 'cHl0aG9u', 'U', '44973892173', '2027-06-23', '83127893712', 'A', 4),
 (7, 'Emerson', '12345678907', 'bWljcm9zb2Z0', 'A', '44998219381', '2027-06-23', '29138912839', 'A', 7),
-(8, 'Teste', '21321631263', 'dGVzdGU=', 'U', '44998381218', '2021-06-22', '36123126123', 'I', 1);
+(8, 'Migucha', '12345678984', 'bWlndWNoYQ==', 'U', '44876536789', '2026-08-13', '23677390987', 'A', 3);
 
 -- --------------------------------------------------------
 
@@ -131,18 +134,18 @@ CREATE TABLE `veiculo` (
 --
 
 INSERT INTO `veiculo` (`id_veiculo`, `modelo`, `placa`, `proprietario`, `status_veiculo`) VALUES
-(1, 'Corsa rebaixado', 'ASD3948', 'Rodrigo Pato', 'A'),
-(2, 'Patinete Xiaomi', 'ASD0434', 'Xi Jinping', 'A'),
-(3, 'Fusca azul', 'ADS9473', 'Ayrton Senna', 'A'),
-(4, 'Touro mecânico', 'ADS0483', 'Serjão Berranteiro', 'A'),
+(1, 'Hyundai HB20', 'ASD3948', 'Rodrigo', 'A'),
+(2, 'Volkswagen Polo', 'ASD0434', 'Yuzo', 'A'),
+(3, 'Chevrolet Onix', 'ADS9473', 'Ayrton Senna', 'A'),
+(4, 'Volkswagen Voyage', 'ADS0483', 'Sergio', 'A'),
+(5, 'Fiat Argo', 'KDS0348', 'Jaime', 'A'),
 (6, 'Fiat 147', 'DAS0312', 'Jhony', 'A'),
-(7, 'Gol bolinha', 'ASD0384', 'Xao xao', 'A'),
-(8, 'Gol quadrado', 'ASD0383', 'Zézão', 'A'),
+(7, 'Fiat Mobi', 'ASD0384', 'Roberto', 'A'),
+(8, 'Volkswagen Gol', 'ASD0383', 'José Carlos', 'A'),
 (9, 'Honda pop', 'KDI9383', 'Dona maria', 'A'),
-(10, 'Burro de carga', 'ADS8374', 'Big big', 'A'),
-(11, 'Nissan tunado', 'ADK9381', 'Alguém', 'A'),
-(12, 'Honda civic', 'ADS8382', 'Alguém top', 'A'),
-(13, 'Carroça', 'ASD1231', 'Jaime da roça', 'A');
+(10, 'Renault Kwid', 'ADS8374', 'Rafael Campos', 'A'),
+(11, 'Fiat Uno', 'ADK9381', 'Maria', 'A'),
+(12, 'Honda civic', 'ADS8382', 'Alguém top', 'A');
 
 --
 -- Índices para tabelas despejadas
@@ -183,13 +186,13 @@ ALTER TABLE `veiculo`
 -- AUTO_INCREMENT de tabela `departamento`
 --
 ALTER TABLE `departamento`
-  MODIFY `id_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_departamento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
@@ -201,7 +204,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `veiculo`
 --
 ALTER TABLE `veiculo`
-  MODIFY `id_veiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_veiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restrições para despejos de tabelas

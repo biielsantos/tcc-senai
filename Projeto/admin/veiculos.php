@@ -33,9 +33,9 @@ include("../config/conexao.php");
             <div class="table-header">
               <span class="table-title valign-wrapper"><i class="fas fa-car fa-5x left"></i>Veículos</span>
               <div class="actions">
-                <a href="#modal1" id="btn-novo-veiculo" class="modal-trigger waves-effect btn-flat nopadding tooltipped" data-position="bottom" data-tooltip="Adicionar"><img style=" width: 26px; top: 50%;transform: translateY(-50%); " src="../images/add_car.svg"></a>
-                <a class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i></a>
-                <a href="/tcc/admin/lixeira-veiculos.php" class="waves-effect btn-flat nopadding tooltipped" data-position="bottom" data-tooltip="Lixeira"><i class="material-icons">delete</i></a>
+                <a href="#modal1" id="btn-novo-veiculo" class="modal-trigger waves-effect btn-flat nopadding"><img style=" width: 26px; top: 50%;transform: translateY(-65%); " src="../images/add_car.svg">Cadastrar</a>
+                <a class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i>Pesquisar</a>
+                <a href="/tcc/admin/lixeira-veiculos.php" class="waves-effect btn-flat nopadding"><i class="material-icons">delete</i>Lixeira</a>
               </div>
             </div>
             <table id="tabela-veiculos" class="centered highlight display compact">

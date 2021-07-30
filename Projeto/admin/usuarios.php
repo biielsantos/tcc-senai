@@ -33,9 +33,9 @@ include("../config/conexao.php");
             <div class="table-header">
               <span class="table-title valign-wrapper"><i class="fas fa-user-circle fa-5x left"></i> Usuários</span>
               <div class="actions">
-                <a href="#modal1" id="btn-novo-usuario" class="modal-trigger waves-effect btn-flat nopadding tooltipped" data-position="bottom" data-tooltip="Adicionar"><i class="material-icons">person_add</i></a>
-                <a class="search-toggle waves-effect btn-flat nopadding tooltipped" data-position="bottom" data-tooltip="Pesquisar"><i class="material-icons">search</i></a>
-                <a href="/tcc/admin/lixeira-usuarios.php" class="waves-effect btn-flat nopadding tooltipped" data-position="bottom" data-tooltip="Lixeira"><i class="material-icons">delete</i></a>
+                <a href="#modal1" id="btn-novo-usuario" class="modal-trigger waves-effect btn-flat nopadding"><i class="material-icons">person_add</i>Cadastrar</a>
+                <a class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search</i>Pesquisar</a>
+                <a href="/tcc/admin/lixeira-usuarios.php" class="waves-effect btn-flat nopadding"><i class="material-icons">delete</i>Lixeira</a>
               </div>
             </div>
     <table id="tabela-usuarios" class="centered highlight display compact">
@@ -97,7 +97,7 @@ include("../config/conexao.php");
               <select id="departamento">
                 <option value="" disabled selected>Selecione</option>
                 <?php
-                $query2 = mysqli_query($conn, "SELECT * FROM departamento WHERE status_departamento = 'A'") or die(mysqli_connect_error());
+                $query2 = mysqli_query($conn, "SELECT * FROM departamento") or die(mysqli_connect_error());
                 while ($departamento = mysqli_fetch_array($query2)){
                 echo "<option value=".$departamento['id_departamento'].">".$departamento['departamento']."</option>";
                 }

@@ -110,18 +110,17 @@ $(document).on("click", ".btnEdit", function(){
       option:option
     },
     success:function(data){
-      console.log(data);
       cnhAtual = data.cnh;
       cpfAtual = data.cpf;
       telefoneAtual = data.telefone;
-      $('#nome').val(data.nome);
-      $("#cpf").val(data.cpf).trigger('input');
-      $("#senha").val(atob(data.senha)); //base64 provisório
-      $("#tipo-usuario").val(data.tipo).formSelect();
-      $("#telefone").val(data.telefone).trigger('input');
-      $("#validade_carteira").val(data.validade_cnh);
-      $("#cnh").val(data.cnh).trigger('input');
-      $("#departamento").val(data.fk_id_departamento).formSelect();
+      $('#nome').val(data[1]);
+      $("#cpf").val(data[2]).trigger('input');
+      $("#senha").val(atob(data[3])); //base64 provisório
+      $("#tipo-usuario").val(data[4]).formSelect();
+      $("#telefone").val(data[5]).trigger('input');
+      $("#validade_carteira").val(data[6]);
+      $("#cnh").val(data[7]).trigger('input');
+      $("#departamento").val(data[8]).formSelect();
       M.updateTextFields();
       option=2;
     }

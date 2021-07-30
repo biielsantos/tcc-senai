@@ -4,6 +4,11 @@
   align-items: center;
 }
 
+main {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 .dot {
   display: block;
   text-align: right;
@@ -57,6 +62,7 @@
 .date-inputs .input-field {
   margin-bottom: 0;
   margin-top: 0;
+  padding-left: 0;
 }
 
 .selecionar-veiculo {

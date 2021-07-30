@@ -6,6 +6,15 @@
   margin-right: 4%;
 }
 
+.actions a {
+  display: flex;
+  align-items: center;
+}
+
+.actions i, .actions img {
+  margin-right: 4px;
+}
+
 #modal1 {
   max-height: 96% !important;
   max-width: 100% !important;
